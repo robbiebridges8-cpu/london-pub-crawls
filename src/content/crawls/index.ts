@@ -6,12 +6,14 @@ export interface Crawl {
   name: string;
   tagline: string;
   description: string;
+  editorialDescription?: string;
   duration: string;
   difficulty: 'Easy' | 'Medium' | 'Hard' | 'Legendary';
   area: string;
   live: boolean;
   url?: string;
   accentColor: string;
+  secondaryColor: string;
   pubs: CrawlPub[];
 }
 
@@ -22,12 +24,14 @@ export const crawls: Crawl[] = [
     name: 'Monopoly',
     tagline: 'Follow the board across London',
     description: 'Visit 26 pubs mapped to every property on the Monopoly board. From Old Kent Road to Mayfair.',
+    editorialDescription: 'The ultimate London pub crawl. Twenty-six pubs, one for each property on the Monopoly board. Start at Old Kent Road, finish at Mayfair — if you make it. This isn\'t a casual afternoon; it\'s a proper expedition through London\'s drinking history, mapped onto the world\'s most famous board game.',
     duration: '12 hours',
     difficulty: 'Legendary',
     area: 'Central London',
     live: true,
     url: 'https://monopolypubcrawl.com',
-    accentColor: '#ef4444',
+    accentColor: '#C41E3A',
+    secondaryColor: '#1E8449',
     pubs: [
       {
         pubId: 'cittie-of-yorke',
@@ -52,11 +56,13 @@ export const crawls: Crawl[] = [
     name: 'Jack the Ripper',
     tagline: 'Walk the dark streets of Victorian Whitechapel',
     description: 'Follow the trail through the historic pubs of the East End where Victorian London\'s darkest chapter unfolded.',
+    editorialDescription: 'Whitechapel, 1888. The East End\'s fog-shrouded streets held secrets that still echo today. This crawl takes you through the pubs where the victims drank, where suspects were questioned, and where Victorian London confronted its darkest hour. Not for the faint-hearted — in any sense.',
     duration: '4 hours',
     difficulty: 'Medium',
     area: 'Whitechapel',
     live: false,
-    accentColor: '#991b1b',
+    accentColor: '#8B0000',
+    secondaryColor: '#1C1C1C',
     pubs: [
       {
         pubId: 'ten-bells-spitalfields',
@@ -105,7 +111,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'West End & St John\'s Wood',
     live: false,
-    accentColor: '#f59e0b',
+    accentColor: '#DAA520',
+    secondaryColor: '#FFF8DC',
     pubs: [
       {
         pubId: 'horse-and-groom-mayfair',
@@ -149,7 +156,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Hard',
     area: 'Zone 1',
     live: false,
-    accentColor: '#eab308',
+    accentColor: '#FFD200',
+    secondaryColor: '#003688',
     pubs: [
       {
         pubId: 'prince-of-wales-paddington',
@@ -208,7 +216,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'Riverside',
     live: false,
-    accentColor: '#3b82f6',
+    accentColor: '#4A6670',
+    secondaryColor: '#C0C0C0',
     pubs: [
       {
         pubId: 'dove-hammersmith',
@@ -262,7 +271,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'Southwark',
     live: false,
-    accentColor: '#a16207',
+    accentColor: '#2E5A1C',
+    secondaryColor: '#F5E6C8',
     pubs: [
       {
         pubId: 'george-inn-southwark',
@@ -306,7 +316,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Medium',
     area: 'East End & Soho',
     live: false,
-    accentColor: '#52525b',
+    accentColor: '#4A4A4A',
+    secondaryColor: '#FF4500',
     pubs: [
       {
         pubId: 'blind-beggar-whitechapel',
@@ -370,7 +381,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'City & Westminster',
     live: false,
-    accentColor: '#57534e',
+    accentColor: '#5C4A32',
+    secondaryColor: '#D4B896',
     pubs: [
       {
         pubId: 'cittie-of-yorke',
@@ -429,7 +441,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Medium',
     area: 'Brixton & Soho',
     live: false,
-    accentColor: '#ec4899',
+    accentColor: '#9B30FF',
+    secondaryColor: '#FFD700',
     pubs: [
       {
         pubId: 'prince-albert-brixton',
@@ -468,7 +481,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Medium',
     area: 'Chelsea & Richmond',
     live: false,
-    accentColor: '#dc2626',
+    accentColor: '#1C1C1C',
+    secondaryColor: '#F5F5DC',
     pubs: [
       {
         pubId: 'bricklayers-arms-soho',
@@ -512,7 +526,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Medium',
     area: 'Bermondsey',
     live: false,
-    accentColor: '#d97706',
+    accentColor: '#6B8E23',
+    secondaryColor: '#B87333',
     pubs: [
       {
         pubId: 'southwark-brewing-bermondsey',
@@ -576,7 +591,8 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'Mayfair & Westminster',
     live: false,
-    accentColor: '#7c3aed',
+    accentColor: '#1E3A5F',
+    secondaryColor: '#D4AF37',
     pubs: [
       {
         pubId: 'grenadier-belgravia',

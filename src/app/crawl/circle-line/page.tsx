@@ -488,16 +488,168 @@ export default function CircleLinePage() {
 
   return (
     <>
-      {/* Schema.org structured data */}
+      {/* Schema.org structured data - comprehensive for SEO and GEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'TouristAttraction',
-            name: 'Circle Line Challenge Pub Crawl',
-            description: '27 stations. 27 pubs. One loop around the Circle Line.',
-            url: 'https://londonpubcrawls.com/crawl/circle-line',
+            '@graph': [
+              // Main TouristAttraction
+              {
+                '@type': 'TouristAttraction',
+                '@id': 'https://londonpubcrawls.com/crawl/circle-line#attraction',
+                name: 'Circle Line Challenge Pub Crawl',
+                description: 'The ultimate London Underground pub crawl challenge: visit one pub near every Circle Line station. 27 stations, 27 pubs, approximately 14 miles of walking, typically taking 10-12 hours to complete. A legendary London drinking challenge that has been attempted for decades.',
+                url: 'https://londonpubcrawls.com/crawl/circle-line',
+                image: 'https://londonpubcrawls.com/og/circle-line.jpg',
+                touristType: ['Pub Enthusiasts', 'Challenge Seekers', 'London Explorers'],
+                isAccessibleForFree: true,
+                publicAccess: true,
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'London',
+                  addressRegion: 'Greater London',
+                  addressCountry: 'GB',
+                },
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: 51.5074,
+                  longitude: -0.1278,
+                },
+              },
+              // BreadcrumbList
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'London Pub Crawls',
+                    item: 'https://londonpubcrawls.com',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Circle Line Challenge',
+                    item: 'https://londonpubcrawls.com/crawl/circle-line',
+                  },
+                ],
+              },
+              // ItemList of pubs
+              {
+                '@type': 'ItemList',
+                name: 'Circle Line Challenge Pubs',
+                description: '27 pubs, one for each Circle Line station',
+                numberOfItems: 27,
+                itemListElement: stations.map((station, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  item: {
+                    '@type': 'BarOrPub',
+                    name: station.pub.name,
+                    description: station.pub.description,
+                    address: {
+                      '@type': 'PostalAddress',
+                      addressLocality: 'London',
+                      addressCountry: 'GB',
+                    },
+                  },
+                })),
+              },
+              // FAQPage for GEO optimization
+              {
+                '@type': 'FAQPage',
+                mainEntity: [
+                  {
+                    '@type': 'Question',
+                    name: 'What is the Circle Line Challenge pub crawl?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'The Circle Line Challenge is a legendary London pub crawl where participants visit one pub near every station on the London Underground Circle Line. This means 27 stations and 27 pubs, covering approximately 14 miles on foot and typically taking 10-12 hours to complete.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'How long does the Circle Line pub crawl take?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'The full Circle Line Challenge typically takes 10-12 hours to complete, including walking time and time spent at each pub. Most groups start around 11am to allow a full day. The route covers approximately 14 miles of walking.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'What is the best day to do the Circle Line Challenge?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Saturday is generally the best day for the Circle Line Challenge. Be aware that many City of London pubs (around Monument, Cannon Street, Mansion House, and Moorgate) are closed on weekends, so you may need alternative pubs for those stops.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Where does the Circle Line pub crawl start and end?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'The traditional route starts at Edgware Road station and proceeds clockwise around the Circle Line, ending at Paddington. Since it\'s a loop, you can optionally continue back to Edgware Road to complete the full circle.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'How many pubs are on the Circle Line Challenge?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'The Circle Line Challenge includes 27 pubs, one for each station on the Circle Line loop. The stations are: Edgware Road, Baker Street, Great Portland Street, Euston Square, King\'s Cross St. Pancras, Farringdon, Barbican, Moorgate, Liverpool Street, Aldgate, Tower Hill, Monument, Cannon Street, Mansion House, Blackfriars, Temple, Embankment, Westminster, St. James\'s Park, Victoria, Sloane Square, South Kensington, Gloucester Road, High Street Kensington, Notting Hill Gate, Bayswater, and Paddington.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Do I need to ride the Circle Line during the pub crawl?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'No, the Circle Line Challenge is a walking pub crawl. You walk between all the pubs rather than taking the Tube. However, keeping an Oyster card handy is recommended in case you need to skip ahead or cut the crawl short.',
+                    },
+                  },
+                ],
+              },
+              // HowTo schema
+              {
+                '@type': 'HowTo',
+                name: 'How to Complete the Circle Line Challenge',
+                description: 'A step-by-step guide to completing London\'s famous Circle Line pub crawl',
+                totalTime: 'PT12H',
+                estimatedCost: {
+                  '@type': 'MonetaryAmount',
+                  currency: 'GBP',
+                  value: '100-150',
+                },
+                step: [
+                  {
+                    '@type': 'HowToStep',
+                    position: 1,
+                    name: 'Start at Edgware Road',
+                    text: 'Begin your Circle Line Challenge at Edgware Road station around 11am. Head to The Beehive for your first pint.',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 2,
+                    name: 'Follow the route clockwise',
+                    text: 'Walk between stations, visiting one pub at each of the 27 Circle Line stops. Cards with pub recommendations are provided for each station.',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 3,
+                    name: 'Pace yourself',
+                    text: 'Take food breaks around pub 10 and pub 20. Drink water. Wear comfortable shoes. This is a marathon, not a sprint.',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 4,
+                    name: 'Finish at Paddington',
+                    text: 'Celebrate completing all 27 stops at The Pride of Paddington, or continue back to Edgware Road to complete the full loop.',
+                  },
+                ],
+              },
+            ],
           }),
         }}
       />

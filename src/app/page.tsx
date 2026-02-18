@@ -39,7 +39,7 @@ function CrawlCard({ crawl }: { crawl: Crawl }) {
             className="absolute top-4 left-4 w-10 h-10 rounded-sm flex items-center justify-center text-sm font-bold text-white/90"
             style={{ backgroundColor: `${crawl.accentColor}cc` }}
           >
-            {crawl.pubs}
+            {crawl.pubs.length}
           </div>
 
           {/* Live badge */}
@@ -283,7 +283,7 @@ export default function Home() {
                   </p>
                   <div className="flex items-center gap-6 mb-8">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-white">{liveCrawl.pubs}</div>
+                      <div className="text-3xl font-bold text-white">{liveCrawl.pubs.length}</div>
                       <div className="text-xs text-zinc-500 uppercase tracking-wider">Pubs</div>
                     </div>
                     <div className="w-px h-12 bg-zinc-800" />

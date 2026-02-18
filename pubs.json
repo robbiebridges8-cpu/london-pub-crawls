@@ -1,0 +1,584 @@
+{
+  "meta": {
+    "description": "Canonical pub database for londonpubcrawls.com",
+    "lastUpdated": "2026-02-18"
+  },
+  "pubs": [
+    {
+      "id": "ten-bells-spitalfields",
+      "name": "The Ten Bells",
+      "address": "84 Commercial St, Spitalfields, London E1 6LY",
+      "neighbourhood": "Spitalfields",
+      "lat": 51.5198,
+      "lng": -0.0726,
+      "googlePlaceId": null
+    },
+    {
+      "id": "white-hart-whitechapel",
+      "name": "The White Hart",
+      "address": "89 Whitechapel High St, London E1 7RA",
+      "neighbourhood": "Whitechapel",
+      "lat": 51.5155,
+      "lng": -0.0713,
+      "googlePlaceId": null
+    },
+    {
+      "id": "blind-beggar-whitechapel",
+      "name": "The Blind Beggar",
+      "address": "337 Whitechapel Rd, London E1 1BU",
+      "neighbourhood": "Whitechapel",
+      "lat": 51.5192,
+      "lng": -0.0614,
+      "googlePlaceId": null
+    },
+    {
+      "id": "culpeper-whitechapel",
+      "name": "The Culpeper",
+      "address": "40 Commercial St, London E1 6LP",
+      "neighbourhood": "Spitalfields",
+      "lat": 51.5183,
+      "lng": -0.0741,
+      "googlePlaceId": null
+    },
+    {
+      "id": "kings-stores-whitechapel",
+      "name": "Kings Store",
+      "address": "14 Widegate St, London E1 7HP",
+      "neighbourhood": "Spitalfields",
+      "lat": 51.5168,
+      "lng": -0.0793,
+      "googlePlaceId": null
+    },
+    {
+      "id": "bell-pub-aldgate",
+      "name": "The Bell",
+      "address": "29 Middlesex St, London E1 7AA",
+      "neighbourhood": "Aldgate",
+      "lat": 51.5155,
+      "lng": -0.0782,
+      "googlePlaceId": null
+    },
+    {
+      "id": "duke-of-wellington-spitalfields",
+      "name": "The Duke of Wellington",
+      "address": "119 Balls Pond Rd, London N1 4BL",
+      "neighbourhood": "Spitalfields",
+      "lat": 51.5474,
+      "lng": -0.0876,
+      "googlePlaceId": null
+    },
+    {
+      "id": "horse-and-groom-mayfair",
+      "name": "The Horse & Groom",
+      "address": "7 Groom Pl, London SW1X 7BA",
+      "neighbourhood": "Belgravia",
+      "lat": 51.4991,
+      "lng": -0.1550,
+      "googlePlaceId": null
+    },
+    {
+      "id": "pub-marylebone",
+      "name": "The Globe",
+      "address": "43-47 Marylebone Rd, London NW1 5JY",
+      "neighbourhood": "Marylebone",
+      "lat": 51.5226,
+      "lng": -0.1571,
+      "googlePlaceId": null
+    },
+    {
+      "id": "the-pub-chiswick-barge",
+      "name": "The Barley Mow",
+      "address": "Strand-on-the-Green, Chiswick, London W4 3PH",
+      "neighbourhood": "Chiswick",
+      "lat": 51.4878,
+      "lng": -0.2637,
+      "googlePlaceId": null
+    },
+    {
+      "id": "ship-soho",
+      "name": "The Ship",
+      "address": "116 Wardour St, London W1F 0TT",
+      "neighbourhood": "Soho",
+      "lat": 51.5139,
+      "lng": -0.1334,
+      "googlePlaceId": null
+    },
+    {
+      "id": "dog-and-duck-soho",
+      "name": "The Dog and Duck",
+      "address": "18 Bateman St, London W1D 3AJ",
+      "neighbourhood": "Soho",
+      "lat": 51.5131,
+      "lng": -0.1314,
+      "googlePlaceId": null
+    },
+    {
+      "id": "prince-albert-brixton",
+      "name": "The Prince Albert",
+      "address": "418 Coldharbour Ln, London SW9 8LF",
+      "neighbourhood": "Brixton",
+      "lat": 51.4624,
+      "lng": -0.1138,
+      "googlePlaceId": null
+    },
+    {
+      "id": "starman-pub-brixton",
+      "name": "The Starman",
+      "address": "Brixton, London SW9",
+      "neighbourhood": "Brixton",
+      "lat": 51.4613,
+      "lng": -0.1156,
+      "googlePlaceId": null
+    },
+    {
+      "id": "toby-jug-kingston",
+      "name": "The Toby Jug",
+      "address": "Tolworth, Kingston upon Thames, KT6",
+      "neighbourhood": "Kingston",
+      "lat": 51.3762,
+      "lng": -0.2798,
+      "googlePlaceId": null
+    },
+    {
+      "id": "bricklayers-arms-soho",
+      "name": "Bricklayer's Arms (site)",
+      "address": "7 Broadwick St, London W1F 0DA",
+      "neighbourhood": "Soho",
+      "lat": 51.5132,
+      "lng": -0.1352,
+      "googlePlaceId": null
+    },
+    {
+      "id": "worlds-end-chelsea",
+      "name": "World's End",
+      "address": "459 King's Rd, London SW10 0LR",
+      "neighbourhood": "Chelsea",
+      "lat": 51.4843,
+      "lng": -0.1853,
+      "googlePlaceId": null
+    },
+    {
+      "id": "six-bells-chelsea",
+      "name": "The Six Bells",
+      "address": "197 Kings Rd, Chelsea, London SW3 5ED",
+      "neighbourhood": "Chelsea",
+      "lat": 51.4887,
+      "lng": -0.1699,
+      "googlePlaceId": null
+    },
+    {
+      "id": "surprise-chelsea",
+      "name": "The Surprise",
+      "address": "6 Christchurch Terrace, London SW3 4AJ",
+      "neighbourhood": "Chelsea",
+      "lat": 51.4856,
+      "lng": -0.1681,
+      "googlePlaceId": null
+    },
+    {
+      "id": "southwark-brewing-bermondsey",
+      "name": "Southwark Brewing Company",
+      "address": "46 Druid St, London SE1 2EZ",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.5016,
+      "lng": -0.0826,
+      "googlePlaceId": null
+    },
+    {
+      "id": "hiver-bermondsey",
+      "name": "Hiver Taproom",
+      "address": "56 Stanworth St, London SE1 3NY",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.5009,
+      "lng": -0.0812,
+      "googlePlaceId": null
+    },
+    {
+      "id": "anspach-hobday-bermondsey",
+      "name": "Anspach & Hobday",
+      "address": "118 Druid St, London SE1 2HH",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.5001,
+      "lng": -0.0776,
+      "googlePlaceId": null
+    },
+    {
+      "id": "kernel-bermondsey",
+      "name": "The Kernel Brewery",
+      "address": "Arch 11, Dockley Rd Industrial Estate, London SE16 3SF",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.4988,
+      "lng": -0.0741,
+      "googlePlaceId": null
+    },
+    {
+      "id": "fourpure-bermondsey",
+      "name": "Fourpure Brewing Co",
+      "address": "22 Bermondsey Trading Estate, Rotherhithe New Rd, London SE16 3LL",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.4971,
+      "lng": -0.0701,
+      "googlePlaceId": null
+    },
+    {
+      "id": "bianca-road-bermondsey",
+      "name": "Bianca Road Brew Co",
+      "address": "London SE16",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.4978,
+      "lng": -0.0722,
+      "googlePlaceId": null
+    },
+    {
+      "id": "gosnells-bermondsey",
+      "name": "Gosnells Mead Bar",
+      "address": "Arch 41, 1 Spa Rd, London SE16 3QS",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.4994,
+      "lng": -0.0768,
+      "googlePlaceId": null
+    },
+    {
+      "id": "moor-beer-bermondsey",
+      "name": "Moor Beer",
+      "address": "Arch 45, 41 Reverdy Rd, London SE1 5PF",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.5003,
+      "lng": -0.0797,
+      "googlePlaceId": null
+    },
+    {
+      "id": "marquis-of-wellington-bermondsey",
+      "name": "The Marquis of Wellington",
+      "address": "1 Munton Rd, London SE17 1PR",
+      "neighbourhood": "Bermondsey",
+      "lat": 51.4949,
+      "lng": -0.0951,
+      "googlePlaceId": null
+    },
+    {
+      "id": "george-inn-southwark",
+      "name": "The George Inn",
+      "address": "75-77 Borough High St, London SE1 1NH",
+      "neighbourhood": "Southwark",
+      "lat": 51.5020,
+      "lng": -0.0921,
+      "googlePlaceId": null
+    },
+    {
+      "id": "anchor-bankside",
+      "name": "The Anchor Bankside",
+      "address": "34 Park St, London SE1 9EF",
+      "neighbourhood": "Bankside",
+      "lat": 51.5076,
+      "lng": -0.0961,
+      "googlePlaceId": null
+    },
+    {
+      "id": "kings-head-borough",
+      "name": "The King's Head",
+      "address": "48 Borough High St, London SE1 1XF",
+      "neighbourhood": "Borough",
+      "lat": 51.5035,
+      "lng": -0.0912,
+      "googlePlaceId": null
+    },
+    {
+      "id": "rake-borough-market",
+      "name": "The Rake",
+      "address": "14a Winchester Walk, London SE1 9AG",
+      "neighbourhood": "Borough Market",
+      "lat": 51.5056,
+      "lng": -0.0907,
+      "googlePlaceId": null
+    },
+    {
+      "id": "ye-olde-cheshire-cheese",
+      "name": "Ye Olde Cheshire Cheese",
+      "address": "145 Fleet St, London EC4A 2BU",
+      "neighbourhood": "Fleet Street",
+      "lat": 51.5138,
+      "lng": -0.1073,
+      "googlePlaceId": null
+    },
+    {
+      "id": "carpenters-arms-bethnal-green",
+      "name": "The Carpenters Arms",
+      "address": "73 Cheshire St, London E2 6EG",
+      "neighbourhood": "Bethnal Green",
+      "lat": 51.5241,
+      "lng": -0.0715,
+      "googlePlaceId": null
+    },
+    {
+      "id": "horns-tavern-kennington",
+      "name": "The Horns Tavern",
+      "address": "Kennington Park Rd, London SE11",
+      "neighbourhood": "Kennington",
+      "lat": 51.4892,
+      "lng": -0.1045,
+      "googlePlaceId": null
+    },
+    {
+      "id": "cittie-of-yorke",
+      "name": "Cittie of Yorke",
+      "address": "22 High Holborn, London WC1V 6BN",
+      "neighbourhood": "Holborn",
+      "lat": 51.5179,
+      "lng": -0.1150,
+      "googlePlaceId": null
+    },
+    {
+      "id": "lamb-and-flag-covent-garden",
+      "name": "Lamb and Flag",
+      "address": "33 Rose St, London WC2E 9EB",
+      "neighbourhood": "Covent Garden",
+      "lat": 51.5128,
+      "lng": -0.1243,
+      "googlePlaceId": null
+    },
+    {
+      "id": "the-hoop-and-grapes",
+      "name": "Hoop and Grapes",
+      "address": "47 Aldgate High St, London EC3N 1AL",
+      "neighbourhood": "Aldgate",
+      "lat": 51.5126,
+      "lng": -0.0757,
+      "googlePlaceId": null
+    },
+    {
+      "id": "viaduct-tavern-holborn",
+      "name": "The Viaduct Tavern",
+      "address": "126 Newgate St, London EC1A 7AA",
+      "neighbourhood": "Holborn",
+      "lat": 51.5163,
+      "lng": -0.1013,
+      "googlePlaceId": null
+    },
+    {
+      "id": "olde-bell-fleet-street",
+      "name": "Ye Olde Bell",
+      "address": "95 Fleet St, London EC4Y 1DH",
+      "neighbourhood": "Fleet Street",
+      "lat": 51.5139,
+      "lng": -0.1091,
+      "googlePlaceId": null
+    },
+    {
+      "id": "seven-stars-holborn",
+      "name": "The Seven Stars",
+      "address": "53 Carey St, London WC2A 2JB",
+      "neighbourhood": "Holborn",
+      "lat": 51.5146,
+      "lng": -0.1124,
+      "googlePlaceId": null
+    },
+    {
+      "id": "dove-hammersmith",
+      "name": "The Dove",
+      "address": "19 Upper Mall, Hammersmith, London W6 9TA",
+      "neighbourhood": "Hammersmith",
+      "lat": 51.4912,
+      "lng": -0.2356,
+      "googlePlaceId": null
+    },
+    {
+      "id": "blue-anchor-hammersmith",
+      "name": "The Blue Anchor",
+      "address": "13 Lower Mall, Hammersmith, London W6 9DJ",
+      "neighbourhood": "Hammersmith",
+      "lat": 51.4901,
+      "lng": -0.2326,
+      "googlePlaceId": null
+    },
+    {
+      "id": "bulls-head-strand-on-green",
+      "name": "The Bull's Head",
+      "address": "Strand-on-the-Green, Chiswick, London W4 3PQ",
+      "neighbourhood": "Chiswick",
+      "lat": 51.4876,
+      "lng": -0.2644,
+      "googlePlaceId": null
+    },
+    {
+      "id": "mayflower-rotherhithe",
+      "name": "The Mayflower",
+      "address": "117 Rotherhithe St, London SE16 4NF",
+      "neighbourhood": "Rotherhithe",
+      "lat": 51.5011,
+      "lng": -0.0544,
+      "googlePlaceId": null
+    },
+    {
+      "id": "grapes-limehouse",
+      "name": "The Grapes",
+      "address": "76 Narrow St, Limehouse, London E14 8BP",
+      "neighbourhood": "Limehouse",
+      "lat": 51.5095,
+      "lng": -0.0316,
+      "googlePlaceId": null
+    },
+    {
+      "id": "trafalgar-greenwich",
+      "name": "The Trafalgar Tavern",
+      "address": "Park Row, Greenwich, London SE10 9NW",
+      "neighbourhood": "Greenwich",
+      "lat": 51.4814,
+      "lng": 0.0041,
+      "googlePlaceId": null
+    },
+    {
+      "id": "grenadier-belgravia",
+      "name": "The Grenadier",
+      "address": "18 Wilton Row, London SW1X 7NR",
+      "neighbourhood": "Belgravia",
+      "lat": 51.4997,
+      "lng": -0.1556,
+      "googlePlaceId": null
+    },
+    {
+      "id": "star-and-garter-richmond",
+      "name": "The White Cross Hotel",
+      "address": "Water Ln, Richmond, London TW9 1TH",
+      "neighbourhood": "Richmond",
+      "lat": 51.4639,
+      "lng": -0.3075,
+      "googlePlaceId": null
+    },
+    {
+      "id": "kings-arms-westminster",
+      "name": "The Kings Arms",
+      "address": "2 Ponton Rd, London SW8 5BA",
+      "neighbourhood": "Westminster",
+      "lat": 51.4883,
+      "lng": -0.1326,
+      "googlePlaceId": null
+    },
+    {
+      "id": "the-albert-victoria",
+      "name": "The Albert",
+      "address": "52 Victoria St, London SW1H 0NP",
+      "neighbourhood": "Westminster",
+      "lat": 51.4986,
+      "lng": -0.1343,
+      "googlePlaceId": null
+    },
+    {
+      "id": "two-chairmen-westminster",
+      "name": "Two Chairmen",
+      "address": "39 Dartmouth St, London SW1H 9BP",
+      "neighbourhood": "Westminster",
+      "lat": 51.4993,
+      "lng": -0.1346,
+      "googlePlaceId": null
+    },
+    {
+      "id": "palace-of-westminster-stranger",
+      "name": "The Stranger's Bar",
+      "address": "Houses of Parliament, London SW1A 0AA",
+      "neighbourhood": "Westminster",
+      "lat": 51.4996,
+      "lng": -0.1246,
+      "googlePlaceId": null
+    },
+    {
+      "id": "prince-of-wales-paddington",
+      "name": "The Prince of Wales",
+      "address": "1-3 Conduit Mews, London W2 5NF",
+      "neighbourhood": "Paddington",
+      "lat": 51.5165,
+      "lng": -0.1791,
+      "googlePlaceId": null
+    },
+    {
+      "id": "victoria-cross-victoria",
+      "name": "The Wetherspoon Victoria",
+      "address": "101 Victoria St, London SW1E 6QT",
+      "neighbourhood": "Victoria",
+      "lat": 51.4963,
+      "lng": -0.1402,
+      "googlePlaceId": null
+    },
+    {
+      "id": "the-blackfriar",
+      "name": "The Blackfriar",
+      "address": "174 Queen Victoria St, London EC4V 4EG",
+      "neighbourhood": "Blackfriars",
+      "lat": 51.5121,
+      "lng": -0.1040,
+      "googlePlaceId": null
+    },
+    {
+      "id": "counting-house-mansion-house",
+      "name": "The Counting House",
+      "address": "50 Cornhill, London EC3V 3PD",
+      "neighbourhood": "Mansion House",
+      "lat": 51.5133,
+      "lng": -0.0870,
+      "googlePlaceId": null
+    },
+    {
+      "id": "hamilton-hall-liverpool-street",
+      "name": "Hamilton Hall",
+      "address": "Liverpool St, London EC2M 7PY",
+      "neighbourhood": "Liverpool Street",
+      "lat": 51.5183,
+      "lng": -0.0810,
+      "googlePlaceId": null
+    },
+    {
+      "id": "water-poet-aldgate",
+      "name": "The Water Poet",
+      "address": "9-11 Folgate St, London E1 6BX",
+      "neighbourhood": "Liverpool Street",
+      "lat": 51.5208,
+      "lng": -0.0782,
+      "googlePlaceId": null
+    },
+    {
+      "id": "callooh-callay-hoxton",
+      "name": "Callooh Callay",
+      "address": "65 Rivington St, London EC2A 3AY",
+      "neighbourhood": "Old Street",
+      "lat": 51.5260,
+      "lng": -0.0826,
+      "googlePlaceId": null
+    },
+    {
+      "id": "edinburgh-castle-camden",
+      "name": "The Edinburgh Castle",
+      "address": "9 Mornington Terrace, London NW1 7RQ",
+      "neighbourhood": "Camden Town",
+      "lat": 51.5360,
+      "lng": -0.1430,
+      "googlePlaceId": null
+    },
+    {
+      "id": "queens-arms-bayswater",
+      "name": "The Queen's Arms",
+      "address": "30 Queens Grove, St John's Wood, London NW8 6EN",
+      "neighbourhood": "St John's Wood",
+      "lat": 51.5306,
+      "lng": -0.1731,
+      "googlePlaceId": null
+    },
+    {
+      "id": "sherlock-holmes-westminster",
+      "name": "The Sherlock Holmes",
+      "address": "10 Northumberland St, London WC2N 5DB",
+      "neighbourhood": "Charing Cross",
+      "lat": 51.5075,
+      "lng": -0.1236,
+      "googlePlaceId": null
+    },
+    {
+      "id": "nags-head-covent-garden",
+      "name": "The Nag's Head",
+      "address": "10 James St, Covent Garden, London WC2E 8BT",
+      "neighbourhood": "Covent Garden",
+      "lat": 51.5127,
+      "lng": -0.1228,
+      "googlePlaceId": null
+    }
+  ]
+}

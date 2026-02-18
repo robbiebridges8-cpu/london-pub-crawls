@@ -34,7 +34,7 @@ function CrawlCard({ crawl, index }: { crawl: Crawl; index: number }) {
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <a
-        href={crawl.live ? (crawl.url || `/${crawl.slug}`) : undefined}
+        href={crawl.live ? `/crawl/${crawl.slug}` : undefined}
         className={`group block relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/5 transition-all duration-500 ${
           crawl.live ? 'cursor-pointer hover:-translate-y-2 hover:border-white/10' : 'cursor-default'
         }`}
@@ -496,7 +496,7 @@ export default function Home() {
                   {crawls.slice(0, 6).map((crawl) => (
                     <li key={crawl.id}>
                       <a
-                        href={crawl.live ? crawl.url || `/${crawl.slug}` : undefined}
+                        href={crawl.live ? `/crawl/${crawl.slug}` : undefined}
                         className={`text-sm transition-colors ${
                           crawl.live ? 'text-white/50 hover:text-[#D4A853]' : 'text-white/30 cursor-default'
                         }`}
@@ -514,7 +514,7 @@ export default function Home() {
                   {crawls.slice(6).map((crawl) => (
                     <li key={crawl.id}>
                       <a
-                        href={crawl.live ? crawl.url || `/${crawl.slug}` : undefined}
+                        href={crawl.live ? `/crawl/${crawl.slug}` : undefined}
                         className={`text-sm transition-colors ${
                           crawl.live ? 'text-white/50 hover:text-[#D4A853]' : 'text-white/30 cursor-default'
                         }`}

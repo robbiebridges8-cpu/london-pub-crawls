@@ -60,7 +60,7 @@ export const crawls: Crawl[] = [
     duration: '4 hours',
     difficulty: 'Medium',
     area: 'Whitechapel',
-    live: true,
+    live: false,
     accentColor: '#8B1A1A',
     secondaryColor: '#1C1C1C',
     pubs: [
@@ -110,7 +110,7 @@ export const crawls: Crawl[] = [
     duration: '5 hours',
     difficulty: 'Easy',
     area: 'West End & St John\'s Wood',
-    live: true,
+    live: false,
     accentColor: '#1A3C6E',
     secondaryColor: '#DAA520',
     pubs: [
@@ -215,7 +215,7 @@ export const crawls: Crawl[] = [
     duration: '4 hours',
     difficulty: 'Easy',
     area: 'South Bank',
-    live: true,
+    live: false,
     accentColor: '#2E6B8A',
     secondaryColor: '#C0C0C0',
     pubs: [

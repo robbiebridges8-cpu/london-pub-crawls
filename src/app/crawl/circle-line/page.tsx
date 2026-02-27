@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
+import { CrawlLayout, PubCarousel, InteractiveMap } from '@/components';
 
-// Tube line colors
+// TfL line colors
 const LINE_COLORS: Record<string, string> = {
   bakerloo: '#B36305',
   central: '#E32017',
@@ -21,6 +22,8 @@ interface Station {
   number: number;
   name: string;
   interchanges: string[];
+  lat: number;
+  lng: number;
   pub: {
     name: string;
     description: string;
@@ -35,6 +38,8 @@ const stations: Station[] = [
     number: 1,
     name: 'Edgware Road',
     interchanges: ['bakerloo', 'district', 'hammersmith-city'],
+    lat: 51.5199,
+    lng: -0.1679,
     pub: {
       name: 'The Beehive',
       description: 'A proper Victorian corner pub that\'s survived the area\'s transformation into Little Beirut. Original etched glass, working fireplaces, and a crowd that ranges from suited media types to old-timers who\'ve drunk here for decades.',
@@ -47,6 +52,8 @@ const stations: Station[] = [
     number: 2,
     name: 'Baker Street',
     interchanges: ['bakerloo', 'jubilee', 'metropolitan', 'hammersmith-city'],
+    lat: 51.5226,
+    lng: -0.1571,
     pub: {
       name: 'The Volunteer',
       description: 'A handsome Georgian boozer tucked behind Baker Street station. Proper pub with no gimmicks — just good beer, dark wood, and the kind of quiet atmosphere where you can actually have a conversation. Popular with Marylebone locals.',
@@ -59,6 +66,8 @@ const stations: Station[] = [
     number: 3,
     name: 'Great Portland Street',
     interchanges: ['hammersmith-city', 'metropolitan'],
+    lat: 51.5238,
+    lng: -0.1440,
     pub: {
       name: 'The Green Man',
       description: 'A proper Fitzrovia local on the edge of the BBC\'s old stomping ground. Small, unpretentious, with a surprisingly good selection of cask ales and a clientele of regulars who treat it like an extension of their living room.',
@@ -71,6 +80,8 @@ const stations: Station[] = [
     number: 4,
     name: 'Euston Square',
     interchanges: ['hammersmith-city', 'metropolitan'],
+    lat: 51.5260,
+    lng: -0.1359,
     pub: {
       name: 'The Euston Flyer',
       description: 'A grand Victorian railway pub built for the thirsty passengers arriving at Euston. High ceilings, ornate plasterwork, and the perpetual buzz of a station pub. It\'s a Wetherspoons now, but the building deserves respect.',
@@ -83,6 +94,8 @@ const stations: Station[] = [
     number: 5,
     name: 'King\'s Cross St. Pancras',
     interchanges: ['northern', 'piccadilly', 'victoria', 'hammersmith-city', 'metropolitan'],
+    lat: 51.5308,
+    lng: -0.1238,
     pub: {
       name: 'The Parcel Yard',
       description: 'Inside King\'s Cross station itself, in the beautifully restored Victorian parcel office. Soaring ceilings, exposed brick, and a terrace overlooking the concourse. Fuller\'s run it well — proper cask ales and decent food.',
@@ -95,6 +108,8 @@ const stations: Station[] = [
     number: 6,
     name: 'Farringdon',
     interchanges: ['hammersmith-city', 'metropolitan', 'elizabeth'],
+    lat: 51.5203,
+    lng: -0.1053,
     pub: {
       name: 'The Jerusalem Tavern',
       description: 'A tiny, ancient-feeling pub that\'s actually a 1990s recreation — but who cares when it\'s this good. Flagstone floors, candlelight, and the complete range of St Peter\'s Suffolk ales on tap. Gets packed, but worth the squeeze.',
@@ -107,6 +122,8 @@ const stations: Station[] = [
     number: 7,
     name: 'Barbican',
     interchanges: ['hammersmith-city', 'metropolitan'],
+    lat: 51.5204,
+    lng: -0.0979,
     pub: {
       name: 'The Butchers Hook & Cleaver',
       description: 'A Fuller\'s pub in a former Smithfield meat market building. The brutalist Barbican looms outside, but inside it\'s all Victorian grandeur — high ceilings, vast windows, and a proper pub feel despite the City postcode.',
@@ -119,6 +136,8 @@ const stations: Station[] = [
     number: 8,
     name: 'Moorgate',
     interchanges: ['hammersmith-city', 'metropolitan', 'northern'],
+    lat: 51.5186,
+    lng: -0.0886,
     pub: {
       name: 'The Globe',
       description: 'A proper City pub that\'s been serving bankers and traders since Victorian times. Wood paneling, brass fittings, and the kind of after-work intensity that only the Square Mile can produce. Quieter at weekends.',
@@ -131,6 +150,8 @@ const stations: Station[] = [
     number: 9,
     name: 'Liverpool Street',
     interchanges: ['hammersmith-city', 'metropolitan', 'central', 'elizabeth'],
+    lat: 51.5178,
+    lng: -0.0823,
     pub: {
       name: 'Hamilton Hall',
       description: 'A former ballroom inside Liverpool Street station, now a Wetherspoons with the most spectacular pub ceiling in London. Gilded baroque plasterwork, vast chandeliers, and cheap pints under ceiling murals of cherubs.',
@@ -143,6 +164,8 @@ const stations: Station[] = [
     number: 10,
     name: 'Aldgate',
     interchanges: ['hammersmith-city', 'metropolitan'],
+    lat: 51.5143,
+    lng: -0.0755,
     pub: {
       name: 'The Hoop and Grapes',
       description: 'One of the oldest pubs in the City — a crooked, timber-framed survivor that predates the Great Fire of 1666. The floors slope, the ceilings sag, and the atmosphere is pure old London. A genuine treasure.',
@@ -155,6 +178,8 @@ const stations: Station[] = [
     number: 11,
     name: 'Tower Hill',
     interchanges: ['district'],
+    lat: 51.5098,
+    lng: -0.0766,
     pub: {
       name: 'The Hung Drawn and Quartered',
       description: 'Named after the fate of traitors executed at the Tower, this Fuller\'s pub delivers exactly what you\'d expect: solid ales, decent pies, and tourists recovering from the Crown Jewels queue. The name does the heavy lifting.',
@@ -167,6 +192,8 @@ const stations: Station[] = [
     number: 12,
     name: 'Monument',
     interchanges: ['district', 'northern'],
+    lat: 51.5107,
+    lng: -0.0860,
     pub: {
       name: 'The Counting House',
       description: 'A former NatWest bank transformed into a spectacular pub. The original banking hall is intact — marble columns, coffered ceilings, a central glass dome flooding the room with light. The most impressive Wetherspoons interior in London.',
@@ -179,6 +206,8 @@ const stations: Station[] = [
     number: 13,
     name: 'Cannon Street',
     interchanges: ['district'],
+    lat: 51.5113,
+    lng: -0.0904,
     pub: {
       name: 'The Banker',
       description: 'A cavernous Fuller\'s pub in a converted banking hall near the station. Suits pack it at 5:30, but on weekends it\'s a ghost town — the City empties completely. Check it\'s open before making the walk.',
@@ -191,6 +220,8 @@ const stations: Station[] = [
     number: 14,
     name: 'Mansion House',
     interchanges: ['district'],
+    lat: 51.5122,
+    lng: -0.0940,
     pub: {
       name: 'The Walrus and the Carpenter',
       description: 'A proper City pub with original Victorian features and a literary name from Lewis Carroll. Small, characterful, and infinitely preferable to the chains nearby. Often closed weekends — plan accordingly.',
@@ -203,6 +234,8 @@ const stations: Station[] = [
     number: 15,
     name: 'Blackfriars',
     interchanges: ['district'],
+    lat: 51.5120,
+    lng: -0.1040,
     pub: {
       name: 'The Black Friar',
       description: 'The most extraordinary pub interior in London. An Arts and Crafts masterpiece from 1905, with marble walls, copper reliefs, and vaulted ceilings covered in mosaics of jolly friars. Nearly demolished in 1964 — Betjeman campaigned to save it.',
@@ -215,6 +248,8 @@ const stations: Station[] = [
     number: 16,
     name: 'Temple',
     interchanges: ['district'],
+    lat: 51.5111,
+    lng: -0.1141,
     pub: {
       name: 'The Edgar Wallace',
       description: 'A proper journalists\' pub, named after the thriller writer who worked at Fleet Street. Dark, wooden, secretive — the kind of place sources were met and expenses were invented. Still pulls a good pint.',
@@ -227,6 +262,8 @@ const stations: Station[] = [
     number: 17,
     name: 'Embankment',
     interchanges: ['bakerloo', 'district', 'northern'],
+    lat: 51.5074,
+    lng: -0.1224,
     pub: {
       name: 'Gordon\'s Wine Bar',
       description: 'Not a pub, but the most atmospheric drinking spot in London. A candlelit cave beneath Villiers Street, with barrels for tables and wine-stained walls. Get there early — no reservations, no standing room, no compromise.',
@@ -239,6 +276,8 @@ const stations: Station[] = [
     number: 18,
     name: 'Westminster',
     interchanges: ['jubilee', 'district'],
+    lat: 51.5010,
+    lng: -0.1254,
     pub: {
       name: 'St. Stephen\'s Tavern',
       description: 'The MPs\' pub, directly opposite Big Ben. Division bells ring inside when votes are called, sending politicians scurrying back to the House. Victorian splendor, surprising intimacy, and the distinct possibility of spotting a Cabinet minister.',
@@ -251,6 +290,8 @@ const stations: Station[] = [
     number: 19,
     name: 'St. James\'s Park',
     interchanges: ['district'],
+    lat: 51.4994,
+    lng: -0.1335,
     pub: {
       name: 'The Red Lion',
       description: 'A small, perfectly formed Westminster pub in the heart of Whitehall. Civil servants, politicos, and tourists who got lucky. The Victorian interior is intact, the beer is excellent, and the location couldn\'t be more central.',
@@ -263,6 +304,8 @@ const stations: Station[] = [
     number: 20,
     name: 'Victoria',
     interchanges: ['district', 'victoria'],
+    lat: 51.4965,
+    lng: -0.1447,
     pub: {
       name: 'The Willow Walk',
       description: 'A vast Wetherspoons in a converted bank near Victoria station. Not charming, but reliable — and after 19 stops, reliable counts for a lot. High ceilings, cheap beer, and the anonymity that only a massive chain pub provides.',
@@ -275,6 +318,8 @@ const stations: Station[] = [
     number: 21,
     name: 'Sloane Square',
     interchanges: ['district'],
+    lat: 51.4924,
+    lng: -0.1565,
     pub: {
       name: 'The Botanist',
       description: 'An upmarket Chelsea pub on Sloane Square itself. All exposed brick and craft beer, the clientele in Barbour jackets and Hunter wellies. A jarring gear change after Victoria — you\'re in proper posh London now.',
@@ -287,6 +332,8 @@ const stations: Station[] = [
     number: 22,
     name: 'South Kensington',
     interchanges: ['district', 'piccadilly'],
+    lat: 51.4941,
+    lng: -0.1738,
     pub: {
       name: 'The Hoop and Toy',
       description: 'A tucked-away Victorian pub on a quiet South Ken side street. Original etched glass, proper ales, and an escape from the museum crowds nearby. Feels like stepping back a century.',
@@ -299,6 +346,8 @@ const stations: Station[] = [
     number: 23,
     name: 'Gloucester Road',
     interchanges: ['district', 'piccadilly'],
+    lat: 51.4945,
+    lng: -0.1829,
     pub: {
       name: 'The Stanhope Arms',
       description: 'A civilised Kensington local hiding in plain sight. High ceilings, big windows, and the kind of quiet confidence that comes from serving a neighbourhood for over a century. A genuine hidden gem.',
@@ -311,6 +360,8 @@ const stations: Station[] = [
     number: 24,
     name: 'High Street Kensington',
     interchanges: ['district'],
+    lat: 51.5009,
+    lng: -0.1918,
     pub: {
       name: 'The Britannia',
       description: 'A big, bustling Fuller\'s pub on the high street. Nothing fancy, but solidly good — proper ales, decent food, and enough space to actually get a seat. The pub equivalent of a reliable friend.',
@@ -323,6 +374,8 @@ const stations: Station[] = [
     number: 25,
     name: 'Notting Hill Gate',
     interchanges: ['central', 'district'],
+    lat: 51.5094,
+    lng: -0.1967,
     pub: {
       name: 'The Churchill Arms',
       description: 'Possibly London\'s most photographed pub — the entire exterior is covered in hanging baskets and, at Christmas, thousands of lights. Inside, every inch of ceiling is covered in chamber pots, jugs, and Churchill memorabilia. Bonkers and brilliant.',
@@ -335,6 +388,8 @@ const stations: Station[] = [
     number: 26,
     name: 'Bayswater',
     interchanges: ['district'],
+    lat: 51.5121,
+    lng: -0.1879,
     pub: {
       name: 'The Cleveland Arms',
       description: 'A proper neighbourhood local in a quiet Bayswater backstreet. Small, friendly, with a little terrace for summer and a fire for winter. The kind of pub you wish was your local.',
@@ -347,6 +402,8 @@ const stations: Station[] = [
     number: 27,
     name: 'Paddington',
     interchanges: ['bakerloo', 'district', 'hammersmith-city', 'elizabeth'],
+    lat: 51.5154,
+    lng: -0.1755,
     pub: {
       name: 'The Pride of Paddington',
       description: 'A small, scruffy, utterly authentic railway pub yards from the station. Paddington Bear would approve of the lack of pretension. You\'ve made it round the Circle. You deserve a pint in a pub that doesn\'t try too hard.',
@@ -357,82 +414,207 @@ const stations: Station[] = [
   },
 ];
 
+// Accent color for Circle Line
+const CIRCLE_LINE_YELLOW = '#FFD300';
+
+interface TubeStopCardProps {
+  station: Station;
+  onClick: () => void;
+}
+
 function InterchangeBadge({ line }: { line: string }) {
   const color = LINE_COLORS[line] || '#666';
-  const displayName = line.split('-').map(word => word.charAt(0).toUpperCase()).join('&');
+  const displayName = line
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' & ');
 
   return (
     <span
-      className="inline-block w-4 h-4 rounded-full border-2 border-white/20"
+      className="inline-block w-4 h-4 rounded-full border-2 border-white"
       style={{ backgroundColor: color }}
-      title={line.replace('-', ' & ')}
+      title={displayName}
     />
   );
 }
 
-function StationCard({ station, isVisible }: { station: Station; isVisible: boolean }) {
-  const isLeft = station.number % 2 === 1;
-
+function TubeStopCard({ station, onClick }: TubeStopCardProps) {
   return (
     <div
-      className={`relative flex items-start gap-6 md:gap-12 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      } ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+      className="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow h-full flex flex-col"
+      onClick={onClick}
     >
-      {/* Station node on the line */}
-      <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 flex flex-col items-center z-10">
-        {/* Roundel-inspired station marker */}
+      {/* Top bar - Circle Line yellow */}
+      <div
+        className="h-3 w-full"
+        style={{ backgroundColor: CIRCLE_LINE_YELLOW }}
+      />
+
+      {/* Station number roundel */}
+      <div className="flex justify-center -mt-6 relative z-10">
         <div className="relative">
-          <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#FFD300] flex items-center justify-center shadow-lg shadow-[#FFD300]/30">
-            <span className="font-bold text-[#0f0f0f] text-sm md:text-base">{station.number}</span>
+          {/* Outer red circle (like TfL roundel) */}
+          <div
+            className="w-14 h-14 rounded-full flex items-center justify-center shadow-md"
+            style={{ backgroundColor: '#E32017' }}
+          >
+            {/* Inner blue bar with number */}
+            <div className="w-12 h-5 bg-[#003688] flex items-center justify-center">
+              <span className="text-white font-bold text-sm">{station.number}</span>
+            </div>
           </div>
-          {/* Pulse effect */}
-          <div className={`absolute inset-0 rounded-full bg-[#FFD300] animate-ping opacity-20 ${isVisible ? '' : 'hidden'}`} />
         </div>
       </div>
 
-      {/* Card content */}
-      <div className={`ml-12 md:ml-0 md:w-[calc(50%-3rem)] ${isLeft ? 'md:pr-8' : 'md:pl-8'}`}>
-        <div className="bg-[#1a1a1a] rounded-xl p-6 border border-white/5 hover:border-[#FFD300]/30 transition-colors">
-          {/* Station name with interchanges */}
-          <div className="flex items-center gap-3 mb-2">
-            <h3 className="font-sans text-lg md:text-xl font-bold text-[#FFD300] uppercase tracking-wide">
-              {station.name}
-            </h3>
-            <div className="flex gap-1">
-              {station.interchanges.map((line) => (
-                <InterchangeBadge key={line} line={line} />
-              ))}
+      {/* Station name */}
+      <div className="px-4 pt-3 pb-2 text-center">
+        <div
+          className="inline-block px-3 py-1 rounded text-sm font-bold uppercase tracking-wider"
+          style={{ backgroundColor: CIRCLE_LINE_YELLOW, color: '#1C2632' }}
+        >
+          {station.name}
+        </div>
+      </div>
+
+      {/* Interchange lines */}
+      <div className="flex justify-center gap-1 px-4 py-2">
+        {station.interchanges.map((line) => (
+          <InterchangeBadge key={line} line={line} />
+        ))}
+      </div>
+
+      {/* Divider */}
+      <div className="mx-6 border-t border-[#E8E4DD]" />
+
+      {/* Pub name */}
+      <div className="px-4 py-4 flex-grow">
+        <h3 className="font-serif text-xl font-bold text-[#1C2632] text-center mb-2">
+          {station.pub.name}
+        </h3>
+        <p className="text-[#4A5568] text-sm text-center line-clamp-3">
+          {station.pub.description}
+        </p>
+      </div>
+
+      {/* Bottom bar with drink recommendation */}
+      <div className="px-4 py-3 bg-[#F5F2ED] border-t border-[#E8E4DD]">
+        <div className="flex items-center justify-center gap-2 text-sm">
+          <span className="text-[#722F37]">🍺</span>
+          <span className="text-[#4A5568] truncate">{station.pub.recommendedDrink}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface PubModalProps {
+  station: Station;
+  onClose: () => void;
+}
+
+function PubModal({ station, onClose }: PubModalProps) {
+  return (
+    <div
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header with Circle Line styling */}
+        <div
+          className="p-6 text-center relative"
+          style={{ backgroundColor: CIRCLE_LINE_YELLOW }}
+        >
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center transition-colors"
+          >
+            <svg className="w-5 h-5 text-[#1C2632]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Roundel */}
+          <div className="flex justify-center mb-3">
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: '#E32017' }}
+            >
+              <div className="w-14 h-6 bg-[#003688] flex items-center justify-center">
+                <span className="text-white font-bold">{station.number}</span>
+              </div>
             </div>
           </div>
 
+          {/* Station name */}
+          <h2 className="font-bold text-xl text-[#1C2632] uppercase tracking-wider">
+            {station.name}
+          </h2>
+
+          {/* Interchanges */}
+          <div className="flex justify-center gap-2 mt-2">
+            {station.interchanges.map((line) => (
+              <InterchangeBadge key={line} line={line} />
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
           {/* Pub name */}
-          <h4 className="font-serif text-2xl md:text-3xl text-[#F5F0E8] mb-3">
+          <h3 className="font-serif text-2xl font-bold text-[#1C2632] mb-4">
             {station.pub.name}
-          </h4>
+          </h3>
 
           {/* Description */}
-          <p className="text-[#F5F0E8]/70 leading-relaxed mb-4">
+          <p className="text-[#4A5568] leading-relaxed mb-6">
             {station.pub.description}
           </p>
 
           {/* Historic note */}
-          <div className="bg-[#FFD300]/10 border-l-2 border-[#FFD300] px-4 py-2 mb-4">
-            <p className="text-[#FFD300] text-sm italic">{station.pub.historicNote}</p>
+          <div
+            className="rounded-lg p-4 mb-6"
+            style={{ backgroundColor: `${CIRCLE_LINE_YELLOW}20`, borderLeft: `3px solid ${CIRCLE_LINE_YELLOW}` }}
+          >
+            <p className="text-[#1C2632] text-sm italic">
+              {station.pub.historicNote}
+            </p>
           </div>
 
-          {/* Details row */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-[#F5F0E8]/50">
-            <span className="flex items-center gap-2">
-              <span className="text-[#FFD300]">🍺</span>
-              {station.pub.recommendedDrink}
-            </span>
-            <span className="hidden md:block w-px h-4 bg-white/20" />
-            <span className="flex items-center gap-2">
-              <span className="text-[#FFD300]">→</span>
-              {station.pub.walkToNext}
-            </span>
+          {/* Details */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="text-xl">🍺</span>
+              <div>
+                <div className="text-xs text-[#4A5568] uppercase tracking-wider">Recommended</div>
+                <div className="text-[#1C2632] font-medium">{station.pub.recommendedDrink}</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xl">🚶</span>
+              <div>
+                <div className="text-xs text-[#4A5568] uppercase tracking-wider">Next Stop</div>
+                <div className="text-[#1C2632] font-medium">{station.pub.walkToNext}</div>
+              </div>
+            </div>
           </div>
+
+          {/* Directions button */}
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${station.lat},${station.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 w-full flex items-center justify-center gap-2 py-3 rounded-lg text-white font-semibold transition-opacity hover:opacity-90"
+            style={{ backgroundColor: CIRCLE_LINE_YELLOW, color: '#1C2632' }}
+          >
+            Get Directions
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -440,645 +622,242 @@ function StationCard({ station, isVisible }: { station: Station; isVisible: bool
 }
 
 export default function CircleLinePage() {
-  const [visibleStations, setVisibleStations] = useState<Set<number>>(new Set());
-  const [currentStation, setCurrentStation] = useState(1);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const stationRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const routeSectionRef = useRef<HTMLDivElement>(null);
+  const [selectedStation, setSelectedStation] = useState<Station | null>(null);
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    stationRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setVisibleStations((prev) => new Set([...prev, index + 1]));
-                setCurrentStation(index + 1);
-              }
-            });
-          },
-          { threshold: 0.3 }
-        );
-        observer.observe(ref);
-        observers.push(observer);
-      }
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (routeSectionRef.current) {
-        const rect = routeSectionRef.current.getBoundingClientRect();
-        const sectionHeight = routeSectionRef.current.offsetHeight;
-        const viewportHeight = window.innerHeight;
-        const scrolled = Math.max(0, -rect.top + viewportHeight * 0.3);
-        const progress = Math.min(100, Math.max(0, (scrolled / sectionHeight) * 100));
-        setScrollProgress(progress);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Map locations
+  const mapLocations = stations.map((s) => ({
+    name: `${s.number}. ${s.name} - ${s.pub.name}`,
+    lat: s.lat,
+    lng: s.lng,
+    number: s.number,
+  }));
 
   return (
-    <>
-      {/* Schema.org structured data - comprehensive for SEO and GEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@graph': [
-              // Main TouristAttraction
-              {
-                '@type': 'TouristAttraction',
-                '@id': 'https://londonpubcrawls.com/crawl/circle-line#attraction',
-                name: 'Circle Line Challenge Pub Crawl',
-                description: 'The ultimate London Underground pub crawl challenge: visit one pub near every Circle Line station. 27 stations, 27 pubs, approximately 14 miles of walking, typically taking 10-12 hours to complete. A legendary London drinking challenge that has been attempted for decades.',
-                url: 'https://londonpubcrawls.com/crawl/circle-line',
-                image: 'https://londonpubcrawls.com/og/circle-line.jpg',
-                touristType: ['Pub Enthusiasts', 'Challenge Seekers', 'London Explorers'],
-                isAccessibleForFree: true,
-                publicAccess: true,
-                address: {
-                  '@type': 'PostalAddress',
-                  addressLocality: 'London',
-                  addressRegion: 'Greater London',
-                  addressCountry: 'GB',
-                },
-                geo: {
-                  '@type': 'GeoCoordinates',
-                  latitude: 51.5074,
-                  longitude: -0.1278,
-                },
-              },
-              // BreadcrumbList
-              {
-                '@type': 'BreadcrumbList',
-                itemListElement: [
-                  {
-                    '@type': 'ListItem',
-                    position: 1,
-                    name: 'London Pub Crawls',
-                    item: 'https://londonpubcrawls.com',
-                  },
-                  {
-                    '@type': 'ListItem',
-                    position: 2,
-                    name: 'Circle Line Challenge',
-                    item: 'https://londonpubcrawls.com/crawl/circle-line',
-                  },
-                ],
-              },
-              // ItemList of pubs
-              {
-                '@type': 'ItemList',
-                name: 'Circle Line Challenge Pubs',
-                description: '27 pubs, one for each Circle Line station',
-                numberOfItems: 27,
-                itemListElement: stations.map((station, index) => ({
-                  '@type': 'ListItem',
-                  position: index + 1,
-                  item: {
-                    '@type': 'BarOrPub',
-                    name: station.pub.name,
-                    description: station.pub.description,
-                    address: {
-                      '@type': 'PostalAddress',
-                      addressLocality: 'London',
-                      addressCountry: 'GB',
-                    },
-                  },
-                })),
-              },
-              // FAQPage for GEO optimization
-              {
-                '@type': 'FAQPage',
-                mainEntity: [
-                  {
-                    '@type': 'Question',
-                    name: 'What is the Circle Line Challenge pub crawl?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'The Circle Line Challenge is a legendary London pub crawl where participants visit one pub near every station on the London Underground Circle Line. This means 27 stations and 27 pubs, covering approximately 14 miles on foot and typically taking 10-12 hours to complete.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: 'How long does the Circle Line pub crawl take?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'The full Circle Line Challenge typically takes 10-12 hours to complete, including walking time and time spent at each pub. Most groups start around 11am to allow a full day. The route covers approximately 14 miles of walking.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: 'What is the best day to do the Circle Line Challenge?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'Saturday is generally the best day for the Circle Line Challenge. Be aware that many City of London pubs (around Monument, Cannon Street, Mansion House, and Moorgate) are closed on weekends, so you may need alternative pubs for those stops.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: 'Where does the Circle Line pub crawl start and end?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'The traditional route starts at Edgware Road station and proceeds clockwise around the Circle Line, ending at Paddington. Since it\'s a loop, you can optionally continue back to Edgware Road to complete the full circle.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: 'How many pubs are on the Circle Line Challenge?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'The Circle Line Challenge includes 27 pubs, one for each station on the Circle Line loop. The stations are: Edgware Road, Baker Street, Great Portland Street, Euston Square, King\'s Cross St. Pancras, Farringdon, Barbican, Moorgate, Liverpool Street, Aldgate, Tower Hill, Monument, Cannon Street, Mansion House, Blackfriars, Temple, Embankment, Westminster, St. James\'s Park, Victoria, Sloane Square, South Kensington, Gloucester Road, High Street Kensington, Notting Hill Gate, Bayswater, and Paddington.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: 'Do I need to ride the Circle Line during the pub crawl?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'No, the Circle Line Challenge is a walking pub crawl. You walk between all the pubs rather than taking the Tube. However, keeping an Oyster card handy is recommended in case you need to skip ahead or cut the crawl short.',
-                    },
-                  },
-                ],
-              },
-              // HowTo schema
-              {
-                '@type': 'HowTo',
-                name: 'How to Complete the Circle Line Challenge',
-                description: 'A step-by-step guide to completing London\'s famous Circle Line pub crawl',
-                totalTime: 'PT12H',
-                estimatedCost: {
-                  '@type': 'MonetaryAmount',
-                  currency: 'GBP',
-                  value: '100-150',
-                },
-                step: [
-                  {
-                    '@type': 'HowToStep',
-                    position: 1,
-                    name: 'Start at Edgware Road',
-                    text: 'Begin your Circle Line Challenge at Edgware Road station around 11am. Head to The Beehive for your first pint.',
-                  },
-                  {
-                    '@type': 'HowToStep',
-                    position: 2,
-                    name: 'Follow the route clockwise',
-                    text: 'Walk between stations, visiting one pub at each of the 27 Circle Line stops. Cards with pub recommendations are provided for each station.',
-                  },
-                  {
-                    '@type': 'HowToStep',
-                    position: 3,
-                    name: 'Pace yourself',
-                    text: 'Take food breaks around pub 10 and pub 20. Drink water. Wear comfortable shoes. This is a marathon, not a sprint.',
-                  },
-                  {
-                    '@type': 'HowToStep',
-                    position: 4,
-                    name: 'Finish at Paddington',
-                    text: 'Celebrate completing all 27 stops at The Pride of Paddington, or continue back to Edgware Road to complete the full loop.',
-                  },
-                ],
-              },
-            ],
-          }),
-        }}
+    <CrawlLayout crawlName="Circle Line Challenge" accentColor={CIRCLE_LINE_YELLOW}>
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-6 bg-gradient-to-b from-[#1C2632] to-[#2a3847]">
+        {/* Animated Circle Line ring background */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-10">
+          <svg viewBox="0 0 400 400" className="w-[500px] h-[500px] md:w-[700px] md:h-[700px]">
+            <circle
+              cx="200"
+              cy="200"
+              r="150"
+              fill="none"
+              stroke={CIRCLE_LINE_YELLOW}
+              strokeWidth="6"
+              className="animate-pulse"
+            />
+            {Array.from({ length: 27 }).map((_, i) => {
+              const angle = (i / 27) * Math.PI * 2 - Math.PI / 2;
+              const x = 200 + Math.cos(angle) * 150;
+              const y = 200 + Math.sin(angle) * 150;
+              return (
+                <circle
+                  key={i}
+                  cx={x}
+                  cy={y}
+                  r="5"
+                  fill={CIRCLE_LINE_YELLOW}
+                  className="animate-pulse"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                />
+              );
+            })}
+          </svg>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Roundel badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
+            <div
+              className="w-6 h-6 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: '#E32017' }}
+            >
+              <div className="w-5 h-2 bg-[#003688]" />
+            </div>
+            <span className="text-white font-bold uppercase tracking-wider text-sm">Circle Line</span>
+          </div>
+
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            The Circle Line{' '}
+            <span style={{ color: CIRCLE_LINE_YELLOW }}>Challenge</span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto">
+            27 Stations. 27 Pubs. One Loop. Good Luck.
+          </p>
+
+          {/* Stats */}
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-10">
+            <div className="text-center">
+              <div className="text-4xl font-bold" style={{ color: CIRCLE_LINE_YELLOW }}>27</div>
+              <div className="text-sm text-white/60 uppercase tracking-wider">Pubs</div>
+            </div>
+            <div className="w-px h-12 bg-white/20 hidden md:block" />
+            <div className="text-center">
+              <div className="text-4xl font-bold" style={{ color: CIRCLE_LINE_YELLOW }}>~14</div>
+              <div className="text-sm text-white/60 uppercase tracking-wider">Miles</div>
+            </div>
+            <div className="w-px h-12 bg-white/20 hidden md:block" />
+            <div className="text-center">
+              <div className="text-4xl font-bold" style={{ color: CIRCLE_LINE_YELLOW }}>10+</div>
+              <div className="text-sm text-white/60 uppercase tracking-wider">Hours</div>
+            </div>
+          </div>
+
+          {/* Difficulty badge */}
+          <div className="inline-block px-4 py-2 bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold uppercase tracking-widest text-sm rounded mb-8">
+            Difficulty: EPIC
+          </div>
+
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#route"
+              className="px-8 py-4 rounded-lg font-bold text-[#1C2632] hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+              style={{ backgroundColor: CIRCLE_LINE_YELLOW }}
+            >
+              See the Route
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Introduction */}
+      <section className="py-16 md:py-24 px-6 bg-[#FAF8F5]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#1C2632] mb-8">
+            The Rules Are Simple
+          </h2>
+          <div className="space-y-6 text-lg text-[#4A5568] leading-relaxed">
+            <p>
+              Start at Edgware Road. Have a drink at a pub near every station on the Circle Line loop.
+              Finish back where you started. That&apos;s it. That&apos;s the challenge.
+            </p>
+            <p>
+              This is arguably London&apos;s most famous pub crawl challenge. People have been attempting
+              it for decades — hen parties, stag dos, charity fundraisers, and friends who should know
+              better. The Circle Line calls to a certain kind of drinker.
+            </p>
+            <p>
+              Let&apos;s be honest: doing all 27 is <em className="text-[#722F37]">genuinely hard</em>. Most groups won&apos;t finish.
+              That&apos;s fine. This isn&apos;t a competition — it&apos;s an adventure.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Route Section - Carousel */}
+      <section id="route" className="py-16 md:py-24 px-6 bg-[#F5F2ED]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#1C2632] mb-4">
+              The Route
+            </h2>
+            <p className="text-[#4A5568] max-w-xl mx-auto">
+              27 stations. 27 pubs. Clockwise from Edgware Road. Tap any card for details.
+            </p>
+          </div>
+
+          <PubCarousel title="All Stops">
+            {stations.map((station) => (
+              <TubeStopCard
+                key={station.number}
+                station={station}
+                onClick={() => setSelectedStation(station)}
+              />
+            ))}
+          </PubCarousel>
+        </div>
+      </section>
+
+      {/* Interactive Map */}
+      <InteractiveMap
+        locations={mapLocations}
+        accentColor={CIRCLE_LINE_YELLOW}
+        title="The Circle"
       />
 
-      <main className="min-h-screen bg-[#0f0f0f] text-[#F5F0E8]">
-        {/* Progress indicator - fixed */}
-        <div className="fixed top-4 right-4 z-50 bg-[#1a1a1a]/90 backdrop-blur-sm rounded-lg px-4 py-3 border border-[#FFD300]/30 shadow-lg">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full border-4 border-[#FFD300]/30 flex items-center justify-center relative">
-              <svg className="absolute inset-0 w-full h-full -rotate-90">
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="20"
-                  fill="none"
-                  stroke="#FFD300"
-                  strokeWidth="4"
-                  strokeDasharray={`${scrollProgress * 1.25} 125`}
-                  className="transition-all duration-300"
-                />
-              </svg>
-              <span className="text-[#FFD300] font-bold text-sm">{currentStation}</span>
+      {/* Logistics */}
+      <section className="py-16 md:py-24 px-6 bg-[#FAF8F5]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#1C2632] mb-8 text-center">
+            Before You Go
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Route details */}
+            <div className="bg-white rounded-xl p-6 shadow-md border border-[#E8E4DD]">
+              <h3 className="font-semibold text-[#1C2632] mb-4 uppercase tracking-wider text-sm">
+                Route Details
+              </h3>
+              <dl className="space-y-3 text-[#4A5568]">
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">Start</dt>
+                  <dd>Edgware Road (Circle Line)</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">End</dt>
+                  <dd>Paddington / back to start</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">Total distance</dt>
+                  <dd>~14 miles on foot</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">Duration</dt>
+                  <dd>10-12 hours (with drinks)</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">Best day</dt>
+                  <dd>Saturday</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-[#4A5568]/60">Start time</dt>
+                  <dd>11am</dd>
+                </div>
+              </dl>
             </div>
-            <div className="text-xs">
-              <div className="text-[#FFD300] font-semibold">Stop {currentStation}</div>
-              <div className="text-[#F5F0E8]/50">of 27</div>
+
+            {/* Tips */}
+            <div className="bg-white rounded-xl p-6 shadow-md border border-[#E8E4DD]">
+              <h3 className="font-semibold text-[#1C2632] mb-4 uppercase tracking-wider text-sm">
+                Essential Tips
+              </h3>
+              <ul className="space-y-3 text-[#4A5568] text-sm">
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0" style={{ color: CIRCLE_LINE_YELLOW }}>⚠️</span>
+                  <span>City pubs (Monument, Cannon Street, Mansion House, Moorgate) often close weekends. Check ahead.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0" style={{ color: CIRCLE_LINE_YELLOW }}>🚇</span>
+                  <span>You walk between pubs — not ride. But keep an Oyster card handy for emergencies.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0" style={{ color: CIRCLE_LINE_YELLOW }}>🥪</span>
+                  <span>Eat. Seriously. Stop for food around pub 10 and pub 20.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0" style={{ color: CIRCLE_LINE_YELLOW }}>👟</span>
+                  <span>Comfortable shoes. You&apos;ll thank us by Station 15.</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* HERO SECTION */}
-        <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Animated Circle Line ring background */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg viewBox="0 0 400 400" className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-20">
-              {/* Outer glow */}
-              <defs>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="8" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              {/* Main circle */}
-              <circle
-                cx="200"
-                cy="200"
-                r="150"
-                fill="none"
-                stroke="#FFD300"
-                strokeWidth="8"
-                filter="url(#glow)"
-                className="animate-pulse"
-              />
-              {/* Station dots */}
-              {Array.from({ length: 27 }).map((_, i) => {
-                const angle = (i / 27) * Math.PI * 2 - Math.PI / 2;
-                const x = 200 + Math.cos(angle) * 150;
-                const y = 200 + Math.sin(angle) * 150;
-                return (
-                  <circle
-                    key={i}
-                    cx={x}
-                    cy={y}
-                    r="6"
-                    fill="#FFD300"
-                    className="animate-pulse"
-                    style={{ animationDelay: `${i * 0.1}s` }}
-                  />
-                );
-              })}
-            </svg>
-          </div>
-
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f0f] via-transparent to-[#0f0f0f]" />
-
-          {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            {/* Back link */}
-            <a
-              href="/"
-              className="inline-flex items-center gap-2 text-[#F5F0E8]/50 hover:text-[#FFD300] transition-colors mb-8 text-sm"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              All Crawls
-            </a>
-
-            {/* Roundel badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFD300]/10 border border-[#FFD300]/30 rounded-full mb-8">
-              <div className="w-6 h-6 rounded-full bg-[#FFD300] flex items-center justify-center">
-                <div className="w-4 h-1 bg-[#0f0f0f]" />
-              </div>
-              <span className="text-[#FFD300] font-bold uppercase tracking-wider text-sm">Circle Line</span>
-            </div>
-
-            {/* Main headline */}
-            <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold text-[#FFD300] mb-6 tracking-tight uppercase">
-              The Circle Line Challenge
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-[#F5F0E8]/80 mb-10 font-light">
-              27 Stations. 27 Pubs. One Loop. Good Luck.
-            </p>
-
-            {/* Stats bar */}
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mb-10">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#FFD300]">27</div>
-                <div className="text-sm text-[#F5F0E8]/50 uppercase tracking-wider">Pubs</div>
-              </div>
-              <div className="w-px h-12 bg-[#FFD300]/30 hidden md:block" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#FFD300]">~14</div>
-                <div className="text-sm text-[#F5F0E8]/50 uppercase tracking-wider">Miles</div>
-              </div>
-              <div className="w-px h-12 bg-[#FFD300]/30 hidden md:block" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#FFD300]">10+</div>
-                <div className="text-sm text-[#F5F0E8]/50 uppercase tracking-wider">Hours</div>
-              </div>
-            </div>
-
-            {/* Difficulty badge */}
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold uppercase tracking-widest text-sm rounded mb-10 animate-pulse">
-              Difficulty: EPIC
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#route"
-                className="px-8 py-4 bg-[#FFD300] text-[#0f0f0f] font-bold rounded-lg hover:bg-[#FFE033] transition-colors inline-flex items-center gap-2"
-              >
-                See the Route
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a>
-              <a
-                href="#builder"
-                className="px-8 py-4 bg-transparent border-2 border-[#FFD300] text-[#FFD300] font-bold rounded-lg hover:bg-[#FFD300]/10 transition-colors"
-              >
-                Build Your Crawl →
-              </a>
-            </div>
-          </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#FFD300]/50 animate-bounce">
-            <span className="text-xs uppercase tracking-widest">Mind the Gap</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </header>
-
-        {/* INTRODUCTION */}
-        <section className="py-24 px-6 border-t border-[#FFD300]/10">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-sans text-3xl md:text-4xl font-bold text-[#FFD300] mb-8 uppercase tracking-wide">
-              The Rules Are Simple
-            </h2>
-            <div className="space-y-6 text-lg text-[#F5F0E8]/80 leading-relaxed">
-              <p>
-                Start at Edgware Road. Have a drink at a pub near every station on the Circle Line loop.
-                Finish back where you started. That&apos;s it. That&apos;s the challenge.
-              </p>
-              <p>
-                This is arguably London&apos;s most famous pub crawl challenge. People have been attempting
-                it for decades — hen parties, stag dos, charity fundraisers, and friends who should know
-                better. The Circle Line calls to a certain kind of drinker.
-              </p>
-              <p>
-                Let&apos;s be honest: doing all 27 is <em>genuinely hard</em>. Most groups won&apos;t finish.
-                That&apos;s fine. This isn&apos;t a competition — it&apos;s an adventure. The crawl builder
-                below lets you pick your stops, skip the ones that don&apos;t suit, and share a custom route
-                with your group. Twenty-seven is a target. Make it your own.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* THE ROUTE - Main content */}
-        <section id="route" ref={routeSectionRef} className="py-24 px-6 relative">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="font-sans text-4xl md:text-5xl font-bold text-[#FFD300] mb-4 uppercase tracking-wide">
-                The Route
-              </h2>
-              <p className="text-[#F5F0E8]/60 text-lg">
-                27 stations. 27 pubs. Clockwise from Edgware Road.
-              </p>
-            </div>
-
-            {/* Vertical route line */}
-            <div className="relative">
-              {/* The yellow line */}
-              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#FFD300] via-[#FFD300] to-[#FFD300]/50 md:-translate-x-1/2" />
-
-              {/* Station cards */}
-              <div className="space-y-16 md:space-y-24">
-                {stations.map((station, index) => (
-                  <div
-                    key={station.number}
-                    ref={(el) => { stationRefs.current[index] = el; }}
-                  >
-                    <StationCard
-                      station={station}
-                      isVisible={visibleStations.has(station.number)}
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* End marker */}
-              <div className="relative flex justify-center pt-16">
-                <div className="w-16 h-16 rounded-full bg-[#FFD300] flex items-center justify-center shadow-lg shadow-[#FFD300]/50">
-                  <svg className="w-8 h-8 text-[#0f0f0f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* LOGISTICS PANEL */}
-        <section className="py-24 px-6 bg-[#0a0a0a]">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-sans text-3xl md:text-4xl font-bold text-[#FFD300] mb-8 uppercase tracking-wide text-center">
-              Before You Go
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Key info */}
-              <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#FFD300]/20">
-                <h3 className="text-[#FFD300] font-bold uppercase tracking-wider text-sm mb-4">Route Details</h3>
-                <dl className="space-y-3 text-[#F5F0E8]/80">
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">Start</dt>
-                    <dd>Edgware Road (Circle Line)</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">End</dt>
-                    <dd>Paddington / back to start</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">Total distance</dt>
-                    <dd>~14 miles on foot</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">Duration</dt>
-                    <dd>10-12 hours (with drinks)</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">Best day</dt>
-                    <dd>Saturday</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-[#F5F0E8]/50">Start time</dt>
-                    <dd>11am — you&apos;ll need the full day</dd>
-                  </div>
-                </dl>
-              </div>
-
-              {/* Tips */}
-              <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#FFD300]/20">
-                <h3 className="text-[#FFD300] font-bold uppercase tracking-wider text-sm mb-4">Essential Tips</h3>
-                <ul className="space-y-3 text-[#F5F0E8]/80 text-sm">
-                  <li className="flex gap-3">
-                    <span className="text-[#FFD300]">⚠️</span>
-                    <span>City pubs (Monument, Cannon Street, Mansion House, Moorgate) often close weekends. Check ahead or use the Crawl Builder for alternatives.</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#FFD300]">🚇</span>
-                    <span>You don&apos;t ride the Circle Line — you walk between pubs. But keep an Oyster card handy for when legs give out.</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#FFD300]">🥪</span>
-                    <span>Eat. Seriously. This isn&apos;t a sprint. Stop for food around pub 10 and pub 20.</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#FFD300]">👟</span>
-                    <span>Comfortable shoes. You&apos;ll thank us by Station 15.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CRAWL BUILDER CTA */}
-        <section id="builder" className="py-24 px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-sans text-3xl md:text-4xl font-bold text-[#FFD300] mb-4 uppercase tracking-wide">
-              27 Is a Lot. Build Your Own.
-            </h2>
-            <p className="text-[#F5F0E8]/60 text-lg mb-8 max-w-xl mx-auto">
-              Not everyone can (or should) do all 27. Pick your stops, skip the ones you don&apos;t fancy,
-              and share a custom route with your group.
-            </p>
-            <div className="inline-block bg-[#1a1a1a] border border-[#FFD300]/30 rounded-xl p-8">
-              <div className="text-[#FFD300] font-bold uppercase tracking-wider text-sm mb-4">Coming Soon</div>
-              <p className="text-[#F5F0E8]/60 mb-6 text-sm">
-                The Circle Line Crawl Builder is under construction. Get notified when it launches.
-              </p>
-              <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  className="flex-1 px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-[#FFD300]/50 transition-colors"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-[#FFD300] text-[#0f0f0f] font-bold rounded-lg hover:bg-[#FFE033] transition-colors"
-                >
-                  Notify Me
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        {/* SHARE SECTION */}
-        <section className="py-16 px-6 bg-[#0a0a0a]">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-2xl md:text-3xl text-[#F5F0E8] mb-4">
-              Think you can finish all 27? Prove it.
-            </h2>
-            <p className="text-[#F5F0E8]/50 mb-6">
-              Share this crawl with your group and start planning
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent('The Circle Line Challenge: 27 stations, 27 pubs, one loop. Are you in? https://londonpubcrawls.com/crawl/circle-line')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('The Circle Line Challenge: 27 stations, 27 pubs, one loop around the Tube. Who\'s in?')}&url=${encodeURIComponent('https://londonpubcrawls.com/crawl/circle-line')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-[#1DA1F2] flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <button
-                onClick={() => navigator.clipboard.writeText('https://londonpubcrawls.com/crawl/circle-line')}
-                className="w-12 h-12 rounded-full bg-[#F5F0E8]/10 flex items-center justify-center hover:scale-110 transition-transform"
-              >
-                <svg className="w-5 h-5 text-[#F5F0E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* OTHER CRAWLS */}
-        <section className="py-24 px-6">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-serif text-2xl md:text-3xl text-[#F5F0E8] mb-8 text-center">
-              If you liked this, try...
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: 'Monopoly Pub Crawl', slug: 'monopoly', color: '#D4001A', tagline: '26 pubs, one for each property' },
-                { name: 'Thames Path', slug: 'thames-path', color: '#2E6B8A', tagline: 'Tower Bridge to Westminster' },
-                { name: 'Jack the Ripper', slug: 'jack-the-ripper', color: '#8B1A1A', tagline: 'Whitechapel\'s darkest corners' },
-              ].map((crawl) => (
-                <a
-                  key={crawl.slug}
-                  href={`/crawl/${crawl.slug}`}
-                  className="block bg-[#1a1a1a] rounded-xl p-6 border border-white/5 hover:border-white/20 transition-colors group"
-                >
-                  <div
-                    className="w-10 h-10 rounded-full mb-4"
-                    style={{ backgroundColor: crawl.color }}
-                  />
-                  <h3 className="font-serif text-xl text-[#F5F0E8] group-hover:text-[#FFD300] transition-colors mb-2">
-                    {crawl.name}
-                  </h3>
-                  <p className="text-[#F5F0E8]/50 text-sm">{crawl.tagline}</p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer className="py-16 px-6 border-t border-[#FFD300]/10">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div>
-                <a href="/" className="font-serif text-xl font-bold text-[#FFD300] hover:text-[#FFE033] transition-colors">
-                  London Pub Crawls
-                </a>
-                <p className="text-[#F5F0E8]/40 text-sm mt-2">
-                  Made in London. Researched on foot. Written with a pint in hand.
-                </p>
-              </div>
-              <nav className="flex items-center gap-6 text-sm">
-                <a href="/" className="text-[#F5F0E8]/50 hover:text-[#FFD300] transition-colors">Home</a>
-                <a href="/#crawls" className="text-[#F5F0E8]/50 hover:text-[#FFD300] transition-colors">All Crawls</a>
-                <a href="#" className="text-[#F5F0E8]/50 hover:text-[#FFD300] transition-colors">About</a>
-                <a href="mailto:hello@londonpubcrawls.com" className="text-[#F5F0E8]/50 hover:text-[#FFD300] transition-colors">Contact</a>
-              </nav>
-            </div>
-            <div className="text-center mt-12 pt-8 border-t border-white/5">
-              <p className="text-[#F5F0E8]/30 text-xs">
-                &copy; {new Date().getFullYear()} London Pub Crawls. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
-      </main>
-    </>
+      {/* Pub Modal */}
+      {selectedStation && (
+        <PubModal
+          station={selectedStation}
+          onClose={() => setSelectedStation(null)}
+        />
+      )}
+    </CrawlLayout>
   );
 }

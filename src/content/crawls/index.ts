@@ -1,5 +1,14 @@
 import { CrawlPub } from '../pubs';
 
+export interface CrawlLogistics {
+  tubeStart: string;
+  tubeEnd: string;
+  suggestedStart: string;
+  bestDay: string;
+  pacingTips: string;
+  specialNotes?: string;
+}
+
 export interface Crawl {
   id: string;
   slug: string;
@@ -15,6 +24,7 @@ export interface Crawl {
   accentColor: string;
   secondaryColor: string;
   pubs: CrawlPub[];
+  logistics?: CrawlLogistics;
 }
 
 export const crawls: Crawl[] = [
@@ -49,6 +59,14 @@ export const crawls: Crawl[] = [
         historicNotes: 'One of the last genuine free houses in central London.',
       },
     ],
+    logistics: {
+      tubeStart: 'Elephant & Castle',
+      tubeEnd: 'Oxford Circus',
+      suggestedStart: '11:00 AM',
+      bestDay: 'Saturday',
+      pacingTips: 'Stick to halves early on to bank time. Eat around pub 8-10. The City pubs close early on weekends.',
+      specialNotes: 'Some City pubs are closed on weekends. Check opening times for Fleet Street stops.',
+    },
   },
   {
     id: '2',
@@ -100,6 +118,14 @@ export const crawls: Crawl[] = [
         historicNotes: 'Consistently cited as the pub nearest to Mary Kelly\'s murder site.',
       },
     ],
+    logistics: {
+      tubeStart: 'Aldgate East',
+      tubeEnd: 'Aldgate',
+      suggestedStart: '6:00 PM',
+      bestDay: 'Thursday or Friday',
+      pacingTips: 'Best done as an evening crawl when the atmospheric streets match the mood. One pint per pub keeps it tight.',
+      specialNotes: 'Consider joining a walking tour first, then do the pub crawl after for full context.',
+    },
   },
   {
     id: '3',
@@ -145,6 +171,14 @@ export const crawls: Crawl[] = [
         historicNotes: 'Walking distance from the Abbey Road crossing.',
       },
     ],
+    logistics: {
+      tubeStart: 'St John\'s Wood',
+      tubeEnd: 'Piccadilly Circus',
+      suggestedStart: '12:00 PM',
+      bestDay: 'Saturday or Sunday',
+      pacingTips: 'Start at Abbey Road for the photo, then work your way through Soho. Perfect pace for a relaxed afternoon.',
+      specialNotes: 'Book the Abbey Road crossing photo early — it gets crowded after midday.',
+    },
   },
   {
     id: '4',
@@ -205,6 +239,14 @@ export const crawls: Crawl[] = [
         historicNotes: 'Walking distance from the Abbey Road crossing.',
       },
     ],
+    logistics: {
+      tubeStart: 'Edgware Road',
+      tubeEnd: 'Edgware Road',
+      suggestedStart: '10:00 AM',
+      bestDay: 'Saturday',
+      pacingTips: 'One drink per pub. Eat at stops 9, 18, and 25. The full 27 is a marathon — pace yourself.',
+      specialNotes: 'Some City pubs close on weekends. Check times for stops around Bank and Monument.',
+    },
   },
   {
     id: '5',
@@ -260,6 +302,14 @@ export const crawls: Crawl[] = [
         historicNotes: 'Richmond was royal territory for centuries. The pub occupies prime riverside position.',
       },
     ],
+    logistics: {
+      tubeStart: 'Tower Hill',
+      tubeEnd: 'Westminster',
+      suggestedStart: '1:00 PM',
+      bestDay: 'Sunday',
+      pacingTips: 'Perfect for a lazy Sunday afternoon stroll. Take your time with the views. Bring a camera.',
+      specialNotes: 'The route works both directions — start at Westminster for sunset views over the City.',
+    },
   },
   {
     id: '6',

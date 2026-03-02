@@ -776,11 +776,20 @@ export default function CircleLinePage() {
       </section>
 
       {/* Interactive Map */}
-      <InteractiveMap
-        locations={mapLocations}
-        accentColor={CIRCLE_LINE_YELLOW}
-        title="The Circle"
-      />
+      <section className="py-16 md:py-24 px-6 bg-[#161B22]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#F5F0E8] text-center mb-4">
+            The Circle
+          </h2>
+          <p className="text-[#8B9AAD] text-center mb-8">
+            Follow the route station by station. Click any stop to see details.
+          </p>
+          <InteractiveMap
+            locations={mapLocations}
+            accentColor={CIRCLE_LINE_YELLOW}
+          />
+        </div>
+      </section>
 
       {/* Logistics */}
       <section className="py-16 md:py-24 px-6 bg-[#FAF8F5]">

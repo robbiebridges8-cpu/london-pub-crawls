@@ -1,117 +1,259 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface MapLocation {
   name: string;
   lat: number;
   lng: number;
   number: number;
+  description?: string;
 }
 
 interface InteractiveMapProps {
   locations: MapLocation[];
   accentColor?: string;
-  title?: string;
+  onMarkerClick?: (location: MapLocation) => void;
 }
 
-export default function InteractiveMap({ locations, accentColor = '#722F37', title = 'Route Map' }: InteractiveMapProps) {
+declare global {
+  interface Window {
+    L: any;
+  }
+}
+
+export default function InteractiveMap({
+  locations,
+  accentColor = '#D4A853',
+  onMarkerClick
+}: InteractiveMapProps) {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<MapLocation | null>(null);
 
-  // Calculate center of all locations
-  const centerLat = locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length;
-  const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
+  useEffect(() => {
+    // Check if Leaflet is already loaded
+    if (typeof window !== 'undefined' && window.L && mapRef.current && !mapInstanceRef.current) {
+      initializeMap();
+    } else if (typeof window !== 'undefined' && !window.L) {
+      // Load Leaflet JS
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+      script.crossOrigin = '';
+      script.onload = () => {
+        if (mapRef.current && !mapInstanceRef.current) {
+          initializeMap();
+        }
+      };
+      document.head.appendChild(script);
+    }
 
-  // Create Google Maps URL with markers
-  const markersParam = locations
-    .map((loc) => `markers=color:red%7Clabel:${loc.number}%7C${loc.lat},${loc.lng}`)
-    .join('&');
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [locations]);
 
-  const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${centerLat},${centerLng}&zoom=12&maptype=roadmap`;
+  const initializeMap = () => {
+    if (!mapRef.current || !window.L || locations.length === 0) return;
 
-  // Fallback static map if embed doesn't work
-  const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${centerLat},${centerLng}&zoom=12&size=800x400&maptype=roadmap&${markersParam}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`;
+    const L = window.L;
+
+    // Calculate center
+    const centerLat = locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length;
+    const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
+
+    // Create map with dark theme
+    const map = L.map(mapRef.current, {
+      center: [centerLat, centerLng],
+      zoom: 13,
+      scrollWheelZoom: true,
+      zoomControl: true,
+    });
+
+    // Use CartoDB Dark Matter tiles for dark theme
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+    }).addTo(map);
+
+    // Create custom marker icon
+    const createMarkerIcon = (number: number, isSelected: boolean = false) => {
+      return L.divIcon({
+        className: 'custom-marker',
+        html: `
+          <div style="
+            width: 32px;
+            height: 32px;
+            background: ${isSelected ? accentColor : '#1C2128'};
+            border: 2px solid ${accentColor};
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${isSelected ? '#0D1117' : accentColor};
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+          ">
+            ${number}
+          </div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -20],
+      });
+    };
+
+    // Add markers
+    const markers: any[] = [];
+    locations.forEach((location, index) => {
+      const marker = L.marker([location.lat, location.lng], {
+        icon: createMarkerIcon(location.number),
+      }).addTo(map);
+
+      // Create popup content
+      const popupContent = `
+        <div style="padding: 8px; min-width: 200px;">
+          <div style="font-size: 11px; color: ${accentColor}; font-weight: 600; margin-bottom: 4px;">
+            STOP ${location.number}
+          </div>
+          <div style="font-size: 14px; font-weight: 700; color: #F5F0E8; margin-bottom: 8px;">
+            ${location.name}
+          </div>
+          ${location.description ? `<div style="font-size: 12px; color: #8B9AAD; line-height: 1.4;">${location.description}</div>` : ''}
+        </div>
+      `;
+
+      marker.bindPopup(popupContent, {
+        className: 'dark-popup',
+      });
+
+      marker.on('click', () => {
+        setSelectedLocation(location);
+        if (onMarkerClick) {
+          onMarkerClick(location);
+        }
+      });
+
+      markers.push(marker);
+    });
+
+    // Draw route line connecting markers
+    if (locations.length > 1) {
+      const routeCoords = locations.map(loc => [loc.lat, loc.lng]);
+      L.polyline(routeCoords, {
+        color: accentColor,
+        weight: 3,
+        opacity: 0.6,
+        dashArray: '10, 10',
+      }).addTo(map);
+    }
+
+    // Fit bounds to show all markers
+    if (markers.length > 0) {
+      const group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.1));
+    }
+
+    mapInstanceRef.current = map;
+    setIsLoaded(true);
+  };
+
+  const handleStopClick = (location: MapLocation) => {
+    setSelectedLocation(location);
+
+    if (mapInstanceRef.current && window.L) {
+      mapInstanceRef.current.setView([location.lat, location.lng], 15, {
+        animate: true,
+      });
+    }
+
+    if (onMarkerClick) {
+      onMarkerClick(location);
+    }
+  };
 
   return (
-    <section id="map" className="py-16 md:py-24 px-6 bg-[#F5F2ED]">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#1C2632] mb-4">
-            {title}
-          </h2>
-          <p className="text-[#4A5568] max-w-xl mx-auto">
-            Follow the route pub by pub. Click any stop to get directions.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Map */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-[#E8E4DD]">
-              <div className="aspect-[16/10] bg-[#E8E4DD] relative">
-                {/* Placeholder map visualization */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div
-                      className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                    <p className="text-[#4A5568] font-medium mb-2">{locations.length} stops on this route</p>
-                    <a
-                      href={`https://www.google.com/maps/dir/${locations.map(l => `${l.lat},${l.lng}`).join('/')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      Open Full Route in Google Maps
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Stop list */}
-          <div className="bg-white rounded-xl shadow-lg border border-[#E8E4DD] p-6 max-h-[500px] overflow-y-auto">
-            <h3 className="font-semibold text-[#1C2632] mb-4 uppercase tracking-wider text-sm">All Stops</h3>
-            <div className="space-y-2">
-              {locations.map((location) => (
-                <a
-                  key={location.number}
-                  href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center gap-3 p-3 rounded-lg transition-colors hover:bg-[#F5F2ED] ${
-                    selectedLocation?.number === location.number ? 'bg-[#F5F2ED]' : ''
-                  }`}
-                  onMouseEnter={() => setSelectedLocation(location)}
-                  onMouseLeave={() => setSelectedLocation(null)}
-                >
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                    style={{ backgroundColor: accentColor }}
-                  >
-                    {location.number}
-                  </div>
-                  <span className="text-[#1C2632] text-sm font-medium truncate">{location.name}</span>
-                  <svg className="w-4 h-4 text-[#4A5568] ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          </div>
+    <div className="grid lg:grid-cols-3 gap-6">
+      {/* Map */}
+      <div className="lg:col-span-2">
+        <div className="rounded-xl overflow-hidden border border-[#30363D] bg-[#161B22]">
+          <div
+            ref={mapRef}
+            className="aspect-[16/10] w-full"
+            style={{ minHeight: '400px' }}
+          />
         </div>
       </div>
-    </section>
+
+      {/* Stop list */}
+      <div className="bg-[#161B22] rounded-xl border border-[#30363D] p-6 max-h-[500px] overflow-y-auto">
+        <h3 className="font-semibold text-[#D4A853] mb-4 uppercase tracking-wider text-sm">
+          All Stops
+        </h3>
+        <div className="space-y-2">
+          {locations.map((location) => (
+            <button
+              key={location.number}
+              onClick={() => handleStopClick(location)}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all text-left ${
+                selectedLocation?.number === location.number
+                  ? 'bg-[#D4A853]/10 border border-[#D4A853]'
+                  : 'hover:bg-[#0D1117] border border-transparent'
+              }`}
+            >
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${
+                  selectedLocation?.number === location.number
+                    ? 'bg-[#D4A853] text-[#0D1117]'
+                    : 'bg-[#0D1117] text-[#D4A853] border-2 border-[#D4A853]'
+                }`}
+              >
+                {location.number}
+              </div>
+              <span className="text-[#F5F0E8] text-sm font-medium truncate">
+                {location.name}
+              </span>
+              <svg
+                className="w-4 h-4 text-[#8B9AAD] ml-auto flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          ))}
+        </div>
+
+        {/* Open in Google Maps button */}
+        <div className="mt-6 pt-4 border-t border-[#30363D]">
+          <a
+            href={`https://www.google.com/maps/dir/${locations.map(l => `${l.lat},${l.lng}`).join('/')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-[#0D1117] font-semibold transition-colors"
+            style={{ backgroundColor: accentColor }}
+          >
+            Open in Google Maps
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }

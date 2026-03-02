@@ -1,33 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  /* London-inspired palette */
-  --background: #FAF8F5;
-  --background-warm: #F5F2ED;
-  --foreground: #1C2632;
-  --foreground-muted: #4A5568;
+  /* Dark pub atmosphere palette */
+  --background: #0D1117;
+  --background-elevated: #161B22;
+  --background-card: #1C2128;
+  --foreground: #F5F0E8;
+  --foreground-muted: #8B9AAD;
 
   /* Primary accents */
-  --navy: #1C3D5A;
-  --burgundy: #722F37;
-  --racing-green: #1B4D3E;
-  --gold: #C9A227;
+  --gold: #D4A853;
+  --gold-bright: #E8C068;
+  --amber: #B8860B;
+  --hunter-green: #1B4D3E;
 
-  /* Secondary */
-  --cream: #FDF9F3;
-  --stone: #E8E4DD;
-  --brass: #B8860B;
+  /* Card surfaces */
+  --cream: #F5F0E8;
+  --cream-dark: #E8E0D0;
+  --parchment: #FFF9E6;
 
-  /* Cards */
-  --card: #FFFFFF;
-  --card-border: #E2DED6;
+  /* Borders */
+  --border: #30363D;
+  --border-gold: #D4A853;
+
+  /* Crawl theme colors */
+  --monopoly-red: #D4001A;
+  --circle-yellow: #FFD300;
+  --ripper-blood: #8B1A1A;
+  --beatles-blue: #1A3C6E;
+  --thames-blue: #2E6B8A;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-navy: var(--navy);
-  --color-burgundy: var(--burgundy);
+  --color-gold: var(--gold);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
 }
@@ -46,22 +53,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Subtle paper texture overlay */
-.paper-texture {
-  position: relative;
-}
-
-.paper-texture::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.02;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Custom scrollbar */
+/* Custom scrollbar - dark theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -71,19 +63,19 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--stone);
+  background: var(--border);
   border-radius: 5px;
   border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #CCC8C0;
+  background: var(--gold);
 }
 
 /* Selection */
 ::selection {
-  background: var(--navy);
-  color: white;
+  background: var(--gold);
+  color: var(--background);
 }
 
 /* Smooth scroll */
@@ -91,66 +83,111 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Decorative underline for headings */
-.heading-underline {
+/* Gold accent underline */
+.heading-gold-underline {
   position: relative;
   display: inline-block;
 }
 
-.heading-underline::after {
+.heading-gold-underline::after {
   content: '';
   position: absolute;
   bottom: -8px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 60px;
-  height: 3px;
-  background: var(--burgundy);
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
 }
 
-/* British-style horizontal rule */
-.british-rule {
-  border: none;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--stone), transparent);
-  margin: 2rem 0;
-}
-
-/* Card hover effect */
+/* Card hover effect - dark theme */
 .card-elevated {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card-elevated:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(28, 61, 90, 0.12);
+  box-shadow: 0 12px 40px rgba(212, 168, 83, 0.15);
 }
 
-/* Button styles */
-.btn-primary {
-  background: var(--burgundy);
-  color: white;
-  transition: all 0.2s ease;
+/* Gold glow effect */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.3);
 }
 
-.btn-primary:hover {
-  background: #5C262D;
-  transform: translateY(-1px);
+/* Pub atmosphere gradient */
+.pub-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--background) 0%,
+    var(--background-elevated) 50%,
+    var(--background) 100%
+  );
 }
 
-.btn-secondary {
-  background: var(--navy);
-  color: white;
-  transition: all 0.2s ease;
+/* Vintage border style */
+.vintage-border {
+  border: 1px solid var(--border);
+  position: relative;
 }
 
-.btn-secondary:hover {
-  background: #152D45;
+.vintage-border::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--border);
+  pointer-events: none;
 }
 
-/* Pub sign style badge */
-.pub-sign {
-  background: var(--foreground);
-  color: var(--cream);
+/* Leaflet map overrides */
+.leaflet-container {
+  background: var(--background-elevated) !important;
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--background-card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--gold) !important;
+  border-radius: 8px !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--background-card) !important;
+  border-left: 1px solid var(--gold) !important;
+  border-bottom: 1px solid var(--gold) !important;
+}
+
+.leaflet-popup-close-button {
+  color: var(--foreground-muted) !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: var(--gold) !important;
+}
+
+/* Custom marker styles */
+.custom-marker {
+  background: var(--background-card);
   border: 2px solid var(--gold);
-  box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+  border-radius: 50%;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  nav, footer, .no-print {
+    display: none !important;
+  }
 }

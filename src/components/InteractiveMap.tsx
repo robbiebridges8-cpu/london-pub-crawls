@@ -24,7 +24,7 @@ declare global {
 
 export default function InteractiveMap({
   locations,
-  accentColor = '#D4A853',
+  accentColor = '#E5A210',
   onMarkerClick
 }: InteractiveMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -90,13 +90,13 @@ export default function InteractiveMap({
           <div style="
             width: 32px;
             height: 32px;
-            background: ${isSelected ? accentColor : '#1C2128'};
+            background: ${isSelected ? accentColor : '#121217'};
             border: 2px solid ${accentColor};
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: ${isSelected ? '#0D1117' : accentColor};
+            color: ${isSelected ? '#08080D' : accentColor};
             font-weight: 700;
             font-size: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -124,10 +124,10 @@ export default function InteractiveMap({
           <div style="font-size: 11px; color: ${accentColor}; font-weight: 600; margin-bottom: 4px;">
             STOP ${location.number}
           </div>
-          <div style="font-size: 14px; font-weight: 700; color: #F5F0E8; margin-bottom: 8px;">
+          <div style="font-size: 14px; font-weight: 700; color: #F5E6C8; margin-bottom: 8px;">
             ${location.name}
           </div>
-          ${location.description ? `<div style="font-size: 12px; color: #8B9AAD; line-height: 1.4;">${location.description}</div>` : ''}
+          ${location.description ? `<div style="font-size: 12px; color: #9898A3; line-height: 1.4;">${location.description}</div>` : ''}
         </div>
       `;
 
@@ -184,7 +184,7 @@ export default function InteractiveMap({
     <div className="grid lg:grid-cols-3 gap-6">
       {/* Map */}
       <div className="lg:col-span-2">
-        <div className="rounded-xl overflow-hidden border border-[#30363D] bg-[#161B22]">
+        <div className="rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
           <div
             ref={mapRef}
             className="aspect-[16/10] w-full"
@@ -194,8 +194,8 @@ export default function InteractiveMap({
       </div>
 
       {/* Stop list */}
-      <div className="bg-[#161B22] rounded-xl border border-[#30363D] p-6 max-h-[500px] overflow-y-auto">
-        <h3 className="font-semibold text-[#D4A853] mb-4 uppercase tracking-wider text-sm">
+      <div className="bg-[var(--surface)] rounded-xl border border-[var(--border)] p-6 max-h-[500px] overflow-y-auto">
+        <h3 className="font-semibold text-[var(--amber)] mb-4 uppercase tracking-wider text-sm">
           All Stops
         </h3>
         <div className="space-y-2">
@@ -205,24 +205,24 @@ export default function InteractiveMap({
               onClick={() => handleStopClick(location)}
               className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all text-left ${
                 selectedLocation?.number === location.number
-                  ? 'bg-[#D4A853]/10 border border-[#D4A853]'
-                  : 'hover:bg-[#0D1117] border border-transparent'
+                  ? 'bg-[rgba(229,162,16,0.1)] border border-[var(--amber)]'
+                  : 'hover:bg-[var(--midnight)] border border-transparent'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${
                   selectedLocation?.number === location.number
-                    ? 'bg-[#D4A853] text-[#0D1117]'
-                    : 'bg-[#0D1117] text-[#D4A853] border-2 border-[#D4A853]'
+                    ? 'bg-[var(--amber)] text-[var(--midnight)]'
+                    : 'bg-[var(--midnight)] text-[var(--amber)] border-2 border-[var(--amber)]'
                 }`}
               >
                 {location.number}
               </div>
-              <span className="text-[#F5F0E8] text-sm font-medium truncate">
+              <span className="text-[var(--cream)] text-sm font-medium truncate">
                 {location.name}
               </span>
               <svg
-                className="w-4 h-4 text-[#8B9AAD] ml-auto flex-shrink-0"
+                className="w-4 h-4 text-[var(--zinc-400)] ml-auto flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -239,12 +239,12 @@ export default function InteractiveMap({
         </div>
 
         {/* Open in Google Maps button */}
-        <div className="mt-6 pt-4 border-t border-[#30363D]">
+        <div className="mt-6 pt-4 border-t border-[var(--border)]">
           <a
             href={`https://www.google.com/maps/dir/${locations.map(l => `${l.lat},${l.lng}`).join('/')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-[#0D1117] font-semibold transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-[var(--midnight)] font-semibold transition-colors"
             style={{ backgroundColor: accentColor }}
           >
             Open in Google Maps

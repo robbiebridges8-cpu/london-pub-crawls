@@ -1,27 +1,21 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-sans",
+const outfit = Outfit({
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
 export const metadata: Metadata = {
-  title: "London Pub Crawls | Drink Your Way Through History",
-  description: "Discover London's greatest themed pub crawls. Curated routes through history, music, crime, and culture. From the Monopoly Pub Crawl to Jack the Ripper, find your perfect pub adventure.",
-  keywords: "london pub crawl, pub crawl london, monopoly pub crawl, jack the ripper pub crawl, beatles london pubs, circle line pub crawl, best pub crawls london",
+  title: "London Pub Crawls | Free Self-Guided Routes",
+  description: "The best pub crawls in London. Curated by locals. Meticulously researched routes through London's best pubs. No apps to download. No tickets to buy.",
+  keywords: "london pub crawl, pub crawl london, monopoly pub crawl, circle line challenge, best pub crawls london, free pub crawl",
   authors: [{ name: "London Pub Crawls" }],
   openGraph: {
-    title: "London Pub Crawls | Drink Your Way Through History",
-    description: "Discover London's greatest themed pub crawls. Curated routes through history, music, crime, and culture.",
+    title: "London Pub Crawls | Free Self-Guided Routes",
+    description: "The best pub crawls in London. Curated by locals. Meticulously researched routes through London's best pubs.",
     url: "https://londonpubcrawls.com",
     siteName: "London Pub Crawls",
     locale: "en_GB",
@@ -29,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "London Pub Crawls | Drink Your Way Through History",
-    description: "Discover London's greatest themed pub crawls. Curated routes through history, music, crime, and culture.",
+    title: "London Pub Crawls | Free Self-Guided Routes",
+    description: "The best pub crawls in London. Curated by locals.",
   },
   robots: {
     index: true,
@@ -46,7 +40,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Leaflet CSS for maps */}
+        {/* Fraunces font with optical sizing */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+          rel="stylesheet"
+        />
+        {/* Leaflet CSS */}
         <link
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -54,9 +55,14 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body
-        className={`${dmSans.variable} ${playfair.variable} font-sans antialiased bg-[#0D1117] text-[#F5F0E8]`}
-      >
+      <body className={`${outfit.variable} font-body antialiased`}>
+        {/* Skip to content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--amber)] focus:text-[var(--midnight)] focus:rounded"
+        >
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

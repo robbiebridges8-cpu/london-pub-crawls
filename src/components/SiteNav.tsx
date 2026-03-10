@@ -2,6 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from '@heroui/react';
 import { useState } from 'react';
 
 const navLinks = [
@@ -12,96 +21,75 @@ const navLinks = [
 
 export default function SiteNav() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-[rgba(8,8,13,0.85)] backdrop-blur-[12px] border-b border-[var(--border)]">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-16 h-16 flex items-center justify-between">
-          {/* Wordmark */}
-          <Link href="/" className="font-display text-xl font-semibold">
-            <span className="text-[var(--cream)]">LONDON</span>{' '}
-            <span className="text-[var(--amber)]">PUB CRAWLS</span>
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      className="fixed top-0 left-0 right-0 z-50 bg-[var(--background)] border-b-2 border-[var(--ink)]"
+      maxWidth="xl"
+      height="4rem"
+    >
+      {/* Logo */}
+      <NavbarContent>
+        <NavbarBrand>
+          <Link href="/" className="font-label text-xl tracking-[0.03em]">
+            <span className="text-[var(--claret)]">LONDON PUB CRAWLS</span>
           </Link>
+        </NavbarBrand>
+      </NavbarContent>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm font-medium uppercase tracking-[0.03em] transition-colors duration-200 ${
-                    isActive
-                      ? 'text-[var(--white)] border-b-2 border-[var(--amber)] pb-1'
-                      : 'text-[var(--zinc-400)] hover:text-[var(--white)]'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-[5px] p-2"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <span className="w-5 h-0.5 bg-[var(--white)]" />
-            <span className="w-5 h-0.5 bg-[var(--white)]" />
-            <span className="w-5 h-0.5 bg-[var(--white)]" />
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-[60] bg-[var(--midnight)] flex flex-col items-center justify-center animate-[clipDown_400ms_cubic-bezier(0.16,1,0.3,1)]"
-          style={{
-            animation: 'clipDown 400ms cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        >
-          {/* Close button */}
-          <button
-            className="absolute top-4 right-6 p-2 text-[var(--white)]"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
-          {/* Mobile Nav Links */}
-          <nav className="flex flex-col items-center gap-6">
-            {navLinks.map((link) => (
+      {/* Desktop Navigation */}
+      <NavbarContent className="hidden md:flex gap-8" justify="end">
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
+          return (
+            <NavbarItem key={link.href}>
               <Link
-                key={link.href}
                 href={link.href}
-                className="font-display text-[32px] font-semibold text-[var(--cream)] hover:text-[var(--amber)] transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className={`font-label text-sm uppercase tracking-[0.03em] transition-colors duration-200 ${
+                  isActive
+                    ? 'text-[var(--claret)]'
+                    : 'text-[var(--ink)] hover:text-[var(--claret)]'
+                }`}
               >
                 {link.label}
               </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+            </NavbarItem>
+          );
+        })}
+      </NavbarContent>
 
-      <style jsx>{`
-        @keyframes clipDown {
-          from {
-            clip-path: inset(0 0 100% 0);
-          }
-          to {
-            clip-path: inset(0 0 0 0);
-          }
-        }
-      `}</style>
-    </>
+      {/* Mobile Menu Toggle */}
+      <NavbarContent className="md:hidden" justify="end">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="text-[var(--ink)]"
+        />
+      </NavbarContent>
+
+      {/* Mobile Menu */}
+      <NavbarMenu className="bg-[var(--background)] pt-8">
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
+          return (
+            <NavbarMenuItem key={link.href} className="py-4">
+              <Link
+                href={link.href}
+                className={`font-display text-3xl font-bold ${
+                  isActive
+                    ? 'text-[var(--claret)]'
+                    : 'text-[var(--ink)]'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </NavbarMenuItem>
+          );
+        })}
+      </NavbarMenu>
+    </Navbar>
   );
 }

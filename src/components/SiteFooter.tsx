@@ -8,23 +8,22 @@ export default function SiteFooter() {
   const comingSoonCrawls = crawls.filter((c) => !c.live);
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--midnight)]">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-16 py-12">
+    <footer className="bg-[var(--surface)] border-t-2 border-[var(--ink)]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-16 py-16">
         <div className="grid md:grid-cols-3 gap-12">
-          {/* Column 1: Wordmark */}
+          {/* Column 1: Wordmark & Description */}
           <div>
-            <Link href="/" className="font-display text-xl font-semibold inline-block mb-4">
-              <span className="text-[var(--cream)]">LONDON</span>{' '}
-              <span className="text-[var(--amber)]">PUB CRAWLS</span>
+            <Link href="/" className="font-label text-xl tracking-[0.03em] inline-block mb-4">
+              <span className="text-[var(--claret)]">LONDON PUB CRAWLS</span>
             </Link>
-            <p className="text-sm text-[var(--zinc-400)]">
-              Free pub crawls across London.
+            <p className="font-body text-sm text-[var(--muted)]">
+              Free, self-guided pub crawls across London. Curated by locals.
             </p>
           </div>
 
           {/* Column 2: Crawls */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-[0.1em] text-[var(--zinc-600)] mb-4">
+            <h4 className="font-label text-xs uppercase tracking-[0.2em] text-[var(--claret)] mb-4">
               Crawls
             </h4>
             <ul className="space-y-2">
@@ -32,7 +31,7 @@ export default function SiteFooter() {
                 <li key={crawl.id}>
                   <Link
                     href={`/crawls/${crawl.slug}`}
-                    className="text-sm text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors"
+                    className="font-body text-sm text-[var(--ink)] hover:text-[var(--claret)] transition-colors"
                   >
                     {crawl.name}
                   </Link>
@@ -40,7 +39,7 @@ export default function SiteFooter() {
               ))}
               {comingSoonCrawls.slice(0, 4).map((crawl) => (
                 <li key={crawl.id}>
-                  <span className="text-sm text-[var(--zinc-600)]">
+                  <span className="font-body text-sm text-[var(--muted)]">
                     {crawl.name}
                   </span>
                 </li>
@@ -50,7 +49,7 @@ export default function SiteFooter() {
 
           {/* Column 3: Connect */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-[0.1em] text-[var(--zinc-600)] mb-4">
+            <h4 className="font-label text-xs uppercase tracking-[0.2em] text-[var(--claret)] mb-4">
               Connect
             </h4>
             <ul className="space-y-2">
@@ -59,7 +58,7 @@ export default function SiteFooter() {
                   href="https://instagram.com/londonpubcrawls"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors"
+                  className="font-body text-sm text-[var(--ink)] hover:text-[var(--claret)] transition-colors"
                 >
                   Instagram
                 </a>
@@ -67,7 +66,7 @@ export default function SiteFooter() {
               <li>
                 <a
                   href="mailto:hello@londonpubcrawls.com"
-                  className="text-sm text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors"
+                  className="font-body text-sm text-[var(--ink)] hover:text-[var(--claret)] transition-colors"
                 >
                   Contact
                 </a>
@@ -77,8 +76,8 @@ export default function SiteFooter() {
         </div>
 
         {/* Bottom row */}
-        <div className="mt-12 pt-8 border-t border-[var(--border)] text-center">
-          <p className="text-xs text-[var(--zinc-600)]">
+        <div className="mt-16 pt-8 border-t border-[var(--muted)] text-center">
+          <p className="font-body text-xs text-[var(--muted)]">
             &copy; {new Date().getFullYear()} London Pub Crawls
           </p>
         </div>

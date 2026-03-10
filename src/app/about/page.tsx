@@ -1,23 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { SiteNav, SiteFooter } from '@/components';
+import { SiteNav, SiteFooter, SectionLabel } from '@/components';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[var(--midnight)]">
+    <div className="min-h-screen bg-[var(--background)]">
       <SiteNav />
 
       <main id="main-content" className="pt-32 pb-24 px-6">
         <article className="max-w-[680px] mx-auto">
           {/* Page title */}
-          <h1 className="font-display text-5xl font-semibold text-[var(--cream)] text-center mb-12">
-            About Us
-          </h1>
+          <div className="text-center mb-12">
+            <SectionLabel className="mb-4">Our Story</SectionLabel>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-[var(--ink)]">
+              About Us
+            </h1>
+          </div>
 
           {/* Intro */}
-          <div className="space-y-6 text-lg text-[var(--zinc-400)] leading-relaxed mb-16">
-            <p className="text-xl text-[var(--white)]">
+          <div className="space-y-6 font-body text-lg text-[var(--muted)] leading-relaxed mb-16">
+            <p className="text-xl text-[var(--ink)]">
               We believe the best way to know a city is through its pubs.
             </p>
             <p>
@@ -37,10 +40,10 @@ export default function AboutPage() {
 
           {/* Philosophy */}
           <section className="mb-16">
-            <h2 className="font-display text-[28px] font-medium text-[var(--cream)] mb-6">
+            <h2 className="font-display text-2xl font-bold text-[var(--ink)] mb-6">
               Our Philosophy
             </h2>
-            <div className="space-y-6 text-[var(--zinc-400)] leading-relaxed">
+            <div className="space-y-6 font-body text-[var(--muted)] leading-relaxed">
               <p>
                 Every route on this site has been walked, researched, and refined by people who
                 actually love London pubs. We look for character, history, and atmosphere &mdash;
@@ -55,35 +58,35 @@ export default function AboutPage() {
 
           {/* What We Look For */}
           <section className="mb-16">
-            <h2 className="font-display text-[28px] font-medium text-[var(--cream)] mb-6">
+            <h2 className="font-display text-2xl font-bold text-[var(--ink)] mb-6">
               What We Look For
             </h2>
-            <ul className="space-y-4 text-[var(--zinc-400)]">
+            <ul className="space-y-4 font-body text-[var(--muted)]">
               <li className="flex items-start gap-3">
-                <span className="text-[var(--amber)] mt-1">&#9670;</span>
-                <span><strong className="text-[var(--white)]">History</strong> &mdash; Pubs with stories to tell. Victorian gin palaces, Dickensian coaching inns, and locals that have been pulling pints for centuries.</span>
+                <span className="text-[var(--claret)] mt-1">&#9670;</span>
+                <span><strong className="text-[var(--ink)]">History</strong> &mdash; Pubs with stories to tell. Victorian gin palaces, Dickensian coaching inns, and locals that have been pulling pints for centuries.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[var(--amber)] mt-1">&#9670;</span>
-                <span><strong className="text-[var(--white)]">Character</strong> &mdash; No chains. No identikit gastropubs. We want personality, quirks, and atmosphere.</span>
+                <span className="text-[var(--claret)] mt-1">&#9670;</span>
+                <span><strong className="text-[var(--ink)]">Character</strong> &mdash; No chains. No identikit gastropubs. We want personality, quirks, and atmosphere.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[var(--amber)] mt-1">&#9670;</span>
-                <span><strong className="text-[var(--white)]">Walkability</strong> &mdash; Routes that flow naturally through interesting neighbourhoods, with sensible distances between stops.</span>
+                <span className="text-[var(--claret)] mt-1">&#9670;</span>
+                <span><strong className="text-[var(--ink)]">Walkability</strong> &mdash; Routes that flow naturally through interesting neighbourhoods, with sensible distances between stops.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[var(--amber)] mt-1">&#9670;</span>
-                <span><strong className="text-[var(--white)]">Variety</strong> &mdash; A mix of pub styles &mdash; old and new, grand and cosy, famous and hidden.</span>
+                <span className="text-[var(--claret)] mt-1">&#9670;</span>
+                <span><strong className="text-[var(--ink)]">Variety</strong> &mdash; A mix of pub styles &mdash; old and new, grand and cosy, famous and hidden.</span>
               </li>
             </ul>
           </section>
 
           {/* The Team */}
           <section className="mb-16">
-            <h2 className="font-display text-[28px] font-medium text-[var(--cream)] mb-6">
+            <h2 className="font-display text-2xl font-bold text-[var(--ink)] mb-6">
               Made by Londoners
             </h2>
-            <div className="space-y-6 text-[var(--zinc-400)] leading-relaxed">
+            <div className="space-y-6 font-body text-[var(--muted)] leading-relaxed">
               <p>
                 We&apos;re a small group of pub enthusiasts who call London home. Between us,
                 we&apos;ve probably visited every historic pub in Zone 1 (and quite a few beyond).
@@ -97,11 +100,11 @@ export default function AboutPage() {
           </section>
 
           {/* CTA */}
-          <section className="text-center pt-8 border-t border-[var(--border)]">
-            <h2 className="font-display text-[28px] font-medium text-[var(--cream)] mb-4">
+          <section className="text-center pt-8 border-t-2 border-[var(--ink)]">
+            <h2 className="font-display text-2xl font-bold text-[var(--ink)] mb-4">
               Ready to explore?
             </h2>
-            <p className="text-[var(--zinc-400)] mb-8">
+            <p className="font-body text-[var(--muted)] mb-8">
               Pick a crawl and start your adventure.
             </p>
             <Link href="/crawls" className="btn-primary inline-block">

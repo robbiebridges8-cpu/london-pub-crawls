@@ -5,11 +5,7 @@ import { use, useState } from 'react';
 import Link from 'next/link';
 import { getCrawlBySlug } from '@/content/crawls';
 import { getPubById } from '@/content/pubs';
-import { SiteNav, SiteFooter } from '@/components';
-import { InteractiveMap } from '@/components';
-
-const MONOPOLY_GREEN = '#1FB25A';
-const CIRCLE_LINE_YELLOW = '#FFD300';
+import { SiteNav, SiteFooter, InteractiveMap, SectionLabel } from '@/components';
 
 interface MapPageProps {
   params: Promise<{ slug: string }>;
@@ -23,8 +19,6 @@ export default function MapPage({ params }: MapPageProps) {
   if (!crawl || !crawl.live) {
     notFound();
   }
-
-  const accentColor = slug === 'monopoly' ? MONOPOLY_GREEN : slug === 'circle-line' ? CIRCLE_LINE_YELLOW : 'var(--amber)';
 
   // Build map locations from pubs with coordinates
   const mapLocations = crawl.pubs
@@ -43,16 +37,16 @@ export default function MapPage({ params }: MapPageProps) {
     .filter(Boolean) as { name: string; lat: number; lng: number; number: number; description: string; address: string }[];
 
   return (
-    <div className="min-h-screen bg-[var(--midnight)]">
+    <div className="min-h-screen bg-[var(--background)]">
       <SiteNav />
 
       <main id="main-content" className="pt-20">
         {/* Header */}
-        <header className="px-6 py-8 border-b border-[var(--border)]">
+        <header className="px-6 py-8 border-b-2 border-[var(--ink)]">
           <div className="max-w-[1400px] mx-auto">
             <Link
               href={`/crawls/${crawl.slug}`}
-              className="inline-flex items-center gap-2 text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors mb-4 text-sm"
+              className="inline-flex items-center gap-2 text-[var(--muted)] hover:text-[var(--ink)] transition-colors mb-4 text-sm font-label uppercase tracking-wider"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -62,10 +56,11 @@ export default function MapPage({ params }: MapPageProps) {
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <h1 className="font-display text-3xl md:text-4xl font-semibold text-[var(--cream)]">
-                  {crawl.name} Map
+                <SectionLabel className="mb-2">Interactive Map</SectionLabel>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
+                  {crawl.name}
                 </h1>
-                <p className="text-[var(--zinc-400)] mt-1">
+                <p className="font-body text-[var(--muted)] mt-1">
                   {crawl.pubs.length} pubs across London
                 </p>
               </div>
@@ -76,7 +71,7 @@ export default function MapPage({ params }: MapPageProps) {
                   href={`https://www.google.com/maps/dir/${mapLocations.map(l => `${l.lat},${l.lng}`).join('/')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-sm"
+                  className="btn-ghost text-sm"
                 >
                   Open in Google Maps
                 </a>
@@ -84,7 +79,7 @@ export default function MapPage({ params }: MapPageProps) {
                 {/* Print button */}
                 <button
                   onClick={() => window.print()}
-                  className="btn-secondary text-sm"
+                  className="btn-ghost text-sm"
                 >
                   Print Route
                 </button>
@@ -99,7 +94,7 @@ export default function MapPage({ params }: MapPageProps) {
             {mapLocations.length > 0 && (
               <InteractiveMap
                 locations={mapLocations}
-                accentColor={accentColor}
+                accentColor={crawl.accentColor}
                 onMarkerClick={(location) => setSelectedStop(location.number)}
               />
             )}
@@ -107,33 +102,33 @@ export default function MapPage({ params }: MapPageProps) {
         </section>
 
         {/* Route List (for print) */}
-        <section className="px-6 py-8 border-t border-[var(--border)] no-print">
+        <section className="px-6 py-8 border-t-2 border-[var(--ink)] no-print">
           <div className="max-w-[1400px] mx-auto">
-            <h2 className="font-display text-2xl font-semibold text-[var(--cream)] mb-6">
-              Full Route
+            <SectionLabel className="mb-4">Full Route</SectionLabel>
+            <h2 className="font-display text-2xl font-bold text-[var(--ink)] mb-6">
+              All {mapLocations.length} Stops
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {mapLocations.map((location, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-[var(--ink)]">
+              {mapLocations.map((location) => (
                 <div
                   key={location.number}
-                  className={`p-4 rounded-lg border transition-colors ${
+                  className={`p-4 transition-colors ${
                     selectedStop === location.number
-                      ? 'border-[var(--amber)] bg-[var(--surface)]'
-                      : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-bright)]'
+                      ? 'bg-[var(--background)]'
+                      : 'bg-[var(--surface)]'
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-                      style={{ backgroundColor: accentColor, color: 'var(--midnight)' }}
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 bg-[var(--ink)] text-[var(--gold)] border-2 border-white"
                     >
                       {location.number}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-[var(--white)] truncate">
+                      <h3 className="font-card font-semibold text-[var(--ink)] truncate">
                         {location.name}
                       </h3>
-                      <p className="text-sm text-[var(--zinc-400)] truncate">
+                      <p className="font-body text-sm text-[var(--muted)] truncate">
                         {location.address}
                       </p>
                     </div>

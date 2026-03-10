@@ -1,114 +1,15 @@
 'use client';
 
 import { notFound } from 'next/navigation';
-import { use, useState, useEffect, useRef } from 'react';
+import { use, useState } from 'react';
 import Link from 'next/link';
+import { Chip, ScrollShadow } from '@heroui/react';
 import { crawls, getCrawlBySlug, getPubCount, Crawl } from '@/content/crawls';
 import { getPubById } from '@/content/pubs';
-import { SiteNav, SiteFooter, InteractiveMap, RouteSpine } from '@/components';
-
-// Monopoly property colors
-const MONOPOLY_COLORS: Record<string, string> = {
-  brown: '#6E3B1B',
-  lightBlue: '#AAE0FA',
-  pink: '#D93A96',
-  orange: '#F7941D',
-  red: '#ED1B24',
-  yellow: '#FEF200',
-  green: '#1FB25A',
-  darkBlue: '#0072BB',
-};
-
-const CIRCLE_LINE_COLOR = '#FFD300';
+import { SiteNav, SiteFooter, InteractiveMap, SectionLabel, getThemedPubCard } from '@/components';
 
 interface CrawlPageProps {
   params: Promise<{ slug: string }>;
-}
-
-// Pub stop card component
-function PubStopCard({
-  pub,
-  crawlPub,
-  stopNumber,
-  totalStops,
-  accentColor,
-  isLeft,
-  onClick,
-}: {
-  pub: { name: string; address: string; neighbourhood: string };
-  crawlPub: { description: string; historicNotes?: string };
-  stopNumber: number;
-  totalStops: number;
-  accentColor: string;
-  isLeft: boolean;
-  onClick: () => void;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={cardRef}
-      className={`relative ${isVisible ? (isLeft ? 'animate-slide-in-left' : 'animate-slide-in-right') : 'opacity-0'}`}
-      onClick={onClick}
-    >
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6 cursor-pointer hover:border-[var(--border-bright)] transition-colors">
-        {/* Stop number badge */}
-        <div
-          className="absolute -top-3 left-6 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-          style={{ backgroundColor: accentColor, color: 'var(--midnight)' }}
-        >
-          {stopNumber}
-        </div>
-
-        {/* Pub name */}
-        <h3 className="text-xl font-semibold text-[var(--white)] mt-2 mb-1">
-          {pub.name}
-        </h3>
-
-        {/* Address */}
-        <p className="text-sm text-[var(--zinc-400)] mb-4">
-          {pub.address}
-        </p>
-
-        {/* Description */}
-        <p className="text-[var(--white)] text-[15px] leading-relaxed mb-4 line-clamp-3">
-          {crawlPub.description}
-        </p>
-
-        {/* Google Maps link */}
-        <a
-          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.name}, ${pub.address}`)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm font-semibold link-hover-underline"
-          style={{ color: 'var(--amber)' }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          Get Directions &rarr;
-        </a>
-      </div>
-    </div>
-  );
 }
 
 // Pub detail modal
@@ -127,37 +28,37 @@ function PubModal({
 }) {
   return (
     <div
-      className="fixed inset-0 bg-[rgba(8,8,13,0.85)] backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
-        className="bg-[var(--surface)] border border-[var(--border)] rounded-lg max-w-md w-full max-h-[85vh] overflow-y-auto"
+        className="bg-[var(--background)] border-2 border-[var(--ink)] max-w-md w-full max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[var(--border)] relative">
+        <div className="px-6 py-4 border-b-2 border-[var(--ink)] relative bg-[var(--claret)]">
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-[var(--midnight)] flex items-center justify-center text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors"
+            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-white hover:opacity-70 transition-opacity"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <div className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--amber)' }}>
+          <div className="font-label text-xs uppercase tracking-[0.2em] mb-1 text-white opacity-80">
             Stop {stopNumber} of {crawl.pubs.length}
           </div>
-          <h2 className="font-display text-2xl font-semibold text-[var(--cream)]">{pub.name}</h2>
-          <p className="text-sm text-[var(--zinc-400)]">{pub.address}</p>
+          <h2 className="font-card text-2xl font-semibold text-white">{pub.name}</h2>
+          <p className="font-body text-sm text-white opacity-80">{pub.address}</p>
         </div>
 
         {/* Content */}
         <div className="p-6">
-          <p className="text-[var(--white)] leading-relaxed mb-4">{crawlPub.description}</p>
+          <p className="font-body text-[var(--ink)] leading-relaxed mb-4">{crawlPub.description}</p>
 
           {crawlPub.historicNotes && (
-            <div className="p-4 rounded-lg mb-4 border border-[var(--border)] bg-[var(--midnight)]">
-              <p className="text-sm italic" style={{ color: 'var(--amber)' }}>
+            <div className="p-4 bg-[var(--surface)] border-l-4 border-[var(--claret)] mb-4">
+              <p className="font-body text-sm italic text-[var(--muted)]">
                 {crawlPub.historicNotes}
               </p>
             </div>
@@ -169,7 +70,7 @@ function PubModal({
             rel="noopener noreferrer"
             className="btn-primary block text-center"
           >
-            Open in Google Maps
+            Get Directions
           </a>
         </div>
       </div>
@@ -188,7 +89,7 @@ export default function CrawlPage({ params }: CrawlPageProps) {
   }
 
   const pubCount = getPubCount(crawl);
-  const accentColor = crawl.slug === 'circle-line' ? CIRCLE_LINE_COLOR : 'var(--amber)';
+  const ThemedCard = getThemedPubCard(crawl.slug);
 
   // Build map locations from pubs with coordinates
   const mapLocations = crawl.pubs
@@ -206,172 +107,148 @@ export default function CrawlPage({ params }: CrawlPageProps) {
     .filter(Boolean) as { name: string; lat: number; lng: number; number: number; description: string }[];
 
   return (
-    <div className="min-h-screen bg-[var(--midnight)]">
+    <div className="min-h-screen bg-[var(--background)]">
       <SiteNav />
 
       <main id="main-content">
-        {/* Hero Section */}
-        <header className="pt-32 pb-16 px-6 max-w-[800px] mx-auto text-center">
-          {/* Back link */}
-          <Link
-            href="/crawls"
-            className="inline-flex items-center gap-2 text-[var(--zinc-400)] hover:text-[var(--white)] transition-colors mb-8 text-sm"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            All Crawls
-          </Link>
+        {/* Hero Section - Claret background */}
+        <header className="pt-24 pb-16 px-6 bg-[var(--claret)]">
+          <div className="max-w-[1000px] mx-auto text-center">
+            {/* Back link */}
+            <Link
+              href="/crawls"
+              className="inline-flex items-center gap-2 text-white opacity-80 hover:opacity-100 transition-opacity mb-8 text-sm font-label uppercase tracking-wider"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              All Crawls
+            </Link>
 
-          {/* Crawl name */}
-          <h1 className="font-display text-5xl md:text-6xl font-semibold mb-4">
-            {crawl.slug === 'monopoly' ? (
-              <>
-                <span className="text-[var(--cream)]">Monopoly</span>{' '}
-                <span style={{ color: MONOPOLY_COLORS.green }}>Pub Crawl</span>
-              </>
-            ) : crawl.slug === 'circle-line' ? (
-              <>
-                <span style={{ color: CIRCLE_LINE_COLOR }}>Circle Line</span>{' '}
-                <span className="text-[var(--cream)]">Challenge</span>
-              </>
-            ) : (
-              <span className="text-[var(--cream)]">{crawl.name}</span>
-            )}
-          </h1>
+            {/* Crawl name */}
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              {crawl.name}
+            </h1>
 
-          {/* Tagline */}
-          <p className="text-lg text-[var(--zinc-400)] leading-relaxed mb-8 max-w-2xl mx-auto">
-            {crawl.editorialDescription || crawl.tagline}
-          </p>
+            {/* Tagline - Italic */}
+            <p className="font-display text-xl md:text-2xl italic text-white opacity-90 mb-8 max-w-2xl mx-auto">
+              {crawl.tagline}
+            </p>
 
-          {/* Stats row */}
-          <div className="flex justify-center gap-8">
-            <div className="text-center">
-              <div className="font-display text-[32px] font-semibold" style={{ color: 'var(--amber)' }}>
-                {pubCount}
-              </div>
-              <div className="text-xs font-medium uppercase tracking-wider text-[var(--zinc-400)]">
-                Pubs
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-[32px] font-semibold" style={{ color: 'var(--amber)' }}>
+            {/* Stat pills */}
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Chip
+                size="lg"
+                className="bg-[var(--surface)] text-[var(--ink)] font-label text-sm uppercase tracking-wider px-4"
+              >
+                {pubCount} Pubs
+              </Chip>
+              <Chip
+                size="lg"
+                className="bg-[var(--surface)] text-[var(--ink)] font-label text-sm uppercase tracking-wider px-4"
+              >
                 {crawl.duration}
-              </div>
-              <div className="text-xs font-medium uppercase tracking-wider text-[var(--zinc-400)]">
-                Duration
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-[32px] font-semibold" style={{ color: 'var(--amber)' }}>
+              </Chip>
+              <Chip
+                size="lg"
+                className="bg-[var(--surface)] text-[var(--ink)] font-label text-sm uppercase tracking-wider px-4"
+              >
                 {crawl.difficulty}
-              </div>
-              <div className="text-xs font-medium uppercase tracking-wider text-[var(--zinc-400)]">
-                Difficulty
-              </div>
+              </Chip>
             </div>
           </div>
-
-          {/* View Map button */}
-          <Link href={`/map/${crawl.slug}`} className="btn-secondary inline-block mt-8">
-            View Map
-          </Link>
         </header>
 
         {/* Logistics Section */}
         {crawl.logistics && (
-          <section className="py-12 px-6">
+          <section className="py-12 px-6 bg-[var(--surface)]">
             <div className="max-w-4xl mx-auto">
-              <div className="grid md:grid-cols-4 gap-4">
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
-                  <div className="text-xs text-[var(--zinc-400)] uppercase tracking-wide mb-1">Start</div>
-                  <div className="font-semibold text-[var(--white)]">{crawl.logistics.tubeStart}</div>
+              <div className="grid md:grid-cols-4 gap-[2px] bg-[var(--ink)]">
+                <div className="bg-[var(--surface)] p-4 text-center">
+                  <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--muted)] mb-1">Start</div>
+                  <div className="font-card font-semibold text-[var(--ink)]">{crawl.logistics.tubeStart}</div>
                 </div>
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
-                  <div className="text-xs text-[var(--zinc-400)] uppercase tracking-wide mb-1">End</div>
-                  <div className="font-semibold text-[var(--white)]">{crawl.logistics.tubeEnd}</div>
+                <div className="bg-[var(--surface)] p-4 text-center">
+                  <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--muted)] mb-1">End</div>
+                  <div className="font-card font-semibold text-[var(--ink)]">{crawl.logistics.tubeEnd}</div>
                 </div>
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
-                  <div className="text-xs text-[var(--zinc-400)] uppercase tracking-wide mb-1">Start Time</div>
-                  <div className="font-semibold text-[var(--white)]">{crawl.logistics.suggestedStart}</div>
+                <div className="bg-[var(--surface)] p-4 text-center">
+                  <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--muted)] mb-1">Start Time</div>
+                  <div className="font-card font-semibold text-[var(--ink)]">{crawl.logistics.suggestedStart}</div>
                 </div>
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
-                  <div className="text-xs text-[var(--zinc-400)] uppercase tracking-wide mb-1">Best Day</div>
-                  <div className="font-semibold text-[var(--white)]">{crawl.logistics.bestDay}</div>
+                <div className="bg-[var(--surface)] p-4 text-center">
+                  <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--muted)] mb-1">Best Day</div>
+                  <div className="font-card font-semibold text-[var(--ink)]">{crawl.logistics.bestDay}</div>
                 </div>
               </div>
 
               {crawl.logistics.pacingTips && (
-                <div className="mt-4 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
-                  <div className="text-xs text-[var(--zinc-400)] uppercase tracking-wide mb-1">Pacing Tips</div>
-                  <p className="text-[var(--white)]">{crawl.logistics.pacingTips}</p>
+                <div className="mt-4 p-4 bg-[var(--background)] border-l-4 border-[var(--claret)]">
+                  <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--claret)] mb-1">Pacing Tips</div>
+                  <p className="font-body text-[var(--ink)]">{crawl.logistics.pacingTips}</p>
                 </div>
               )}
             </div>
           </section>
         )}
 
-        {/* Route Section */}
+        {/* Pub Stops Carousel */}
         <section className="py-16 px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-display text-[32px] font-medium text-[var(--cream)] text-center mb-12">
-              The Route
-            </h2>
+          <div className="max-w-[1400px] mx-auto">
+            <div className="text-center mb-8">
+              <SectionLabel className="mb-4">The Route</SectionLabel>
+              <h2 className="font-display text-3xl font-bold text-[var(--ink)]">
+                {pubCount} Pubs to Visit
+              </h2>
+            </div>
 
-            {/* Pub cards with route spine */}
-            <div className="relative">
-              {/* Animated route spine (desktop only) */}
-              <RouteSpine
-                totalStops={pubCount}
-                accentColor={crawl.slug === 'monopoly' ? MONOPOLY_COLORS.green : crawl.slug === 'circle-line' ? CIRCLE_LINE_COLOR : '#E5A210'}
-                className="hidden lg:block"
-              />
-
-              {/* Pub cards */}
-              <div className="space-y-16">
+            <ScrollShadow
+              orientation="horizontal"
+              className="w-full"
+              hideScrollBar
+            >
+              <div className="flex gap-6 pb-4 px-4">
                 {crawl.pubs.map((crawlPub, index) => {
                   const pub = getPubById(crawlPub.pubId);
                   if (!pub) return null;
 
-                  const isLeft = index % 2 === 0;
-
                   return (
                     <div
                       key={crawlPub.pubId}
-                      className={`lg:w-[calc(50%-48px)] ${isLeft ? 'lg:mr-auto' : 'lg:ml-auto'}`}
+                      className="flex-shrink-0"
+                      style={{ width: 'min(85vw, 280px)' }}
                     >
-                      <PubStopCard
-                        pub={pub}
-                        crawlPub={crawlPub}
+                      <ThemedCard
+                        pubName={pub.name}
+                        description={crawlPub.description}
                         stopNumber={index + 1}
                         totalStops={pubCount}
-                        accentColor={accentColor}
-                        isLeft={isLeft}
+                        nearestTube={pub.neighbourhood}
+                        accentColor={crawl.accentColor}
                         onClick={() => setSelectedPub({ pub, crawlPub, stopNumber: index + 1 })}
                       />
                     </div>
                   );
                 })}
               </div>
-            </div>
+            </ScrollShadow>
           </div>
         </section>
 
-        {/* Map Preview Section */}
-        <section className="py-16 px-6 border-t border-[var(--border)]">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="font-display text-[32px] font-medium text-[var(--cream)] text-center mb-4">
-              See the Full Route
-            </h2>
-            <p className="text-[var(--zinc-400)] text-center mb-8">
-              All {pubCount} pubs plotted on an interactive map.
-            </p>
+        {/* Map Section */}
+        <section className="py-16 px-6 bg-[var(--surface)]">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="text-center mb-8">
+              <SectionLabel className="mb-4">Interactive Map</SectionLabel>
+              <h2 className="font-display text-3xl font-bold text-[var(--ink)]">
+                See the Full Route
+              </h2>
+            </div>
 
             {mapLocations.length > 0 && (
               <InteractiveMap
                 locations={mapLocations}
-                accentColor={accentColor}
+                accentColor={crawl.accentColor}
                 onMarkerClick={(location) => {
                   const crawlPub = crawl.pubs[location.number - 1];
                   const pub = getPubById(crawlPub.pubId);
@@ -384,19 +261,23 @@ export default function CrawlPage({ params }: CrawlPageProps) {
 
             <div className="text-center mt-8">
               <Link href={`/map/${crawl.slug}`} className="btn-primary inline-block">
-                Open Full Map &rarr;
+                Open Full Map
               </Link>
             </div>
           </div>
         </section>
 
         {/* More Crawls Section */}
-        <section className="py-16 px-6 border-t border-[var(--border)]">
+        <section className="py-16 px-6">
           <div className="max-w-[1000px] mx-auto">
-            <h2 className="font-display text-[32px] font-medium text-[var(--cream)] text-center mb-8">
-              More Crawls
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="text-center mb-8">
+              <SectionLabel className="mb-4">Keep Exploring</SectionLabel>
+              <h2 className="font-display text-3xl font-bold text-[var(--ink)]">
+                More Crawls
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-[2px] bg-[var(--ink)]">
               {crawls
                 .filter((c) => c.live && c.slug !== crawl.slug)
                 .slice(0, 2)
@@ -404,27 +285,28 @@ export default function CrawlPage({ params }: CrawlPageProps) {
                   <Link
                     key={otherCrawl.id}
                     href={`/crawls/${otherCrawl.slug}`}
-                    className="block bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6 hover:border-[var(--border-bright)] transition-colors"
+                    className="block bg-[var(--surface)] p-6 hover:bg-[var(--background)] transition-colors"
                   >
-                    <h3 className="font-display text-xl font-semibold text-[var(--cream)] mb-2">
+                    <h3 className="font-card text-xl font-semibold text-[var(--ink)] mb-2">
                       {otherCrawl.name}
                     </h3>
-                    <p className="text-[var(--zinc-400)] text-sm mb-4 line-clamp-2">
+                    <p className="font-body text-sm text-[var(--muted)] mb-4 line-clamp-2">
                       {otherCrawl.tagline}
                     </p>
                     <div className="flex gap-3">
-                      <span className="px-2 py-1 rounded text-xs font-semibold bg-[rgba(229,162,16,0.15)] text-[var(--amber)]">
+                      <span className="font-label text-xs uppercase tracking-wider text-[var(--claret)]">
                         {otherCrawl.pubs.length} pubs
                       </span>
-                      <span className="px-2 py-1 rounded text-xs font-semibold bg-[rgba(229,162,16,0.15)] text-[var(--amber)]">
+                      <span className="font-label text-xs uppercase tracking-wider text-[var(--muted)]">
                         {otherCrawl.duration}
                       </span>
                     </div>
                   </Link>
                 ))}
             </div>
+
             <div className="text-center mt-8">
-              <Link href="/crawls" className="btn-secondary inline-block">
+              <Link href="/crawls" className="btn-ghost">
                 View All Crawls
               </Link>
             </div>

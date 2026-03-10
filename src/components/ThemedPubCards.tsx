@@ -1,7 +1,5 @@
 'use client';
 
-import { Crawl } from '@/content/crawls';
-
 interface PubCardProps {
   pubName: string;
   description: string;
@@ -12,56 +10,139 @@ interface PubCardProps {
   onClick?: () => void;
 }
 
-// Monopoly-style property card
+// Monopoly property colours
+const MONOPOLY_PROPERTY_COLORS: Record<string, string> = {
+  brown: '#8B4513',
+  lightBlue: '#ADD8E6',
+  pink: '#FF69B4',
+  orange: '#FFA500',
+  red: '#CC0000',
+  yellow: '#FFD700',
+  green: '#006400',
+  darkBlue: '#003087',
+};
+
+// Get property colour based on stop number (Monopoly board order)
+function getMonopolyPropertyColor(stopNumber: number): string {
+  // Map stop numbers to property groups (1-26 stops = 8 colour groups)
+  if (stopNumber <= 2) return MONOPOLY_PROPERTY_COLORS.brown;
+  if (stopNumber <= 5) return MONOPOLY_PROPERTY_COLORS.lightBlue;
+  if (stopNumber <= 8) return MONOPOLY_PROPERTY_COLORS.pink;
+  if (stopNumber <= 11) return MONOPOLY_PROPERTY_COLORS.orange;
+  if (stopNumber <= 14) return MONOPOLY_PROPERTY_COLORS.red;
+  if (stopNumber <= 17) return MONOPOLY_PROPERTY_COLORS.yellow;
+  if (stopNumber <= 20) return MONOPOLY_PROPERTY_COLORS.green;
+  return MONOPOLY_PROPERTY_COLORS.darkBlue;
+}
+
+// Get street name based on Monopoly board position
+function getMonopolyStreetName(stopNumber: number): string {
+  const streets: Record<number, string> = {
+    1: 'OLD KENT ROAD',
+    2: 'WHITECHAPEL ROAD',
+    3: 'ANGEL ISLINGTON',
+    4: 'EUSTON ROAD',
+    5: 'PENTONVILLE ROAD',
+    6: 'PALL MALL',
+    7: 'WHITEHALL',
+    8: 'NORTHUMBERLAND AVE',
+    9: 'BOW STREET',
+    10: 'GREAT MARLBOROUGH ST',
+    11: 'VINE STREET',
+    12: 'STRAND',
+    13: 'FLEET STREET',
+    14: 'TRAFALGAR SQUARE',
+    15: 'LEICESTER SQUARE',
+    16: 'COVENTRY STREET',
+    17: 'PICCADILLY',
+    18: 'REGENT STREET',
+    19: 'OXFORD STREET',
+    20: 'BOND STREET',
+    21: 'PARK LANE',
+    22: 'MAYFAIR',
+    23: 'HOLBORN',
+    24: 'THE STRAND',
+    25: 'LIVERPOOL ST',
+    26: 'FENCHURCH ST',
+  };
+  return streets[stopNumber] || `STOP ${stopNumber}`;
+}
+
+// Monopoly-style property card - rebuilt per spec
 export function MonopolyPubCard({
   pubName,
   description,
   stopNumber,
   totalStops,
-  accentColor,
   onClick,
 }: PubCardProps) {
+  const propertyColor = getMonopolyPropertyColor(stopNumber);
+  const streetName = getMonopolyStreetName(stopNumber);
+
   return (
     <button
       onClick={onClick}
-      className="w-full bg-[#FFF9E6] border-[3px] border-[#1a1a2e] rounded-lg overflow-hidden cursor-pointer flex flex-col text-left hover:shadow-xl transition-all hover:-translate-y-1"
+      className="w-full bg-[#FFF8E7] border-2 border-[var(--ink)] cursor-pointer flex flex-col text-left hover:shadow-xl transition-all hover:-translate-y-1"
       style={{ aspectRatio: '3 / 4' }}
     >
-      {/* Color band - Monopoly property style */}
+      {/* Colored header band */}
       <div
-        className="px-4 py-3 text-center border-b-[3px] border-[#1a1a2e]"
-        style={{ backgroundColor: accentColor }}
+        className="px-4 py-3 text-center"
+        style={{ backgroundColor: propertyColor }}
       >
-        <span className="text-xs font-black uppercase tracking-wider text-white drop-shadow-sm">
-          Stop {stopNumber}
+        <span className="font-label text-xs uppercase tracking-[0.15em] text-white drop-shadow-sm">
+          {streetName}
         </span>
       </div>
 
       {/* Card body */}
-      <div className="p-4 flex-1 flex flex-col">
-        <div className="text-center mb-3">
-          <div className="text-[10px] uppercase tracking-widest text-[#4A5568] mb-1">Title Deed</div>
-          <h3 className="text-lg font-black uppercase tracking-tight text-[#1a1a2e] leading-tight">
-            {pubName}
-          </h3>
+      <div className="p-4 flex-1 flex flex-col border-t-2 border-[var(--ink)]">
+        {/* Title Deed label */}
+        <div className="text-center mb-2">
+          <span className="font-label text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            Title Deed
+          </span>
         </div>
 
-        <div className="h-px bg-[#1a1a2e] mb-3" />
+        {/* Pub name */}
+        <h3 className="font-card text-lg font-semibold text-[var(--ink)] text-center mb-3 leading-tight">
+          {pubName}
+        </h3>
 
-        <p className="text-xs text-[#4A5568] leading-relaxed flex-1 line-clamp-4">
-          {description}
-        </p>
+        {/* Divider */}
+        <div className="h-px bg-[var(--ink)] mb-3" />
 
-        <div className="mt-3 pt-3 border-t border-[#E8E4DD] flex justify-between items-center">
-          <span className="text-[10px] uppercase tracking-wider text-[#4A5568]">Progress</span>
-          <span className="font-black text-[#1a1a2e]">{stopNumber}/{totalStops}</span>
+        {/* Description rows */}
+        <div className="flex-1 space-y-2 text-xs">
+          <div className="flex justify-between">
+            <span className="font-body text-[var(--muted)]">Time</span>
+            <span className="font-body font-medium text-[var(--ink)]">~30 mins</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-body text-[var(--muted)]">Drink</span>
+            <span className="font-body font-medium text-[var(--ink)]">1 pint</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-body text-[var(--muted)]">Cost</span>
+            <span className="font-body font-medium text-[var(--ink)]">~£6-8</span>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-3 pt-3 border-t border-[var(--muted)] flex justify-between items-center">
+          <span className="font-label text-xs text-[var(--claret)]">
+            ★★★★☆
+          </span>
+          <span className="font-label text-xs uppercase tracking-wider text-[var(--muted)]">
+            Stop {stopNumber}/{totalStops}
+          </span>
         </div>
       </div>
     </button>
   );
 }
 
-// Circle Line tube roundel style card
+// Circle Line tube roundel style card - keep existing design
 export function CircleLinePubCard({
   pubName,
   description,
@@ -299,35 +380,32 @@ export function DefaultPubCard({
   return (
     <button
       onClick={onClick}
-      className="w-full bg-white border-2 rounded-lg overflow-hidden cursor-pointer flex flex-col text-left hover:shadow-xl transition-all hover:-translate-y-1"
-      style={{
-        aspectRatio: '3 / 4',
-        borderColor: accentColor,
-      }}
+      className="w-full bg-[var(--surface)] border-2 border-[var(--ink)] cursor-pointer flex flex-col text-left hover:shadow-xl transition-all hover:-translate-y-1"
+      style={{ aspectRatio: '3 / 4' }}
     >
       {/* Header */}
-      <div className="px-4 py-3" style={{ backgroundColor: accentColor }}>
+      <div className="px-4 py-3 bg-[var(--claret)]">
         <div className="text-center">
-          <span className="text-xs font-bold uppercase tracking-wider text-white">
+          <span className="font-label text-xs uppercase tracking-wider text-white">
             Stop {stopNumber}
           </span>
         </div>
       </div>
 
       {/* Card body */}
-      <div className="p-4 flex-1 flex flex-col">
-        <h3 className="text-lg font-bold text-[#1C2632] mb-2 text-center">
+      <div className="p-4 flex-1 flex flex-col border-t-2 border-[var(--ink)]">
+        <h3 className="font-card text-lg font-semibold text-[var(--ink)] mb-2 text-center">
           {pubName}
         </h3>
 
-        <div className="h-px mb-3" style={{ backgroundColor: `${accentColor}30` }} />
+        <div className="h-px bg-[var(--muted)] mb-3" />
 
-        <p className="text-xs text-[#4A5568] leading-relaxed flex-1 line-clamp-4">
+        <p className="font-body text-xs text-[var(--muted)] leading-relaxed flex-1 line-clamp-4">
           {description}
         </p>
 
-        <div className="mt-3 pt-3 border-t border-[#E8E4DD] text-center">
-          <span className="text-xs" style={{ color: accentColor }}>{stopNumber}/{totalStops}</span>
+        <div className="mt-3 pt-3 border-t border-[var(--muted)] text-center">
+          <span className="font-label text-xs text-[var(--claret)]">{stopNumber}/{totalStops}</span>
         </div>
       </div>
     </button>

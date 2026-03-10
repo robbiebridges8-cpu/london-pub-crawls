@@ -24,7 +24,7 @@ declare global {
 
 export default function InteractiveMap({
   locations,
-  accentColor = '#E5A210',
+  accentColor = '#C47B10', // Gold by default
   onMarkerClick
 }: InteractiveMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -63,44 +63,53 @@ export default function InteractiveMap({
 
     const L = window.L;
 
-    // Calculate center
-    const centerLat = locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length;
-    const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
+    // Calculate center - default to London (51.505, -0.09) as per spec
+    const centerLat = locations.length > 0
+      ? locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length
+      : 51.505;
+    const centerLng = locations.length > 0
+      ? locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length
+      : -0.09;
 
-    // Create map with dark theme
+    // Create map
     const map = L.map(mapRef.current, {
       center: [centerLat, centerLng],
-      zoom: 13,
+      zoom: 12,
       scrollWheelZoom: true,
       zoomControl: true,
     });
 
-    // Use CartoDB Dark Matter tiles for dark theme
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
+    // Use OpenStreetMap tiles as per spec
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(map);
 
-    // Create custom marker icon
+    // Create custom marker icon per spec:
+    // ink background (#1A0A00), gold number (#C47B10), white border
     const createMarkerIcon = (number: number, isSelected: boolean = false) => {
+      const inkColor = '#1A0A00';
+      const goldColor = '#C47B10';
+
       return L.divIcon({
         className: 'custom-marker',
         html: `
           <div style="
             width: 32px;
             height: 32px;
-            background: ${isSelected ? accentColor : '#121217'};
-            border: 2px solid ${accentColor};
+            background: ${inkColor};
+            border: 2px solid #FFFFFF;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: ${isSelected ? '#08080D' : accentColor};
+            color: ${goldColor};
             font-weight: 700;
             font-size: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            font-family: var(--font-label);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: all 0.2s ease;
+            ${isSelected ? `transform: scale(1.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);` : ''}
           ">
             ${number}
           </div>
@@ -113,27 +122,29 @@ export default function InteractiveMap({
 
     // Add markers
     const markers: any[] = [];
-    locations.forEach((location, index) => {
+    locations.forEach((location) => {
       const marker = L.marker([location.lat, location.lng], {
         icon: createMarkerIcon(location.number),
       }).addTo(map);
 
-      // Create popup content
+      // Create popup content per spec:
+      // Pub name (Spectral bold) + stop number + drink + "Get Directions →"
       const popupContent = `
-        <div style="padding: 8px; min-width: 200px;">
-          <div style="font-size: 11px; color: ${accentColor}; font-weight: 600; margin-bottom: 4px;">
-            STOP ${location.number}
+        <div style="padding: 8px; min-width: 200px; font-family: var(--font-body);">
+          <div style="font-size: 11px; color: #C47B10; font-weight: 700; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+            Stop ${location.number}
           </div>
-          <div style="font-size: 14px; font-weight: 700; color: #F5E6C8; margin-bottom: 8px;">
+          <div style="font-size: 16px; font-weight: 600; color: #1A0A00; margin-bottom: 8px; font-family: var(--font-card);">
             ${location.name}
           </div>
-          ${location.description ? `<div style="font-size: 12px; color: #9898A3; line-height: 1.4;">${location.description}</div>` : ''}
+          ${location.description ? `<div style="font-size: 12px; color: #8A7060; line-height: 1.4; margin-bottom: 8px;">${location.description.substring(0, 100)}...</div>` : ''}
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.name + ' London')}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: #0D7680; font-weight: 500; text-decoration: none;">
+            Get Directions →
+          </a>
         </div>
       `;
 
-      marker.bindPopup(popupContent, {
-        className: 'dark-popup',
-      });
+      marker.bindPopup(popupContent);
 
       marker.on('click', () => {
         setSelectedLocation(location);
@@ -149,10 +160,10 @@ export default function InteractiveMap({
     if (locations.length > 1) {
       const routeCoords = locations.map(loc => [loc.lat, loc.lng]);
       L.polyline(routeCoords, {
-        color: accentColor,
-        weight: 3,
-        opacity: 0.6,
-        dashArray: '10, 10',
+        color: '#1A0A00',
+        weight: 2,
+        opacity: 0.4,
+        dashArray: '8, 8',
       }).addTo(map);
     }
 
@@ -184,18 +195,17 @@ export default function InteractiveMap({
     <div className="grid lg:grid-cols-3 gap-6">
       {/* Map */}
       <div className="lg:col-span-2">
-        <div className="rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
+        <div className="border-2 border-[var(--ink)] overflow-hidden bg-[var(--surface)]">
           <div
             ref={mapRef}
-            className="aspect-[16/10] w-full"
-            style={{ minHeight: '400px' }}
+            style={{ height: '500px', width: '100%' }}
           />
         </div>
       </div>
 
       {/* Stop list */}
-      <div className="bg-[var(--surface)] rounded-xl border border-[var(--border)] p-6 max-h-[500px] overflow-y-auto">
-        <h3 className="font-semibold text-[var(--amber)] mb-4 uppercase tracking-wider text-sm">
+      <div className="bg-[var(--surface)] border-2 border-[var(--ink)] p-6 max-h-[500px] overflow-y-auto">
+        <h3 className="font-label text-xs uppercase tracking-[0.2em] text-[var(--claret)] mb-4">
           All Stops
         </h3>
         <div className="space-y-2">
@@ -203,26 +213,22 @@ export default function InteractiveMap({
             <button
               key={location.number}
               onClick={() => handleStopClick(location)}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all text-left ${
+              className={`w-full flex items-center gap-3 p-3 transition-all text-left ${
                 selectedLocation?.number === location.number
-                  ? 'bg-[rgba(229,162,16,0.1)] border border-[var(--amber)]'
-                  : 'hover:bg-[var(--midnight)] border border-transparent'
+                  ? 'bg-[var(--background)] border-l-4 border-[var(--claret)]'
+                  : 'hover:bg-[var(--background)] border-l-4 border-transparent'
               }`}
             >
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${
-                  selectedLocation?.number === location.number
-                    ? 'bg-[var(--amber)] text-[var(--midnight)]'
-                    : 'bg-[var(--midnight)] text-[var(--amber)] border-2 border-[var(--amber)]'
-                }`}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 bg-[var(--ink)] text-[var(--gold)] border-2 border-white"
               >
                 {location.number}
               </div>
-              <span className="text-[var(--cream)] text-sm font-medium truncate">
+              <span className="font-card text-sm font-medium text-[var(--ink)] truncate">
                 {location.name}
               </span>
               <svg
-                className="w-4 h-4 text-[var(--zinc-400)] ml-auto flex-shrink-0"
+                className="w-4 h-4 text-[var(--muted)] ml-auto flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -239,18 +245,14 @@ export default function InteractiveMap({
         </div>
 
         {/* Open in Google Maps button */}
-        <div className="mt-6 pt-4 border-t border-[var(--border)]">
+        <div className="mt-6 pt-4 border-t-2 border-[var(--ink)]">
           <a
             href={`https://www.google.com/maps/dir/${locations.map(l => `${l.lat},${l.lng}`).join('/')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-[var(--midnight)] font-semibold transition-colors"
-            style={{ backgroundColor: accentColor }}
+            className="btn-primary block text-center"
           >
             Open in Google Maps
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
           </a>
         </div>
       </div>

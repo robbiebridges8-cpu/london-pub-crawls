@@ -1,11 +1,31 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Playfair_Display, Barlow_Condensed, Barlow, Spectral } from "next/font/google";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
-const outfit = Outfit({
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["700"],
+  style: ["normal", "italic"],
+});
+
+const barlowCondensed = Barlow_Condensed({
+  variable: "--font-label",
+  subsets: ["latin"],
+  weight: ["700"],
+});
+
+const barlow = Barlow({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
+});
+
+const spectral = Spectral({
+  variable: "--font-card",
+  subsets: ["latin"],
+  weight: ["600"],
 });
 
 export const metadata: Metadata = {
@@ -40,13 +60,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Fraunces font with optical sizing */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
-          rel="stylesheet"
-        />
         {/* Leaflet CSS */}
         <link
           rel="stylesheet"
@@ -55,15 +68,17 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className={`${outfit.variable} font-body antialiased`}>
-        {/* Skip to content link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--amber)] focus:text-[var(--midnight)] focus:rounded"
-        >
-          Skip to content
-        </a>
-        {children}
+      <body className={`${playfairDisplay.variable} ${barlowCondensed.variable} ${barlow.variable} ${spectral.variable} font-body antialiased`}>
+        <Providers>
+          {/* Skip to content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-claret focus:text-white focus:rounded"
+          >
+            Skip to content
+          </a>
+          {children}
+        </Providers>
       </body>
     </html>
   );

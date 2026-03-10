@@ -1,90 +1,41 @@
 'use client';
 
 import Link from 'next/link';
-import { crawls, Crawl } from '@/content/crawls';
-import { SiteNav, SiteFooter } from '@/components';
+import Image from 'next/image';
+import { crawls } from '@/content/crawls';
+import {
+  SiteNav,
+  SiteFooter,
+  SectionLabel,
+  CrawlCard,
+  HowItWorksStep,
+} from '@/components';
+import { CrawlNameScramble } from '@/components/ui/crawl-name-scramble';
 
-// Accent colors for crawl themes
-const crawlAccents: Record<string, string> = {
-  monopoly: '#1FB25A',
-  'circle-line': '#FFD300',
-};
-
-function CrawlCard({ crawl }: { crawl: Crawl }) {
-  const isLive = crawl.live;
-  const accentColor = crawlAccents[crawl.slug] || 'var(--border)';
-
-  const CardContent = (
-    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden h-full flex flex-col">
-      {/* Placeholder image area */}
-      <div
-        className="h-[200px] flex items-center justify-center relative"
-        style={{ borderBottom: `2px solid ${accentColor}` }}
-      >
-        <span
-          className="font-display text-2xl font-semibold"
-          style={{ color: accentColor, opacity: 0.3 }}
-        >
-          {crawl.name}
-        </span>
-      </div>
-
-      {/* Card content */}
-      <div className="p-6 flex flex-col flex-grow">
-        {/* Crawl name */}
-        <h3 className="font-display text-[28px] font-semibold text-[var(--cream)] mb-2">
-          {crawl.name}
-        </h3>
-
-        {/* Tagline */}
-        <p className="text-base text-[var(--zinc-400)] mb-4 line-clamp-2 flex-grow">
-          {crawl.tagline}
-        </p>
-
-        {/* Metadata badges */}
-        <div className="flex gap-4 items-center mb-4">
-          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-[rgba(229,162,16,0.15)] text-[var(--amber)]">
-            {crawl.pubs.length} pubs
-          </span>
-          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-[rgba(229,162,16,0.15)] text-[var(--amber)]">
-            {crawl.duration}
-          </span>
-        </div>
-
-        {/* CTA */}
-        {isLive ? (
-          <span className="btn-primary text-center inline-block">
-            Start This Crawl &rarr;
-          </span>
-        ) : (
-          <span className="text-sm font-medium text-[var(--zinc-600)]">
-            Coming Soon
-          </span>
-        )}
-      </div>
-    </div>
-  );
-
-  if (isLive) {
-    return (
-      <Link
-        href={`/crawls/${crawl.slug}`}
-        className="block transition-all duration-300 hover:-translate-y-0.5 hover:[&>div]:border-[var(--border-bright)] hover:[&>div]:shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-      >
-        {CardContent}
-      </Link>
-    );
-  }
-
-  return (
-    <div className="opacity-70 cursor-default">
-      {CardContent}
-    </div>
-  );
-}
+const howItWorksSteps = [
+  {
+    number: '01',
+    title: 'Choose Your Crawl',
+    description: 'Pick from our curated routes across London',
+  },
+  {
+    number: '02',
+    title: 'Get the Route',
+    description: 'View the map and pub list on any device',
+  },
+  {
+    number: '03',
+    title: 'Start Walking',
+    description: 'Follow the route at your own pace',
+  },
+  {
+    number: '04',
+    title: 'Enjoy the Pubs',
+    description: 'Discover London\'s best drinking spots',
+  },
+];
 
 export default function Home() {
-  // Show 6 crawls: 2 live + 4 coming soon
   const displayCrawls = [
     ...crawls.filter((c) => c.live),
     ...crawls.filter((c) => !c.live).slice(0, 4),
@@ -96,84 +47,128 @@ export default function Home() {
 
       <main id="main-content">
         {/* Hero Section */}
-        <section className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6 py-24">
-          {/* Kicker */}
-          <p className="text-sm font-medium uppercase tracking-[0.1em] text-[var(--zinc-400)] mb-6 animate-fade-in-up">
-            Free self-guided pub crawls across London
-          </p>
+        <section className="relative min-h-screen flex flex-col">
+          {/* London Skyline Background */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80"
+              alt="London skyline at dusk"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/90 via-[var(--background)]/70 to-[var(--background)]" />
+          </div>
 
-          {/* Headline */}
-          <h1 className="font-display text-[40px] md:text-[72px] font-semibold leading-none tracking-tight mb-6 animate-fade-in-up animation-delay-100">
-            <span className="text-[var(--cream)]">The best pub crawls in London.</span>
-            <br />
-            <span className="text-[var(--amber)]">Curated by locals.</span>
-          </h1>
+          {/* Hero Content */}
+          <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pt-24 pb-16">
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Main Headline */}
+              <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-[var(--ink)] mb-8 tracking-tight">
+                London Crawling
+              </h1>
 
-          {/* Subheadline */}
-          <p className="text-lg text-[var(--zinc-400)] max-w-[540px] leading-relaxed mb-10 animate-fade-in-up animation-delay-200">
-            Meticulously researched routes through London&apos;s best pubs. No apps to download.
-            No tickets to buy. Just a route, a map, and good company.
-          </p>
+              {/* Scrambling Crawl Names */}
+              <div className="mb-12">
+                <CrawlNameScramble className="text-2xl md:text-3xl lg:text-4xl" />
+              </div>
 
-          {/* CTA */}
-          <Link
-            href="/crawls"
-            className="btn-primary animate-fade-in-up animation-delay-300"
-          >
-            Explore Crawls
-          </Link>
+              {/* CTA Button */}
+              <Link href="/crawls" className="btn-primary text-lg px-8 py-4">
+                Explore the Crawls
+              </Link>
+            </div>
+          </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <svg
-              className="w-5 h-5 text-[var(--zinc-600)] animate-bounce-slow"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7" />
-            </svg>
+          <div className="relative z-10 pb-8 flex justify-center">
+            <div className="animate-bounce">
+              <svg
+                className="w-6 h-6 text-[var(--muted)]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
           </div>
         </section>
 
-        {/* Featured Crawls Section */}
-        <section className="py-24 px-6">
+        {/* Crawls Section */}
+        <section className="py-20 px-6">
           <div className="max-w-[1200px] mx-auto">
-            {/* Section heading */}
-            <h2 className="font-display text-[32px] font-medium text-[var(--cream)] text-center mb-12">
-              Our Crawls
-            </h2>
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <SectionLabel className="mb-4">Our Routes</SectionLabel>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
+                Choose Your Crawl
+              </h2>
+            </div>
 
-            {/* Crawl card grid */}
-            <div className="grid lg:grid-cols-2 gap-6">
+            {/* Crawl Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-[var(--ink)]">
               {displayCrawls.map((crawl) => (
                 <CrawlCard key={crawl.id} crawl={crawl} />
+              ))}
+            </div>
+
+            {/* View All Link */}
+            <div className="text-center mt-12">
+              <Link href="/crawls" className="btn-ghost">
+                View All Crawls
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-20 px-6 bg-[var(--surface)]">
+          <div className="max-w-[1200px] mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <SectionLabel className="mb-4">Getting Started</SectionLabel>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
+                How It Works
+              </h2>
+            </div>
+
+            {/* Steps Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {howItWorksSteps.map((step) => (
+                <HowItWorksStep
+                  key={step.number}
+                  number={step.number}
+                  title={step.title}
+                  description={step.description}
+                />
               ))}
             </div>
           </div>
         </section>
 
         {/* About Teaser Section */}
-        <section className="py-24 px-6">
+        <section className="py-20 px-6">
           <div className="max-w-[680px] mx-auto text-center">
-            <h2 className="font-display text-[32px] font-medium text-[var(--cream)] mb-8">
+            <SectionLabel className="mb-4">About Us</SectionLabel>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)] mb-8">
               Made by Londoners, for everyone.
             </h2>
 
-            <div className="space-y-6 text-lg text-[var(--zinc-400)] leading-relaxed mb-8">
+            <div className="space-y-6 font-body text-lg text-[var(--muted)] leading-relaxed mb-8">
               <p>
                 These aren&apos;t tourist traps or corporate bar crawls. Every route has been
                 walked, researched, and refined by people who actually love London pubs.
               </p>
               <p>
                 We believe the best way to know a city is through its pubs — the history on the walls,
-                the stories at the bar, the neighbourhoods between stops. Our crawls are free,
-                self-guided, and designed for groups of friends, tourists, or anyone who wants to explore.
+                the stories at the bar, the neighbourhoods between stops.
               </p>
             </div>
 
-            <Link href="/about" className="btn-secondary inline-block">
-              Learn More About Us &rarr;
+            <Link href="/about" className="btn-ghost">
+              Learn More About Us
             </Link>
           </div>
         </section>

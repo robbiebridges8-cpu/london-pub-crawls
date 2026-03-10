@@ -29,22 +29,26 @@ const spectral = Spectral({
 });
 
 export const metadata: Metadata = {
-  title: "London Pub Crawls | Free Self-Guided Routes",
-  description: "The best pub crawls in London. Curated by locals. Meticulously researched routes through London's best pubs. No apps to download. No tickets to buy.",
-  keywords: "london pub crawl, pub crawl london, monopoly pub crawl, circle line challenge, best pub crawls london, free pub crawl",
-  authors: [{ name: "London Pub Crawls" }],
+  title: {
+    default: "London Crawling | Free Self-Guided Pub Crawls",
+    template: "%s | London Crawling",
+  },
+  description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
+  keywords: "london pub crawl, pub crawl london, monopoly pub crawl, circle line challenge, best pub crawls london, free pub crawl, self-guided pub crawl",
+  authors: [{ name: "London Crawling" }],
+  metadataBase: new URL("https://londoncrawling.com"),
   openGraph: {
-    title: "London Pub Crawls | Free Self-Guided Routes",
-    description: "The best pub crawls in London. Curated by locals. Meticulously researched routes through London's best pubs.",
-    url: "https://londonpubcrawls.com",
-    siteName: "London Pub Crawls",
+    title: "London Crawling | Free Self-Guided Pub Crawls",
+    description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
+    url: "https://londoncrawling.com",
+    siteName: "London Crawling",
     locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "London Pub Crawls | Free Self-Guided Routes",
-    description: "The best pub crawls in London. Curated by locals.",
+    title: "London Crawling | Free Self-Guided Pub Crawls",
+    description: "Free, self-guided pub crawls through London's best drinking spots.",
   },
   robots: {
     index: true,
@@ -66,6 +70,24 @@ export default function RootLayout({
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossOrigin=""
+        />
+        {/* Schema.org WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "London Crawling",
+              url: "https://londoncrawling.com",
+              description: "Free, self-guided pub crawls through London's best drinking spots.",
+              publisher: {
+                "@type": "Organization",
+                name: "London Crawling",
+                url: "https://londoncrawling.com",
+              },
+            }),
+          }}
         />
       </head>
       <body className={`${playfairDisplay.variable} ${barlowCondensed.variable} ${barlow.variable} ${spectral.variable} font-body antialiased`}>

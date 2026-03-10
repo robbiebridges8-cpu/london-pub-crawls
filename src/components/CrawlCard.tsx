@@ -76,7 +76,7 @@ export default function CrawlCard({ crawl }: CrawlCardProps) {
   if (isLive) {
     return (
       <Link
-        href={`/crawls/${crawl.slug}`}
+        href={`/${crawl.slug}`}
         className="block transition-all duration-200 hover:shadow-lg"
       >
         {CardContent}

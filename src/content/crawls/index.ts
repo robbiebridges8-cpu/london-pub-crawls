@@ -78,7 +78,7 @@ export const crawls: Crawl[] = [
     duration: '4 hours',
     difficulty: 'Medium',
     area: 'Whitechapel',
-    live: false,
+    live: true,
     accentColor: '#8B1A1A',
     secondaryColor: '#1C1C1C',
     pubs: [

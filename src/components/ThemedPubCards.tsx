@@ -312,8 +312,8 @@ export function BeatlesPubCard({
   );
 }
 
-// Thames Path nautical style card
-export function ThamesPathPubCard({
+// South Bank nautical style card
+export function SouthBankPubCard({
   pubName,
   description,
   stopNumber,
@@ -423,8 +423,8 @@ export function getThemedPubCard(crawlSlug: string) {
       return RipperPubCard;
     case 'beatles':
       return BeatlesPubCard;
-    case 'thames-path':
-      return ThamesPathPubCard;
+    case 'south-bank':
+      return SouthBankPubCard;
     default:
       return DefaultPubCard;
   }

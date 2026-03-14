@@ -13,19 +13,9 @@ export default function SiteFooter() {
         <div className="grid md:grid-cols-3 gap-12">
           {/* Column 1: Logo & Tagline */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              {/* Pint Glass Icon */}
-              <svg
-                className="w-6 h-6 text-[var(--gold)]"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M5 3h14l-1.5 15.5a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5L5 3z" />
-                <path d="M7 3V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1" fill="var(--ink)" />
-                <ellipse cx="12" cy="5" rx="5" ry="1.5" fill="var(--ink)" opacity="0.3" />
-              </svg>
+            <Link href="/" className="flex items-center mb-4">
               <span className="font-display text-xl font-bold tracking-tight text-white">
-                London Crawling
+                London on Tap
               </span>
             </Link>
             <p className="font-body text-sm text-white/60">
@@ -66,8 +56,16 @@ export default function SiteFooter() {
             </h4>
             <ul className="space-y-2">
               <li>
+                <Link
+                  href="/build"
+                  className="font-body text-sm text-[var(--gold)] hover:text-white transition-colors font-semibold"
+                >
+                  Build Your Own Crawl
+                </Link>
+              </li>
+              <li>
                 <a
-                  href="https://instagram.com/londoncrawling"
+                  href="https://instagram.com/londonontap"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-body text-sm text-white/80 hover:text-white transition-colors"
@@ -77,7 +75,7 @@ export default function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="mailto:hello@londoncrawling.com"
+                  href="mailto:hello@londonontap.com"
                   className="font-body text-sm text-white/80 hover:text-white transition-colors"
                 >
                   Contact
@@ -90,7 +88,7 @@ export default function SiteFooter() {
         {/* Bottom row */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-white/40">
-            &copy; {new Date().getFullYear()} London Crawling. Made with love in London.
+            &copy; {new Date().getFullYear()} London on Tap. Made with love in London.
           </p>
           <p className="font-body text-xs text-white/40">
             Drink responsibly. Know your limits.

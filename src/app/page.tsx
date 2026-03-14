@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { crawls } from '@/content/crawls';
 import {
   SiteNav,
@@ -52,26 +51,57 @@ export default function Home() {
 
       <main id="main-content">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex flex-col">
-          {/* London Skyline Background */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80"
-              alt="London skyline at dusk"
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/90 via-[var(--background)]/70 to-[var(--background)]" />
-          </div>
+        <section
+          className="relative min-h-screen flex flex-col overflow-hidden"
+          style={{
+            minHeight: '100dvh',
+          }}
+        >
+          {/* Background image — absolute fill */}
+          <div className="hero-bg absolute inset-0 z-0" />
+          {/* Overlays */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-[var(--background)]/70 via-[var(--background)]/50 to-[var(--background)] lg:from-[var(--background)]/80 lg:via-[var(--background)]/65" />
+          <div className="absolute inset-0 z-0" style={{
+            background: 'radial-gradient(ellipse 80% 70% at 50% 45%, rgba(255,241,229,0.55) 0%, transparent 100%)',
+          }} />
+          <div className="hidden lg:block absolute inset-0 z-0" style={{
+            background: 'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,241,229,0.5) 0%, transparent 100%)',
+          }} />
 
           {/* Hero Content */}
-          <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pt-24 pb-16">
+          <div className="relative z-10 flex flex-col items-center px-6 pt-12 md:pt-24 pb-8">
             <div className="text-center max-w-4xl mx-auto">
+              {/* Stats */}
+              <div className="flex justify-center gap-8 md:gap-12 mb-6">
+                <div className="text-center">
+                  <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
+                    {crawls.filter(c => c.live).length}
+                  </div>
+                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)]">
+                    Crawls
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
+                    101
+                  </div>
+                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)]">
+                    Pubs
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
+                    Free
+                  </div>
+                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)]">
+                    Always
+                  </div>
+                </div>
+              </div>
+
               {/* Main Headline */}
               <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-[var(--ink)] mb-8 tracking-tight">
-                London Crawling
+                London on Tap
               </h1>
 
               {/* Scrambling Crawl Names */}
@@ -79,10 +109,15 @@ export default function Home() {
                 <CrawlNameScramble className="text-2xl md:text-3xl lg:text-4xl" />
               </div>
 
-              {/* CTA Button */}
-              <a href="#crawls" className="btn-primary text-lg px-8 py-4">
-                Explore the Crawls
-              </a>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#crawls" className="btn-primary text-lg px-8 py-4">
+                  Explore the Crawls
+                </a>
+                <Link href="/build" className="btn-ghost text-lg px-8 py-4">
+                  Build Your Own
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -97,46 +132,6 @@ export default function Home() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Bar */}
-        <section className="bg-[var(--ink)] py-6">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="font-display text-3xl md:text-4xl font-bold text-white mb-1">
-                  {crawls.filter(c => c.live).length}
-                </div>
-                <div className="font-label text-xs uppercase tracking-[0.1em] text-white/70">
-                  Live Crawls
-                </div>
-              </div>
-              <div>
-                <div className="font-display text-3xl md:text-4xl font-bold text-white mb-1">
-                  {crawls.reduce((acc, c) => acc + c.pubs.length, 0)}+
-                </div>
-                <div className="font-label text-xs uppercase tracking-[0.1em] text-white/70">
-                  Pubs Listed
-                </div>
-              </div>
-              <div>
-                <div className="font-display text-3xl md:text-4xl font-bold text-white mb-1">
-                  {crawls.length}
-                </div>
-                <div className="font-label text-xs uppercase tracking-[0.1em] text-white/70">
-                  Routes Planned
-                </div>
-              </div>
-              <div>
-                <div className="font-display text-3xl md:text-4xl font-bold text-[var(--gold)] mb-1">
-                  £0
-                </div>
-                <div className="font-label text-xs uppercase tracking-[0.1em] text-white/70">
-                  Always Free
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -164,6 +159,25 @@ export default function Home() {
                 View All Crawls
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Build Your Own CTA */}
+        <section className="py-20 px-6 bg-[var(--ink)]">
+          <div className="max-w-[800px] mx-auto text-center">
+            <p className="font-label text-xs uppercase tracking-[0.2em] text-[var(--gold)] mb-4">
+              Coming Soon
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              Build Your Own Crawl
+            </h2>
+            <p className="font-body text-lg text-white/70 leading-relaxed mb-8 max-w-lg mx-auto">
+              Pick your pubs. Set your route. Share it with your mates.
+              Design a completely custom pub crawl through London.
+            </p>
+            <Link href="/build" className="inline-block px-8 py-4 bg-[var(--claret)] text-white font-label text-sm uppercase tracking-wider font-bold hover:bg-[var(--claret-dark)] transition-colors">
+              Find Out More
+            </Link>
           </div>
         </section>
 
@@ -216,7 +230,7 @@ export default function Home() {
                 outdated blogs, and closed pubs. So I started mapping them myself.
               </p>
               <p>
-                London Crawling is what I wish existed when I started. Proper routes, researched pubs,
+                London on Tap is what I wish existed when I started. Proper routes, researched pubs,
                 interactive maps. Free, no booking, no app to download. Just great pubs and the stories
                 that make them special.
               </p>

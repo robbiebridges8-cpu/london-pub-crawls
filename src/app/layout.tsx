@@ -30,24 +30,24 @@ const spectral = Spectral({
 
 export const metadata: Metadata = {
   title: {
-    default: "London Crawling | Free Self-Guided Pub Crawls",
-    template: "%s | London Crawling",
+    default: "London on Tap | Free Self-Guided Pub Crawls",
+    template: "%s | London on Tap",
   },
   description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
   keywords: "london pub crawl, pub crawl london, monopoly pub crawl, circle line challenge, best pub crawls london, free pub crawl, self-guided pub crawl",
-  authors: [{ name: "London Crawling" }],
-  metadataBase: new URL("https://londoncrawling.com"),
+  authors: [{ name: "London on Tap" }],
+  metadataBase: new URL("https://londonontap.com"),
   openGraph: {
-    title: "London Crawling | Free Self-Guided Pub Crawls",
+    title: "London on Tap | Free Self-Guided Pub Crawls",
     description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
-    url: "https://londoncrawling.com",
-    siteName: "London Crawling",
+    url: "https://londonontap.com",
+    siteName: "London on Tap",
     locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "London Crawling | Free Self-Guided Pub Crawls",
+    title: "London on Tap | Free Self-Guided Pub Crawls",
     description: "Free, self-guided pub crawls through London's best drinking spots.",
   },
   robots: {
@@ -78,13 +78,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "London Crawling",
-              url: "https://londoncrawling.com",
+              name: "London on Tap",
+              url: "https://londonontap.com",
               description: "Free, self-guided pub crawls through London's best drinking spots.",
               publisher: {
                 "@type": "Organization",
-                name: "London Crawling",
-                url: "https://londoncrawling.com",
+                name: "London on Tap",
+                url: "https://londonontap.com",
               },
             }),
           }}

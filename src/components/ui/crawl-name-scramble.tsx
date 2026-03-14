@@ -6,10 +6,14 @@ import { TextScramble } from './text-scramble';
 const crawlNames = [
   'Monopoly',
   'Circle Line',
+  'Bermondsey',
   'Jack the Ripper',
   'Beatles',
-  'Thames Path',
-  'Shakespeare',
+  'Historic London',
+  'South Bank',
+  'Criminal London',
+  'Literary London',
+  'Haunted London',
 ];
 
 export function CrawlNameScramble({ className }: { className?: string }) {
@@ -27,7 +31,7 @@ export function CrawlNameScramble({ className }: { className?: string }) {
 
   return (
     <div className={className}>
-      <span className="inline-flex items-baseline gap-2">
+      <span className="inline-flex items-baseline gap-1.5 md:gap-3">
         <TextScramble
           as="span"
           className="font-display font-bold text-[var(--claret)]"

@@ -10,8 +10,8 @@ const crawlBorderColors: Record<string, string> = {
   'circle-line': '#FFD300',
   'jack-the-ripper': '#6B0F1A',
   'beatles': '#003087',
-  'thames-path': '#0098D4',
-  'shakespeare': '#8B4513',
+  'south-bank': '#0098D4',
+  'criminal-london': '#1A1A2E',
 };
 
 interface CrawlCardProps {

@@ -16,8 +16,11 @@
   --circle-line-border: #FFD300;
   --ripper-border: #6B0F1A;
   --beatles-border: #003087;
-  --thames-border: #0098D4;
-  --shakespeare-border: #8B4513;
+  --south-bank-border: #0098D4;
+  --criminal-london-border: #1A1A2E;
+  --historic-london-border: #8B4513;
+  --literary-london-border: #2E4057;
+  --haunted-london-border: #2C1810;
 
   /* Monopoly property colours */
   --monopoly-brown: #8B4513;
@@ -51,6 +54,20 @@
   --font-label: var(--font-label);
   --font-body: var(--font-body);
   --font-card: var(--font-card);
+}
+
+/* Hero background image */
+.hero-bg {
+  background-image: url('https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1920&q=80');
+  background-size: 220%;
+  background-position: center 1%;
+}
+@media (min-width: 1024px) {
+  .hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+  }
 }
 
 body {
@@ -90,24 +107,6 @@ body {
   color: var(--claret);
 }
 
-/* Custom scrollbar - FT theme */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--surface);
-  border-radius: 5px;
-  border: 2px solid var(--background);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--claret);
-}
 
 /* Selection */
 ::selection {
@@ -311,13 +310,57 @@ a:hover {
 
 /* Print styles */
 @media print {
-  body {
+  * {
     background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-color: #ccc !important;
+  }
+
+  body {
+    font-family: -apple-system, sans-serif !important;
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+  }
+
+  nav, footer, .no-print,
+  .sm-map-panel, .sm-progress, .btn-primary, .btn-ghost,
+  .sm-deed-actions, .sm-card-actions,
+  [class*="map"], [class*="Map"] {
+    display: none !important;
+  }
+
+  /* Strip layout constraints */
+  .sm-layout {
+    display: block !important;
+    height: auto !important;
+    border: none !important;
+  }
+  .sm-list {
+    max-height: none !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  /* Show all cards expanded for print */
+  .sm-card {
+    border-left: none !important;
+    padding: 6pt 0 !important;
+    border-bottom: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+  .sm-card-num {
+    border: 1px solid #000 !important;
+  }
+
+  a {
+    text-decoration: none !important;
     color: black !important;
   }
 
-  nav, footer, .no-print {
-    display: none !important;
+  h1, h2, h3 {
+    font-family: Georgia, serif !important;
   }
 }
 

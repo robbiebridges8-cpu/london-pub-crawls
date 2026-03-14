@@ -1,8 +1,8 @@
-# London Crawling — Product Requirements Document
+# London on Tap — Product Requirements Document
 
 **Document version:** 2.1 — March 2026
 **Product owner:** Robbie Bridges
-**Domain:** londonpubcrawls.com (TBC)
+**Domain:** londonontap.com (TBC)
 **Related domain:** monopolypubcrawl.com (redirect to /monopoly)
 **Status:** Pre-launch — architecture, design, and content phase
 **GitHub repo:** london-pub-crawls
@@ -11,9 +11,9 @@
 
 ## 1. Executive Summary
 
-London Crawling is a free, self-guided pub crawl platform for London. It provides themed, curated routes with pub-by-pub itineraries and interactive maps. No booking, no app download, no payment required to use.
+London on Tap is a free, self-guided pub crawl platform for London. It provides themed, curated routes with pub-by-pub itineraries and interactive maps. No booking, no app download, no payment required to use.
 
-The platform launches with several fully researched crawls. The MVP is a content-rich, SEO-optimised static site designed to capture organic search traffic in a space with no credible incumbent.
+The platform launches with 10 fully researched crawls. The MVP is a content-rich, SEO-optimised static site designed to capture organic search traffic in a space with no credible incumbent.
 
 This is a solo hobby project with serious commercial ambitions. The founder personally completed and documented the Monopoly Pub Crawl, which inspired the product. The near-term strategy is to build organic traffic and domain authority. Monetisation begins post-traction via a digital pub crawl passport (a paid product that unlocks discounts at participating pubs).
 
@@ -43,7 +43,7 @@ The competitive landscape is remarkably thin. A handful of outdated blog posts e
 
 ### 3.1 V1 Launch Goals
 
-Ship 10 fully functional crawl pages with interactive maps, complete pub data, and printable routes. Launch with all foundational SEO in place. See Section 12 for the confirmed launch backlog.
+Ship 10 fully functional crawl pages with interactive maps, complete pub data, and printable routes. Launch with all foundational SEO in place.
 
 ### 3.2 Six-Month Goals
 
@@ -52,14 +52,13 @@ Ship 10 fully functional crawl pages with interactive maps, complete pub data, a
 | Monthly organic users | 1,000 | Primary success metric |
 | Google ranking (Monopoly Pub Crawl) | Top 10 | Currently no dominant result |
 | Google ranking (Circle Line Challenge) | Top 10 | Low competition |
-| Google ranking (Bermondsey Beer Mile) | Top 10 | No definitive guide exists |
 | Crawl page engagement (avg. time on page) | > 3 minutes | Proxy for genuine use |
 | PDF/print downloads | Track volume | Directional signal only |
 | Crawls live | ~20 | Target for 6-month mark |
 
 ### 3.3 Longer-Term Goals (12–24 months)
 
-Reach 5,000+ monthly users and begin monetisation via the passport model. Establish London Crawling as the default search result — and the default LLM citation — for all major London pub crawl queries. Build a content engine (blog, guides) that drives long-tail SEO traffic. Begin outreach to pubs for partnership and promotion deals.
+Reach 5,000+ monthly users and begin monetisation via the passport model. Establish London on Tap as the default search result — and the default LLM citation — for all major London pub crawl queries. Build a content engine (blog, guides) that drives long-tail SEO traffic. Begin outreach to pubs for partnership and promotion deals.
 
 ---
 
@@ -87,7 +86,6 @@ Reach 5,000+ monthly users and begin monetisation via the passport model. Establ
 
 - Homepage — crawl directory grid (design TBC), stats bar, How It Works section, About section (on homepage rather than separate page)
 - Crawl landing pages — reusable template with hero, description, interactive map, logistics panel, pub-by-pub breakdown with themed pub cards, and print/save route functionality
-- 10 crawl pages live at launch (see Section 12 for confirmed backlog)
 - Coming Soon pages — TBC, may or may not be included at launch
 - 404 page — nice-to-have, not a launch blocker
 - Schema.org structured data on all pages (TouristAttraction, ItemList, WebSite)
@@ -127,9 +125,9 @@ Reach 5,000+ monthly users and begin monetisation via the passport model. Establ
 
 **Sections (top to bottom):**
 
-1. **Navigation** — Sticky, minimal. Text-based logo left ("London Crawling" in display font with subtle amber pint glass icon). Right: Crawls / About. Frosted background on scroll. No hamburger on desktop.
+1. **Navigation** — Sticky, minimal. Text-based logo left ("London on Tap" in display font with subtle amber pint glass icon). Right: Crawls / About. Frosted background on scroll. No hamburger on desktop.
 
-2. **Hero** — Full-screen (100vh) atmospheric photo background. Centred text: overline in small caps, main headline (2–3 words, enormous display font), one-line subheading, single CTA ("Explore the Crawls" filled). Scroll indicator chevron.
+2. **Hero** — Full-screen (100vh) atmospheric photo background. Centred text: overline in small caps, main headline (2–3 words, enormous display font), one-line subheading with text randomiser cycling through crawl names, single CTA ("Explore the Crawls" filled). Scroll indicator chevron.
 
 3. **Stats bar** — Full-width dark strip. Key stats (crawl count, pub count, miles of walking, etc. — exact stats TBC based on launch content).
 
@@ -139,7 +137,7 @@ Reach 5,000+ monthly users and begin monetisation via the passport model. Establ
 
 6. **About** — The founder's story, folded into the homepage rather than a separate page. Warm, authentic, first-person tone.
 
-7. **Footer** — Deep ink background. Logo, link columns, one-liner.
+7. **Footer** — Deep claret background. Logo, link columns, one-liner.
 
 **Data:** All crawl data from static JSON. No API calls on this page.
 
@@ -157,17 +155,15 @@ Reach 5,000+ monthly users and begin monetisation via the passport model. Establ
 
 4. **Logistics panel** — Meeting point, suggested start time, pacing tips, practical info. Start tube stop, end tube stop, best day/time.
 
-5. **Interactive map** — All pubs plotted with clickable markers. Clicking a marker highlights the corresponding pub card. Uses Leaflet.js or Google Maps API.
+5. **Interactive map + pub list** — Unified component. Map and pub list integrated as one section. Compact, scannable pub list with accordion expansion for detail cards. Map responds to pub selection with flyTo animation. Pub cards are themed per crawl (Monopoly = property deed, Circle Line = roundel, etc.).
 
-6. **Pub-by-pub breakdown** — The core content. Each pub gets a themed card. Cards are the ONE element where crawl-specific branding appears (Monopoly cards look like Monopoly property cards, Circle Line cards look like Tube roundels, Jack the Ripper cards are Victorian, etc.). Each card: pub name, station/area, description, historic note, order number, shareable link button.
+6. **Print / save route** — Button to generate a printable version or downloadable PDF.
 
-7. **Print / save route** — Button to generate a printable version or downloadable PDF.
+7. **Share & challenge section** — WhatsApp-first share buttons. Social proof / challenge framing.
 
-8. **Share & challenge section** — WhatsApp-first share buttons. Social proof / challenge framing.
+8. **Other crawls** — 2–3 card teasers for related crawls.
 
-9. **Other crawls** — 2–3 card teasers for related crawls.
-
-10. **Footer** — Consistent with homepage.
+9. **Footer** — Consistent with homepage.
 
 **Schema.org:** TouristAttraction structured data per page.
 
@@ -241,38 +237,29 @@ Content is stored as flat JSON files. No database at launch. Each crawl is a sel
 
 There is no per-crawl branding beyond two elements:
 
-1. **Pub cards** — Each crawl has a distinct card style (Monopoly cards look like Monopoly property cards, Circle Line cards look like Tube roundels, Jack the Ripper cards are Victorian, etc.). This is driven by the `color`, `colorGroup`, and card design in the frontend.
+1. **Pub cards** — Each crawl has a distinct card style (Monopoly cards styled as property cards, Circle Line as roundels, etc.). This is driven by the `color`, `colorGroup`, and card design in the frontend.
 2. **Map markers** — Markers on the interactive map are styled per crawl to match the card theming.
 
-Everything else — nav, layout, typography, hero treatment, footer — uses the unified London Crawling platform design. No per-crawl colour schemes, no per-crawl hero images, no mood switching.
+Everything else — nav, layout, typography, hero treatment, footer — uses the unified London on Tap platform design. No per-crawl colour schemes, no per-crawl hero images, no mood switching.
 
 ---
 
 ## 8. Design System
 
-**Status: TBC — to be designed separately and fed back into this document.**
+**Status: Implemented — documented in `context/CLAUDE.md`.**
 
 ### 8.1 Confirmed Decisions
 
+- **Editorial/magazine aesthetic** inspired by the Financial Times — warm, confident, typographically rich.
+- **Colour palette:** Warm cream background (#FFF1E5), near-black ink text (#1A0A00), claret primary accent (#990F3D), gold secondary (#C47B10), teal for links (#0D7680), muted secondary text (#8A7060), surface for alternating sections (#F2DFCE).
+- **Typography:** Four font roles — Playfair Display (display/headings), Barlow Condensed (labels/nav), Barlow (body), Spectral (pub card text).
 - **Unified platform branding.** The site has one consistent design language. Per-crawl theming is limited to pub cards and map markers only.
 - **Mobile-first.** The majority of users will be on their phone during the crawl. Every page must work beautifully on a 375px screen.
 - **Performance matters.** Near-perfect Lighthouse scores. Lazy-load images. Maps lazy-loaded. No render-blocking resources.
+- **Maps:** MapLibre GL JS with CARTO basemap tiles (no API key required).
 - **IP defensibility.** The Monopoly crawl is one of many themed routes under a platform umbrella, not a standalone Monopoly-branded product.
 
-### 8.2 To Be Designed
-
-The following are all pending and will be determined through a dedicated design process:
-
-- Colour palette
-- Typography
-- Layout and grid system
-- Card design (homepage and pub cards)
-- Hero treatment
-- Nav and footer design
-- Overall aesthetic direction
-- Responsive breakpoints
-
-### 8.3 Tone of Voice
+### 8.2 Tone of Voice
 
 Warm, witty, confident. Like a mate who's done every pub crawl in London twice and is genuinely excited to share. Never corporate, never laddish, never tourist-trap cheesy.
 
@@ -334,8 +321,8 @@ Not the current focus. The priority is building traffic and content quality. Mon
 | Framework | Next.js (App Router, static generation) | SSG for performance and SEO |
 | Hosting | Netlify | |
 | Styling | Tailwind CSS | |
-| Maps | Leaflet.js or Google Maps API | TBC — lazy-loaded |
-| Content | JSON files (no database at launch) | One file per crawl |
+| Maps | MapLibre GL JS with CARTO basemap tiles | No API key required |
+| Content | TypeScript files (no database at launch) | One file per crawl in src/content/crawls/ |
 | Database (future) | Supabase | When user-generated content is introduced |
 | Pub ratings signal | Google Places API (client-side, keyed) | |
 | Payments (future) | Stripe Checkout | For passport purchases |
@@ -345,16 +332,16 @@ Not the current focus. The priority is building traffic and content quality. Mon
 ### 11.2 Project Structure
 
 ```
-/app
+/src/app
   /page.tsx                    # Homepage — crawl directory + about
-  /[crawl]/page.tsx            # Dynamic crawl landing page
-/content
+  /[slug]/page.tsx             # Dynamic crawl landing page
+/src/content
   /crawls/
-    monopoly.json              # One file per crawl
-    circle-line.json
-    jack-the-ripper.json
+    monopoly.ts                # One file per crawl
+    circleline.ts
+    ripper.ts
     ...
-/components
+/src/components
   /                            # Shared UI components (structure TBC)
 /public
   /images/crawls/              # Hero images per crawl
@@ -365,7 +352,7 @@ Not the current focus. The priority is building traffic and content quality. Mon
 ### 11.3 Development Conventions
 
 - Prioritise static generation (generateStaticParams) for performance and SEO
-- One crawl = one JSON file in /content/crawls — keep content separate from code
+- One crawl = one TypeScript file in /src/content/crawls — keep content separate from code
 - Mobile-first — most users will be on their phone during the crawl
 - Maps lazy-loaded to keep page speed high
 - Components are crawl-agnostic — they receive crawl data as props
@@ -373,56 +360,28 @@ Not the current focus. The priority is building traffic and content quality. Mon
 
 ---
 
-## 12. Crawl Backlog
+## 12. Launch Crawl Backlog
 
-### 12.1 Launch Backlog (10 Crawls)
+### 12.1 The Launch 10
 
-The launch backlog was selected through SEO opportunity analysis (March 2026), prioritising crawls with the highest combination of likely search demand and weakest existing competition. Crawls are listed in build priority order.
+| # | Crawl | Slug | Theme / Hook | Status |
+|---|-------|------|-------------|--------|
+| 1 | Monopoly Pub Crawl | /monopoly | A pub for every space on the London Monopoly board. The flagship. | In development |
+| 2 | Circle Line Challenge | /circle-line | One pub per station on the original Circle Line loop (27 stops). | In development |
+| 3 | Bermondsey Beer Mile | /bermondsey-beer-mile | South London's famous brewery trail. | Content needed |
+| 4 | Jack the Ripper Pub Crawl | /jack-the-ripper | Whitechapel's darkest corners, one pint at a time. | In development |
+| 5 | Beatles Pub Crawl | /beatles | Follow the Fab Four through London's drinking spots. | Content needed |
+| 6 | Historic London Pub Crawl | /historic-london | London's oldest and most storied pubs. | Content needed |
+| 7 | Thames Path Pub Crawl | /thames-path | Pubs along the river from east to west. | Content needed |
+| 8 | Shakespeare Pub Crawl | /shakespeare | Bankside to the West End, in the Bard's footsteps. | Content needed |
+| 9 | Literary London Pub Crawl | /literary-london | Where London's writers drank — Dickens, Orwell, Woolf, and more. | Content needed |
+| 10 | Haunted London Pub Crawl | /haunted-london | London's most haunted pubs and the ghosts that haunt them. | Content needed |
 
-#### Tier 1 — High demand, terrible competition (build first)
+### 12.2 Post-Launch Expansion
 
-| # | Crawl | Slug | Theme / Hook | SEO Rationale |
-|---|-------|------|-------------|---------------|
-| 1 | Monopoly Pub Crawl | /monopoly | A pub for every space on the London Monopoly board. 26 stops. The flagship. | Significant search interest. The main competing site (monopolyboardpubcrawl.com) is pre-COVID and barely maintained. Multiple stag do sites and listicles reference it but none offer a well-designed, map-enabled guide. Easiest keyword to win. |
-| 2 | Circle Line Challenge | /circle-line | One pub per station on the original Circle Line loop (27 stops). | Searched under both "circle line pub crawl" and "circle line challenge." Existing dedicated sites are functional but not well-optimised or interactive. The crawl builder feature (V1.1) is a natural fit — 27 pubs is too many for one day. |
-| 3 | Bermondsey Beer Mile | /bermondsey-beer-mile | Craft brewery taprooms under the railway arches in SE1. | Huge real-world popularity but no definitive central resource. Breweries open and close frequently, and all existing documentation is scattered blog posts that quickly go out of date. A maintained, map-first guide becomes the go-to resource immediately. Craft beer audience is highly engaged and likely to share/link. |
+Target ~20 crawls at the six-month mark. Additional crawls to be researched and prioritised based on search demand vs. weakness of existing competition. Previous ideas explored include Royal Family, Criminal London, WW2, David Bowie, Rolling Stones — none confirmed.
 
-#### Tier 2 — Strong demand, moderate competition
-
-| # | Crawl | Slug | Theme / Hook | SEO Rationale |
-|---|-------|------|-------------|---------------|
-| 4 | Jack the Ripper Pub Crawl | /jack-the-ripper | Pubs linked to the 1888 Whitechapel murders. The Ten Bells as centrepiece. | Multiple paid guided tours exist (proving demand), but self-guided content is thin. Overlaps with enormous "Jack the Ripper tour" search volume — catches people who want the experience without paying £25. Victorian-themed pub cards would look incredible. |
-| 5 | Historic Pubs of London | /historic-pubs | Fleet Street to Holborn — The Blackfriar, Ye Olde Cheshire Cheese, Cittie of Yorke, Princess Louise. | "London's oldest pubs" and "historic pubs London" are evergreen tourist search terms. Nobody owns this as a packaged crawl route — it's scattered across forum recommendations and listicles. Packages something people already do informally. |
-| 6 | Thames Path Pub Crawl | /thames-path | Riverside pubs from the Blackfriar through Wapping to the Prospect of Whitby and The Grapes. | Riverside pub content performs well — the pubs are photogenic and the walk is scenic. Multiple people have written about this but nobody owns it as a definitive self-guided route with an interactive map. |
-
-#### Tier 3 — Moderate demand, low competition (good long-tail, distinctive content)
-
-| # | Crawl | Slug | Theme / Hook | SEO Rationale |
-|---|-------|------|-------------|---------------|
-| 7 | Literary London Pub Crawl | /literary-london | Pubs associated with Shakespeare, Dickens, Virginia Woolf, and London's literary history. | "Dickens pubs London" and "literary pubs London" are solid long-tail keywords with tourist intent. Guided tour versions exist but cost money — a free self-guided route would rank well. |
-| 8 | Beatles Pub Crawl | /beatles | Pubs and locations associated with the Beatles across central London. | The Beatles have massive global search volume and London is full of associated locations. No well-established self-guided Beatles pub crawl route currently exists, meaning London Crawling could create and own this keyword. Huge international tourist audience. Requires original route research. |
-| 9 | Hampstead Village Pub Crawl | /hampstead | A leafy village crawl — The Duke of Hamilton, The Flask, The Holly Bush, and others around the heath. | "Hampstead pubs" has solid search volume with both tourist and local appeal. Compact, photogenic village with genuinely excellent pubs. Offers a different vibe from central London endurance crawls. No one owns this as a packaged route. |
-| 10 | Haunted Pubs of London | /haunted-pubs | Pubs with ghost stories, dark history, and eerie atmospheres across central London. | "Haunted pubs London" is an evergreen tourist search term. Works year-round with a significant seasonal spike around Halloween, providing a natural content marketing hook. |
-
-### 12.2 Post-Launch Backlog (V1.1–V2, targeting ~20 crawls at 6 months)
-
-The following crawls are candidates for the post-launch expansion. They require further research and SEO validation before committing to build order.
-
-| Crawl | Slug | Notes |
-|-------|------|-------|
-| Oliver Reed's Wimbledon Common Crawl | /wimbledon | Great story (actor used to sprint between pubs), but niche — requires audience to know who Oliver Reed is. Better as blog content initially. 6 surviving pubs from the original 8. |
-| Soho Pub Crawl | TBC | High activity volume but generic — competes with every nightlife guide and paid crawl operator. Needs a sharper angle (e.g. "Historic Soho" or "Soho After Dark") to differentiate. |
-| Camden Pub Crawl | TBC | Similar to Soho — popular neighbourhood but needs a distinctive hook beyond geography. Live music angle could work. |
-| Shoreditch Pub Crawl | TBC | Same challenge as Soho/Camden. Craft cocktail or street art angle could differentiate. |
-| Walthamstow Craft Beer Crawl | TBC | Emerging beer scene along Blackhorse Lane. Niche but growing. |
-| Hackney Wick | TBC | Cool taprooms and brewery bars. Similar to Bermondsey but less established as a "crawl." |
-| Greenwich to Tower Bridge | TBC | Riverside crawl via historic taverns. Some overlap with Thames Path. |
-| Shakespeare's London | TBC | Potential overlap with Literary London — may be better as a variant or blog post. |
-| Criminal London | TBC | Broader than Jack the Ripper — could cover Kray twins, Great Train Robbery connections, etc. |
-| Royal London | TBC | Pubs with royal connections, near palaces. Tourist appeal but needs route research. |
-| David Bowie's London | TBC | Locations associated with Bowie across Brixton, Soho, and beyond. Similar Beatles playbook. |
-| Wetherspoons Loop | TBC | 12 Spoons in 12 hours across central London. Strong search potential but brand-dependent — pubs could close or rebrand. Better suited as blog content. |
-| Samuel Smith's Crawl | TBC | Central London route through their gorgeous, cheap, no-phones pubs. Brand-dependent and niche audience. Better suited as blog content. |
+**Brand-dependent crawls** (Wetherspoons Loop, Samuel Smith's) belong in blog content, not core crawl pages — they carry legal/commercial risk and dilute the editorial positioning.
 
 ---
 
@@ -458,23 +417,23 @@ How pub quality signals evolve as the platform grows:
 
 | # | Question | Status | Notes |
 |---|----------|--------|-------|
-| 1 | Maps library | Decided | Leaflet. Free, lightweight, sufficient for V1. |
+| 1 | Maps library | Decided | MapLibre GL JS with CARTO basemap tiles. Free, modern, sufficient for V1. |
 | 2 | Google Places API quotas | Low risk | Free tier sufficient for V1. Monitor usage as traffic grows. |
 | 3 | Monopoly IP risk | Acknowledged | Will rename to "Monopoly Board" or similar if needed. Mitigated by platform umbrella. Keep monitoring. |
 | 4 | Circle Line: original 27-stop loop or current expanded line? | Decided | Original loop only (Edgware Road round to Edgware Road). No Hammersmith branch. |
 | 5 | Pub data accuracy | Resolved | Addresses sourced directly for all pubs. googlePlaceId fields still need populating via Places API. |
 | 6 | Server-side rendering vs. static generation | Decided | SSG via Next.js. No SSR needed at V1. All content is static. |
-| 7 | Design direction — dark or light? | Decided | Light theme. Platform chrome is always light. |
-| 8 | Beatles crawl route | Open | No well-established self-guided route exists. Requires original research to identify pubs with genuine Beatles connections and build a walkable route. High ceiling but more work than crawls with existing routes. |
+| 7 | Design direction — dark or light? | Decided | Light theme. Platform chrome is always light. Dark sections use claret. |
+| 8 | Launch crawl count | Decided | 10 crawls at launch. See Section 12. |
 
 ---
 
 ## 16. What This Document Is For
 
-This PRD serves as the primary context document for building the London Crawling platform. It is designed to be used as:
+This PRD serves as the primary context document for building the London on Tap platform. It is designed to be used as:
 
 1. **Claude project context** — paste into a Claude project to give any session the full strategic and technical picture
 2. **Claude Code reference** — keep alongside CLAUDE.md in the repo root so Claude Code understands not just technical conventions but product intent
 3. **Personal reference** — the single source of truth for all product decisions made to date
 
-It supersedes the earlier .docx PRD (v1.0, February 2026), the previous markdown PRD (v2.0, March 2026), and the CLAUDE.md file, consolidating all decisions from both into one document.
+It supersedes the earlier .docx PRD (v1.0, February 2026), the previous v2.0 PRD, and the CLAUDE.md file for product decisions, consolidating all decisions into one document.

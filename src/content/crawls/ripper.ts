@@ -79,18 +79,6 @@ export const ripperStats = {
   area: 'Whitechapel & Spitalfields',
 };
 
-// Helper to get Google Maps URL for a pub
-export function getRipperMapsUrl(pub: RipperPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getRipperDirectionsUrl(fromPub: RipperPub, toPub: RipperPub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking`;
-}
-
 // The five canonical victims for reference/display
 export const canonicalVictims = [
   { name: 'Mary Ann Nichols', date: 'August 31, 1888', location: 'Buck\'s Row (now Durward Street)', age: 43 },

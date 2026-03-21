@@ -104,15 +104,3 @@ export const beatlesStats = {
   estimatedTime: 'Full day',
   area: 'Central London & Chiswick',
 };
-
-// Helper to get Google Maps URL for a pub
-export function getBeatlesMapsUrl(pub: BeatlesPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getBeatlesDirectionsUrl(fromPub: BeatlesPub, toPub: BeatlesPub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking`;
-}

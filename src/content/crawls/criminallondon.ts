@@ -79,13 +79,3 @@ export const criminalLondonStats = {
   estimatedTime: 'Full day',
   area: 'Central London, Wapping & East End',
 };
-
-export function getCriminalLondonMapsUrl(pub: CriminalLondonPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-export function getCriminalLondonDirectionsUrl(fromPub: CriminalLondonPub, toPub: CriminalLondonPub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
-}

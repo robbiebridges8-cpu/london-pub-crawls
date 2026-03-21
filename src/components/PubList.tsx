@@ -139,6 +139,12 @@ export default function PubList<T extends BasePub>({
             <div
               className="tl-pub"
               onClick={() => handlePubClick?.(pub.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handlePubClick?.(pub.id);
+                }
+              }}
               role="button"
               tabIndex={0}
             >

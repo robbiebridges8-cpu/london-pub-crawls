@@ -55,7 +55,7 @@ export default function Home() {
   const displayCrawls = CRAWL_ORDER
     .map((slug) => liveCrawls.find((c) => c.slug === slug))
     .filter((c): c is typeof liveCrawls[number] => !!c);
-  const totalPubs = liveCrawls.reduce((sum, c) => sum + (c.pubCount ?? c.pubs.length), 0);
+  const totalPubs = liveCrawls.reduce((sum, c) => sum + (c.pubCount ?? 0), 0);
 
   return (
     <>

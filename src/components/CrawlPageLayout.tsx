@@ -8,8 +8,9 @@ import { crawls, Crawl } from '@/content/crawls';
 import { SiteNav, SiteFooter } from '@/components';
 import { SITE_URL } from '@/lib/siteConfig';
 import { BasePub } from '@/content/crawls/types';
-import { ScrollMapTheme } from './BaseScrollMap';
+import { ScrollMapTheme } from '@/lib/mapTypes';
 import { CrawlMapHandle } from './CrawlMap';
+import MapErrorBoundary from './MapErrorBoundary';
 import { CrawlContext } from './CrawlContext';
 
 const CrawlMap = dynamic(() => import('./CrawlMap'), { ssr: false });
@@ -98,15 +99,17 @@ export default function CrawlPageLayout({
 
       {/* ===== FIXED MAP — completely outside scroll flow ===== */}
       <div className={`map-fixed ${mobileMapOpen ? 'map-open' : 'map-closed'}`}>
-        <CrawlMap
-          ref={mapRef}
-          pubs={pubs}
-          theme={theme}
-          routeSegments={routeSegments}
-          isWalking={isWalking}
-          createMarker={createMarker}
-          onMarkerClick={handleMarkerClick}
-        />
+        <MapErrorBoundary>
+          <CrawlMap
+            ref={mapRef}
+            pubs={pubs}
+            theme={theme}
+            routeSegments={routeSegments}
+            isWalking={isWalking}
+            createMarker={createMarker}
+            onMarkerClick={handleMarkerClick}
+          />
+        </MapErrorBoundary>
         {/* Mobile: hide map pill ON the map */}
         <button
           className="map-btn-hide lg:hidden"

@@ -576,27 +576,6 @@ export const monopolyColorGroups: Record<string, { name: string; color: string; 
   station: { name: "Station", color: "#212121", bg: "#F5F5F5" }
 };
 
-// Helper to get Google Maps URL
-export function getMonopolyMapsUrl(pub: MonopolyPub): string {
-  const q = encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`);
-  return `https://www.google.com/maps/search/?api=1&query=${q}`;
-}
-
-// Helper to get directions URL
-export function getMonopolyDirectionsUrl(fromPub: MonopolyPub, toPub: MonopolyPub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}, ${fromPub.postcode}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}, ${toPub.postcode}`);
-
-  let travelMode = 'walking';
-  if (fromPub.transportToNext === 'Cycle') {
-    travelMode = 'bicycling';
-  } else if (fromPub.transportToNext === 'Tube') {
-    travelMode = 'transit';
-  }
-
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=${travelMode}`;
-}
-
 // Calculate totals
 export const monopolyStats = {
   totalPubs: monopolyPubs.length,

@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback, useImperativeHandle, forwardRef } from 
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { BasePub } from '@/content/crawls/types';
-import { ScrollMapTheme } from './BaseScrollMap';
+import { ScrollMapTheme } from '@/lib/mapTypes';
 
 const EASE_OUT_CUBIC = (t: number) => 1 - Math.pow(1 - t, 3);
 

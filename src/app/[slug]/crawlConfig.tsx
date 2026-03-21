@@ -14,7 +14,7 @@ import { bermondseyPubs, bermondseyStats } from '@/content/crawls/bermondseybm';
 import { criminalLondonPubs, criminalLondonStats } from '@/content/crawls/criminallondon';
 import { getRouteSegments } from '@/content/routes';
 import { PrintPub } from '@/components/CrawlPageLayout';
-import { ScrollMapTheme } from '@/components/BaseScrollMap';
+import { ScrollMapTheme } from '@/lib/mapTypes';
 import { BasePub } from '@/content/crawls/types';
 
 const mapLoader = () => (

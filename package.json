@@ -14,7 +14,6 @@
   "dependencies": {
     "@heroui/react": "^2.8.9",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.34.5",
     "maplibre-gl": "^5.20.0",
     "motion": "^12.35.2",
     "next": "16.1.6",

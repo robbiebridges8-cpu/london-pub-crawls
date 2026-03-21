@@ -104,15 +104,3 @@ export const literaryLondonStats = {
   estimatedTime: '4\u20135 hours',
   area: 'Fitzrovia, Soho & Southwark',
 };
-
-// Helper to get Google Maps URL for a pub
-export function getLiteraryLondonMapsUrl(pub: LiteraryLondonPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getLiteraryLondonDirectionsUrl(from: LiteraryLondonPub, to: LiteraryLondonPub): string {
-  const origin = encodeURIComponent(`${from.pubName}, ${from.address}`);
-  const destination = encodeURIComponent(`${to.pubName}, ${to.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking`;
-}

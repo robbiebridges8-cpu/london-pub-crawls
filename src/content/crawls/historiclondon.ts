@@ -104,15 +104,3 @@ export const historicLondonStats = {
   estimatedTime: '5-6 hours',
   area: 'Fleet Street to Wapping',
 };
-
-// Helper to get Google Maps URL for a pub
-export function getHistoricLondonMapsUrl(pub: HistoricLondonPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getHistoricLondonDirectionsUrl(from: HistoricLondonPub, to: HistoricLondonPub): string {
-  const origin = encodeURIComponent(`${from.pubName}, ${from.address}`);
-  const destination = encodeURIComponent(`${to.pubName}, ${to.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking`;
-}

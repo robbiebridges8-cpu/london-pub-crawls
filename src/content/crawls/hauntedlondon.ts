@@ -101,13 +101,3 @@ export const hauntedLondonStats = {
   estimatedTime: 'Full evening',
   area: 'Central London & Highgate',
 };
-
-export function getHauntedLondonMapsUrl(pub: HauntedLondonPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-export function getHauntedLondonDirectionsUrl(fromPub: HauntedLondonPub, toPub: HauntedLondonPub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
-}

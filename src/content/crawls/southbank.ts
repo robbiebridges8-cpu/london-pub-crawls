@@ -82,15 +82,3 @@ export const southBankStats = {
   estimatedTime: '4\u20135 hours',
   area: 'South Bank & Wapping',
 };
-
-// Helper to get Google Maps URL for a pub
-export function getSouthBankMapsUrl(pub: SouthBankPub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getSouthBankDirectionsUrl(from: SouthBankPub, to: SouthBankPub): string {
-  const origin = encodeURIComponent(`${from.pubName}, ${from.address}`);
-  const destination = encodeURIComponent(`${to.pubName}, ${to.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking`;
-}

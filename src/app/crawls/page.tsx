@@ -32,7 +32,7 @@ export default function CrawlsPage() {
     if (sortBy === 'name') {
       return a.name.localeCompare(b.name);
     } else if (sortBy === 'pubs') {
-      return b.pubs.length - a.pubs.length;
+      return (b.pubCount ?? 0) - (a.pubCount ?? 0);
     } else if (sortBy === 'difficulty') {
       return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
     }

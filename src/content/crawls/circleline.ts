@@ -446,15 +446,3 @@ export const circleLineStats = {
   estimatedTime: '13.5 hours',
   totalTubeTime: circleLinePubs.reduce((acc, pub) => acc + (pub.transportTime || 0), 0),
 };
-
-// Helper to get Google Maps URL for a pub
-export function getCircleLineMapsUrl(pub: CircleLinePub): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${pub.pubName}, ${pub.address}, ${pub.postcode}`)}`;
-}
-
-// Helper to get directions from one pub to the next
-export function getCircleLineDirectionsUrl(fromPub: CircleLinePub, toPub: CircleLinePub): string {
-  const origin = encodeURIComponent(`${fromPub.pubName}, ${fromPub.address}`);
-  const destination = encodeURIComponent(`${toPub.pubName}, ${toPub.address}`);
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
-}

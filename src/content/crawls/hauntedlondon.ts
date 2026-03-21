@@ -1,14 +1,8 @@
-export interface HauntedLondonPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface HauntedLondonPub extends BasePub {
   ghost: string;
   walkToNext: string | null;
-  website?: string;
 }
 
 export const hauntedLondonPubs: HauntedLondonPub[] = [

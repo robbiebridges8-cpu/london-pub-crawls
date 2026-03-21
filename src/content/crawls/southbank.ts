@@ -1,16 +1,10 @@
 // South Bank Pub Crawl - London's Greatest Riverside Pubs
 
-export interface SouthBankPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface SouthBankPub extends BasePub {
   landmark: string;
   walkToNext: string | null;
-  website?: string;
 }
 
 export const southBankPubs: SouthBankPub[] = [
@@ -22,7 +16,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5121,
     lng: -0.1038,
     landmark: 'Blackfriars Bridge',
-    review: 'Start at the most extraordinary pub interior in London. Built in 1875 and redecorated in stunning Art Nouveau style, every surface is covered in mosaics, marble, and bronze reliefs of merry monks. Nothing else on this crawl looks like this.',
+    review: 'The starting point is technically north of the river, but it\'s a two-minute walk from Blackfriars Bridge and unmissable. Built in 1875 on the site of a Dominican priory, the interior was redecorated in 1905 in extravagant Art Nouveau \u2014 mosaics, marble, and bronze reliefs of fat monks drinking and feasting cover every surface. John Betjeman led the campaign that saved it from demolition in the 1960s.',
     walkToNext: '10 min walk across Blackfriars Bridge',
   },
   {
@@ -33,7 +27,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5081,
     lng: -0.0987,
     landmark: "St Paul's Cathedral",
-    review: "Cross Blackfriars Bridge and turn left along the South Bank. The Founders Arms is a modern pub but the view is the point \u2014 St Paul's Cathedral fills the window like a painting. Grab a terrace seat if the weather's kind.",
+    review: 'A modern pub with zero historical interest and no pretence otherwise. You\'re here for the view \u2014 St Paul\'s Cathedral across the river, framed perfectly from the terrace. Good place to grab the first proper pint of the crawl before heading east along the Thames Path.',
     walkToNext: '5 min walk along the river',
   },
   {
@@ -44,7 +38,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5073,
     lng: -0.0921,
     landmark: "Shakespeare's Globe",
-    review: "A Thames-side institution since the 1600s. Samuel Pepys watched the Great Fire from here in 1666. Low beams, wood-panelled rooms, and a sprawling layout that rewards exploration. Shakespeare's Globe is next door.",
+    review: 'A pub has stood on this site since at least the early 1600s, when Bankside was London\'s entertainment district \u2014 theatres, bear pits, and brothels shoulder to shoulder. Samuel Pepys is said to have watched the Great Fire of London from here on 2 September 1666. The current building dates from the 18th century. Shakespeare\'s Globe is next door.',
     walkToNext: '8 min walk via Borough Market',
   },
   {
@@ -55,7 +49,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5046,
     lng: -0.0897,
     landmark: 'Borough Market',
-    review: "A short detour off the river but essential. London's last surviving galleried coaching inn, owned by the National Trust. Dickens drank here. Shakespeare almost certainly did too. The cobbled courtyard feels like stepping back 400 years.",
+    review: 'London\'s last surviving galleried coaching inn, now owned by the National Trust. An inn has stood on this site since at least 1542 \u2014 the current building dates from 1676, rebuilt after a fire in Southwark. The cobbled courtyard with its timber balconies still hosts outdoor performances in summer. A two-minute detour off the river path, but non-negotiable.',
     walkToNext: '5 min walk back to the river',
   },
   {
@@ -66,7 +60,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5064,
     lng: -0.0882,
     landmark: 'London Bridge',
-    review: 'Named after the Victorian scavengers who picked through Thames mud for valuables at low tide. Small, honest, well-kept ales, and a perfect position between Borough Market and the river. Good stop before the final stretch east.',
+    review: 'Named after the Victorian mudlarks \u2014 scavengers who waded into the Thames at low tide to pick through the filth for coins, nails, and anything they could sell. A small, straightforward pub tucked under the arches near London Bridge. Good ales, no fuss, and a useful stop before the long riverside stretch east to Wapping.',
     walkToNext: '25 min walk along the Thames',
   },
   {
@@ -77,7 +71,7 @@ export const southBankPubs: SouthBankPub[] = [
     lat: 51.5066,
     lng: -0.0553,
     landmark: 'Wapping',
-    review: "London's oldest riverside pub, dating back to 1520. Originally called The Devil's Tavern for its clientele of smugglers and pirates. Pepys and Dickens both drank here. The flagstone floor, pewter bar top, and Thames-side terrace are all original. Finish here as the sun goes down.",
+    review: 'London\'s oldest riverside pub, dating to around 1520. Originally called The Devil\'s Tavern for its clientele of smugglers and pirates. Samuel Pepys drank here. Charles Dickens drank here. J.M.W. Turner painted the Thames from the balcony. The flagstone floor and pewter bar top are original. Finish as the sun goes down \u2014 there is no better final pint in London.',
     walkToNext: null,
   },
 ];

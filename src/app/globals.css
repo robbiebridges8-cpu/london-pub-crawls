@@ -20,7 +20,6 @@
   --criminal-london-border: #1A1A2E;
   --historic-london-border: #8B4513;
   --literary-london-border: #2E4057;
-  --haunted-london-border: #2C1810;
 
   /* Monopoly property colours */
   --monopoly-brown: #8B4513;
@@ -308,6 +307,11 @@ a:hover {
   opacity: 0;
 }
 
+/* Print route — hidden on screen */
+.print-route {
+  display: none;
+}
+
 /* Print styles */
 @media print {
   * {
@@ -320,47 +324,109 @@ a:hover {
 
   body {
     font-family: -apple-system, sans-serif !important;
-    font-size: 12pt !important;
+    font-size: 11pt !important;
     line-height: 1.4 !important;
   }
 
-  nav, footer, .no-print,
-  .sm-map-panel, .sm-progress, .btn-primary, .btn-ghost,
-  .sm-deed-actions, .sm-card-actions,
+  /* Hide everything except the print route */
+  nav, footer, header, section, .no-print,
+  .sm-layout, .sm-map-panel, .sm-progress,
+  .btn-primary, .btn-ghost,
   [class*="map"], [class*="Map"] {
     display: none !important;
   }
 
-  /* Strip layout constraints */
-  .sm-layout {
+  /* Show the print route */
+  .print-route {
     display: block !important;
-    height: auto !important;
-    border: none !important;
-  }
-  .sm-list {
-    max-height: none !important;
-    overflow: visible !important;
-    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  /* Show all cards expanded for print */
-  .sm-card {
-    border-left: none !important;
-    padding: 6pt 0 !important;
+  .print-route h1 {
+    font-family: Georgia, serif !important;
+    font-size: 22pt !important;
+    font-weight: bold !important;
+    margin: 0 0 4pt !important;
+    padding: 0 !important;
+  }
+
+  .print-route-meta {
+    font-size: 10pt !important;
+    color: #555 !important;
+    margin: 0 0 2pt !important;
+  }
+
+  .print-route-logistics {
+    font-size: 9pt !important;
+    color: #777 !important;
+    margin: 0 0 16pt !important;
+    padding-bottom: 8pt !important;
     border-bottom: 1px solid #ccc !important;
+  }
+
+  .print-route-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-route-pub {
+    padding: 10pt 0 !important;
+    border-bottom: 1px solid #ddd !important;
     page-break-inside: avoid;
   }
-  .sm-card-num {
-    border: 1px solid #000 !important;
+
+  .print-route-pub-header {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .print-route-num {
+    font-family: Georgia, serif !important;
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    min-width: 20pt !important;
+  }
+
+  .print-route-pub-header strong {
+    font-size: 12pt !important;
+  }
+
+  .print-route-addr {
+    font-size: 9pt !important;
+    color: #666 !important;
+  }
+
+  .print-route-desc {
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    margin: 4pt 0 0 28pt !important;
+    color: #333 !important;
+  }
+
+  .print-route-transport {
+    font-size: 9pt !important;
+    font-style: italic !important;
+    color: #888 !important;
+    margin: 6pt 0 0 28pt !important;
+    padding-top: 4pt !important;
+  }
+
+  .print-route-footer {
+    font-size: 8pt !important;
+    color: #aaa !important;
+    text-align: center !important;
+    margin-top: 16pt !important;
+    padding-top: 8pt !important;
+    border-top: 1px solid #ccc !important;
   }
 
   a {
     text-decoration: none !important;
     color: black !important;
-  }
-
-  h1, h2, h3 {
-    font-family: Georgia, serif !important;
   }
 }
 

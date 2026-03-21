@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Barlow_Condensed, Barlow, Spectral } from "next/font/google";
 import { Providers } from "@/components/Providers";
+import { SITE_URL, SITE_NAME } from "@/lib/siteConfig";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -13,7 +14,7 @@ const playfairDisplay = Playfair_Display({
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-label",
   subsets: ["latin"],
-  weight: ["700"],
+  weight: ["500", "600", "700"],
 });
 
 const barlow = Barlow({
@@ -25,7 +26,8 @@ const barlow = Barlow({
 const spectral = Spectral({
   variable: "--font-card",
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -36,12 +38,12 @@ export const metadata: Metadata = {
   description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
   keywords: "london pub crawl, pub crawl london, monopoly pub crawl, circle line challenge, best pub crawls london, free pub crawl, self-guided pub crawl",
   authors: [{ name: "London on Tap" }],
-  metadataBase: new URL("https://londonontap.com"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     title: "London on Tap | Free Self-Guided Pub Crawls",
     description: "Free, self-guided pub crawls through London's best drinking spots. Curated routes, interactive maps, no booking required.",
-    url: "https://londonontap.com",
-    siteName: "London on Tap",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_GB",
     type: "website",
   },
@@ -78,13 +80,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "London on Tap",
-              url: "https://londonontap.com",
+              name: SITE_NAME,
+              url: SITE_URL,
               description: "Free, self-guided pub crawls through London's best drinking spots.",
               publisher: {
                 "@type": "Organization",
-                name: "London on Tap",
-                url: "https://londonontap.com",
+                name: SITE_NAME,
+                url: SITE_URL,
               },
             }),
           }}

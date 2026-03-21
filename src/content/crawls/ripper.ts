@@ -1,88 +1,72 @@
 // Jack the Ripper Pub Crawl - Whitechapel's Darkest History
 
-export interface RipperPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface RipperPub extends BasePub {
   walkToNext: number | null;
-  website?: string;
 }
 
 export const ripperPubs: RipperPub[] = [
   {
     id: 1,
     pubName: 'The White Hart',
-    address: '89 Whitechapel High Street',
+    address: '89 Whitechapel High St',
     postcode: 'E1 7RA',
     lat: 51.5152,
     lng: -0.0712,
-    walkToNext: 5,
-    review: 'Where every Ripper tour begins. Martha Tabram drank here on the night she was murdered in the alleyway next door — George Yard, now Gunthorpe Street. The cellar once housed the barber shop of Ripper suspect Severin Klosowski. Still has Ripper memorabilia on the walls.',
+    walkToNext: 3,
+    review: 'Martha Tabram was drinking here on the night of 7 August 1888 before she was murdered in George Yard \u2014 the alleyway next door, now Gunthorpe Street. Tabram\'s killing is considered by many Ripperologists to be the first in the Whitechapel series. The cellar housed the barber shop of Severin Klosowski, later convicted as the serial poisoner George Chapman, and named as a Ripper suspect by the officer who arrested him.',
   },
   {
     id: 2,
+    pubName: 'The Ten Bells',
+    address: '84 Commercial St',
+    postcode: 'E1 6LY',
+    lat: 51.5195,
+    lng: -0.0754,
+    walkToNext: 1,
+    review: 'The most famous pub in Ripper history. Annie Chapman was seen drinking here alone on the morning of 8 September 1888, hours before her body was found on Hanbury Street. Mary Jane Kelly was a regular and picked up clients on the pavement outside. The pub was renamed "The Jack the Ripper" in 1976 and reverted after a Reclaim the Night campaign in 1988. The original Victorian ceramic tiling \u2014 including a painted mural of "Spitalfields in ye Olden Time" \u2014 is intact and stunning.',
+    website: 'https://www.tenbells.com',
+  },
+  {
+    id: 3,
     pubName: 'The Culpeper',
-    address: '40 Commercial Street',
+    address: '40 Commercial St',
     postcode: 'E1 6LP',
     lat: 51.5161,
     lng: -0.0737,
     walkToNext: 5,
-    review: 'The original Princess Alice was the haunt of "Leather Apron" — John Pizer, who threatened local women with a knife and was briefly the prime Ripper suspect. Frances Coles, the last official Whitechapel murder victim, was last seen alive here. Now a smart gastropub with a rooftop, but the bones of 1888 are still underneath.',
-  },
-  {
-    id: 3,
-    pubName: 'The Golden Heart',
-    address: '110 Commercial Street',
-    postcode: 'E1 6LZ',
-    lat: 51.5189,
-    lng: -0.0748,
-    walkToNext: 2,
-    review: 'Not a Ripper pub per se, but a proper Spitalfields landmark sitting on the route between murder sites. Sandra Esquilant held court here for decades. A pint-sized breather between the darkness of Commercial Street and what\'s coming next at the Ten Bells.',
+    review: 'Formerly The Princess Alice \u2014 the pub where John Pizer, known as "Leather Apron", threatened local women with a knife and became the first prime Ripper suspect in September 1888. He was cleared at Annie Chapman\'s inquest. Frances Coles, the last official victim of the Whitechapel Murders, was last seen alive leaving here in February 1891. The building has been heavily refurbished and is now a gastropub, but it sits on ground soaked in the case.',
   },
   {
     id: 4,
-    pubName: 'The Ten Bells',
-    address: '84 Commercial Street',
-    postcode: 'E1 6LY',
-    lat: 51.5195,
-    lng: -0.0754,
-    walkToNext: 3,
-    review: 'The most famous Ripper pub in the world. Annie Chapman drank here the morning she was murdered on Hanbury Street. Mary Jane Kelly picked up clients on the pavement outside. Was renamed "The Jack the Ripper" from 1976–1988 before a Reclaim the Night campaign forced the change back. The original Victorian tiling is stunning.',
-    website: 'https://www.tenbells.com',
-  },
-  {
-    id: 5,
     pubName: 'The Pride of Spitalfields',
-    address: '3 Heneage Street',
+    address: '3 Heneage St',
     postcode: 'E1 5LJ',
     lat: 51.5180,
     lng: -0.0720,
-    walkToNext: 5,
-    review: 'A tiny, perfect Victorian boozer tucked behind Brick Lane. The kind of cramped, candlelit, unreconstructed pub that Whitechapel was full of in 1888. Drink here to feel what it was actually like — low ceilings, dark wood, locals who\'ve been coming for decades.',
+    walkToNext: 6,
+    review: 'Then called the Romford Arms, this was the local of George Hutchinson \u2014 the witness who gave police an extraordinarily detailed description of a man he claimed to have seen with Mary Kelly on the night of her murder, 9 November 1888. Some researchers consider Hutchinson himself a suspect. The pub is one of the last unreconstructed Victorian boozers in Spitalfields \u2014 carpets, low ceilings, no TV, no pretension. CAMRA\'s East London Pub of the Year, 2013.',
   },
   {
-    id: 6,
+    id: 5,
     pubName: 'The Alma',
-    address: '41 Spelman Street',
+    address: '41 Spelman St',
     postcode: 'E1 5LG',
     lat: 51.5170,
     lng: -0.0660,
     walkToNext: 8,
-    review: 'One of the few surviving pubs from the actual Ripper era in this part of Whitechapel. A quiet, no-nonsense local that the victims would have known well. It sits close to Durward Street (formerly Buck\'s Row), where Polly Nichols — the first canonical victim — was found.',
+    review: 'One of the few surviving pubs from the Whitechapel of 1888, on the back streets where the canonical murders happened. It sits two minutes from Durward Street \u2014 formerly Buck\'s Row \u2014 where Polly Nichols, the first canonical victim, was found on 31 August 1888. Ripper walking tours stop here. The second floor has period posters and artwork from the case.',
   },
   {
-    id: 7,
+    id: 6,
     pubName: 'The Blind Beggar',
-    address: '337 Whitechapel Road',
+    address: '337 Whitechapel Rd',
     postcode: 'E1 1BU',
     lat: 51.5210,
     lng: -0.0594,
     walkToNext: null,
-    review: 'End the crawl with a different kind of East End infamy. The Blind Beggar is where Ronnie Kray shot George Cornell in 1966. Nothing to do with the Ripper, everything to do with the dark thread that runs through Whitechapel. William Booth preached his first Salvation Army sermon outside here in 1865. A proper full stop.',
+    review: 'End with a different chapter of East End violence. On 9 March 1966, Ronnie Kray walked into this pub and shot George Cornell of the Richardson gang in the head. The jukebox was playing "The Sun Ain\'t Gonna Shine Anymore." Cornell\'s last words: "Well, look who\'s here." Nothing to do with the Ripper \u2014 everything to do with the thread of darkness that runs through Whitechapel across the centuries. William Booth preached his first Salvation Army sermon outside in 1865.',
     website: 'https://www.theblindbeggar.com',
   },
 ];

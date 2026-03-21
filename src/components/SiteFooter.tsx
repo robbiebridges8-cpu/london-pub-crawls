@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { crawls } from '@/content/crawls';
+import { SITE_EMAIL } from '@/lib/siteConfig';
 
 export default function SiteFooter() {
   const liveCrawls = crawls.filter((c) => c.live);
-  const comingSoonCrawls = crawls.filter((c) => !c.live);
 
   return (
     <footer className="bg-[var(--ink)]">
@@ -39,13 +39,6 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
-              {comingSoonCrawls.slice(0, 3).map((crawl) => (
-                <li key={crawl.id}>
-                  <span className="font-body text-sm text-white/40">
-                    {crawl.name} <span className="text-xs">(soon)</span>
-                  </span>
-                </li>
-              ))}
             </ul>
           </div>
 
@@ -55,14 +48,6 @@ export default function SiteFooter() {
               Connect
             </h4>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/build"
-                  className="font-body text-sm text-[var(--gold)] hover:text-white transition-colors font-semibold"
-                >
-                  Build Your Own Crawl
-                </Link>
-              </li>
               <li>
                 <a
                   href="https://instagram.com/londonontap"
@@ -75,7 +60,7 @@ export default function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="mailto:hello@londonontap.com"
+                  href={`mailto:${SITE_EMAIL}`}
                   className="font-body text-sm text-white/80 hover:text-white transition-colors"
                 >
                   Contact

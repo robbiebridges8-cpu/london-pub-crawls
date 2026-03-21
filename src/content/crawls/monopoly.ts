@@ -1,14 +1,10 @@
 // Monopoly Pub Crawl - All 26 board properties mapped to real London pubs
 // Route follows the optimised crawl order from the original monopolypubcrawl.com
 
-export interface MonopolyPub {
-  id: number;
+import { BasePub } from './types';
+
+export interface MonopolyPub extends BasePub {
   property: string;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
   rating: number;
   startTime: string;
   endTime: string;
@@ -16,11 +12,8 @@ export interface MonopolyPub {
   transportTime: number | null;
   price: number;
   pintQuantity: string;
-  review: string;
   color: string;
   colorGroup: string;
-  website?: string;
-  image?: string;
 }
 
 export const monopolyPubs: MonopolyPub[] = [

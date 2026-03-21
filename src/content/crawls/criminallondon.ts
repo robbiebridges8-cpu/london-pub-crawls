@@ -1,49 +1,43 @@
-export interface CriminalLondonPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface CriminalLondonPub extends BasePub {
   crime: string;
   walkToNext: string | null;
-  website?: string;
 }
 
 export const criminalLondonPubs: CriminalLondonPub[] = [
   {
     id: 1,
-    pubName: 'The Lamb and Flag',
-    address: '33 Rose Street',
-    postcode: 'WC2E 9EB',
-    lat: 51.5122,
-    lng: -0.1252,
-    crime: 'Bare-knuckle boxing & assassination attempt',
-    review: 'Start with a Covent Garden pub nicknamed \'The Bucket of Blood.\' Bare-knuckle prize fights were held upstairs for decades. In 1679, poet John Dryden was attacked and nearly beaten to death in the alley outside — hired thugs sent by the Duchess of Portsmouth.',
-    walkToNext: '15 min walk or Tube to Hyde Park Corner',
+    pubName: 'The Blind Beggar',
+    address: '337 Whitechapel Rd',
+    postcode: 'E1 1BU',
+    lat: 51.5210,
+    lng: -0.0594,
+    crime: 'Kray murder of George Cornell',
+    review: 'The most infamous pub murder in British criminal history. On 9 March 1966, Ronnie Kray walked in and shot George Cornell in the head as he sat at the bar drinking a light ale. The barmaid ducked. The jukebox needle stuck. Cornell was a member of the rival Richardson gang, and his murder was the beginning of the end for the Krays \u2014 it led directly to the police investigation that brought them down three years later.',
+    walkToNext: '10 min walk north to Bethnal Green',
   },
   {
     id: 2,
-    pubName: 'The Star Tavern',
-    address: '6 Belgrave Mews West',
-    postcode: 'SW1X 8HT',
-    lat: 51.5013,
-    lng: -0.1565,
-    crime: 'Great Train Robbery',
-    review: 'Hidden in a Belgravia mews, this is where the Great Train Robbers planned the 1963 heist. Bruce Reynolds and his crew met in groups of four upstairs, plotting over pints. Also the local of cat burglar George \'Taters\' Chatham, who\'d pop in after relieving Sophia Loren of her jewellery.',
-    walkToNext: 'Take District line to Tower Hill, then walk',
+    pubName: 'The Carpenter\'s Arms',
+    address: '73 Cheshire St',
+    postcode: 'E2 6EG',
+    lat: 51.5232,
+    lng: -0.0631,
+    crime: 'Kray twins\' headquarters',
+    review: 'The Kray twins bought this pub in the 1960s and ran it as the headquarters of The Firm. Meetings were held here, and the Kray family\'s Christmas parties were local legend. Reggie Kray reportedly took a carving knife from the kitchen and had a drink at this bar before heading to Stoke Newington to murder Jack "The Hat" McVitie in 1967. The single entrance \u2014 the one the Krays insisted on, so they could watch the door \u2014 is still the only way in. Now a quiet gastropub.',
+    walkToNext: 'Tube: Bethnal Green to Wapping (Overground, ~15 min)',
   },
   {
     id: 3,
     pubName: 'The Town of Ramsgate',
-    address: '62 Wapping High Street',
+    address: '62 Wapping High St',
     postcode: 'E1W 2PN',
     lat: 51.5057,
     lng: -0.0560,
     crime: 'Judge Jeffreys captured',
-    review: 'In 1688, the hated Judge Jeffreys — \'the Hanging Judge\' — was caught here disguised as a sailor, trying to flee to France. The mob nearly lynched him. He was dragged to the Tower and died there. Next door, Wapping Old Stairs lead down to where pirates were chained at low tide and left to drown.',
-    walkToNext: '5 min walk',
+    review: 'In December 1688, Judge Jeffreys \u2014 the Lord Chancellor known as "the Hanging Judge" for sentencing over 300 people to death after the Monmouth Rebellion \u2014 was caught here disguised as a coal merchant, trying to escape to France. A mob recognised him and nearly beat him to death before soldiers intervened. He was taken to the Tower of London and died there four months later. Next door, Wapping Old Stairs lead down to the Thames foreshore where convicted pirates were chained at low tide and left to drown.',
+    walkToNext: '5 min walk east along the river',
   },
   {
     id: 4,
@@ -53,51 +47,29 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     lat: 51.5066,
     lng: -0.0553,
     crime: 'Pirates, smugglers & Execution Dock',
-    review: 'London\'s oldest riverside pub, originally called \'The Devil\'s Tavern\' for its clientele — smugglers, pirates, and thieves. A noose hangs outside by the river as a memorial to Execution Dock. Judge Jeffreys used to watch executions from the balcony with a pint. Dating to 1520.',
-    walkToNext: 'Take Overground to Bethnal Green, then walk',
+    review: 'Dating to around 1520, this is London\'s oldest riverside pub. It was originally called The Devil\'s Tavern \u2014 named for its clientele of smugglers, thieves, and pirates. A hangman\'s noose hangs over the river terrace as a memorial to Execution Dock, where pirates including Captain Kidd were hanged and left on display until three tides had washed over them. Judge Jeffreys is said to have watched the executions from the balcony.',
+    walkToNext: 'Tube: Wapping to Barbican (~18 min via Overground and Hammersmith & City)',
   },
   {
     id: 5,
-    pubName: 'The Carpenter\'s Arms',
-    address: '73 Cheshire Street',
-    postcode: 'E2 6EG',
-    lat: 51.5232,
-    lng: -0.0631,
-    crime: 'Kray twins\' headquarters',
-    review: 'The Krays bought this pub and made it their headquarters in the 1960s. The Firm held meetings here. Reggie reportedly grabbed a carving knife from the kitchen before heading out to murder Jack \'The Hat\' McVitie. The one entrance the Krays loved — so they could watch the door — is still the only way in.',
-    walkToNext: '10 min walk',
-  },
-  {
-    id: 6,
-    pubName: 'The Blind Beggar',
-    address: '337 Whitechapel Road',
-    postcode: 'E1 1BU',
-    lat: 51.5210,
-    lng: -0.0594,
-    crime: 'Kray murder of George Cornell',
-    review: 'The most infamous pub murder in British history. On 9 March 1966, Ronnie Kray walked in and shot George Cornell in the head. The jukebox was playing \'The Sun Ain\'t Gonna Shine Anymore\' — the needle stuck on the word \'anymore.\' Cornell\'s last words: \'Well, look who\'s here.\'',
-    walkToNext: 'Take Central line to Barbican, then walk',
-  },
-  {
-    id: 7,
     pubName: 'The Rising Sun',
     address: '38 Cloth Fair',
     postcode: 'EC1A 7JQ',
     lat: 51.5189,
     lng: -0.0989,
     crime: 'Body snatchers',
-    review: 'Next to St Bart\'s Hospital, this was where 19th-century body snatchers John Bishop and Thomas Williams targeted victims. They\'d drug drinkers and sell the corpses to surgeons next door for dissection. London\'s answer to Burke and Hare.',
-    walkToNext: '5 min walk',
+    review: 'In the early 1830s, body snatchers John Bishop and Thomas Williams \u2014 known as the London Burkers \u2014 frequented this pub next to St Bartholomew\'s Hospital. They would drug victims with rum laced with laudanum, drown them in a well, and sell the corpses to the hospital\'s anatomy school. They were convicted of murder in 1831 and hanged at Newgate, a five-minute walk from this pub. Their case led directly to the Anatomy Act of 1832.',
+    walkToNext: '5 min walk south-west',
   },
   {
-    id: 8,
+    id: 6,
     pubName: 'The Viaduct Tavern',
-    address: '126 Newgate Street',
+    address: '126 Newgate St',
     postcode: 'EC1A 7AA',
     lat: 51.5155,
     lng: -0.1025,
     crime: 'Built on Newgate Prison cells',
-    review: 'End opposite the Old Bailey in the last surviving Victorian gin palace. Built in 1875 directly above the cells of Newgate debtors\' prison. The cellars still have the original holding cells. Prison below, pub at ground level, court across the street.',
+    review: 'End the crawl opposite the Old Bailey \u2014 the Central Criminal Court of England and Wales. This is London\'s last surviving Victorian gin palace, built in 1875 directly above the cells of the old Giltspur Street Compter, a debtors\' prison. The original holding cells are still accessible in the cellar. Prison beneath your feet, pint in your hand, criminal court across the street.',
     walkToNext: null,
   },
 ];

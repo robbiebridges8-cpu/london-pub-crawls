@@ -96,8 +96,8 @@ All four fonts are loaded via Google Fonts in `layout.tsx`.
 ### Stack
 - **Framework:** Next.js (App Router, static generation)
 - **Styling:** Tailwind CSS
-- **Maps:** Leaflet.js (lazy-loaded)
-- **Content:** Flat JSON/TS files in `src/content/crawls/`
+- **Maps:** MapLibre GL JS (lazy-loaded via `next/dynamic`)
+- **Content:** Flat TypeScript files in `src/content/crawls/`
 - **Fonts:** Google Fonts (Playfair Display, Barlow, Barlow Condensed, Spectral) via next/font
 
 ### File Structure
@@ -107,48 +107,47 @@ src/
 ├── app/
 │   ├── layout.tsx              # Root layout — fonts, nav, footer
 │   ├── page.tsx                # Homepage
+│   ├── sitemap.ts              # Auto-generated sitemap from crawl index
 │   ├── [slug]/
-│   │   └── page.tsx            # Crawl landing page template
+│   │   ├── page.tsx            # Server component — generateStaticParams + slug routing
+│   │   ├── CrawlPageContent.tsx # Client component — renders layout + scroll map
+│   │   └── crawlConfig.tsx     # Registry mapping slugs to ScrollMap components + config
 │   └── globals.css             # Tailwind base + CSS variables
 ├── content/
 │   └── crawls/
-│       ├── index.ts            # Exports all crawls, shared types
-│       ├── monopoly.ts         # One file per crawl
+│       ├── types.ts            # BasePub — shared type all pub interfaces extend
+│       ├── index.ts            # Exports all crawls, shared types, re-exports BasePub
+│       ├── monopoly.ts         # One data file per crawl (extends BasePub)
 │       ├── circleline.ts
-│       └── ripper.ts
+│       └── ...
 ├── components/
+│   ├── CrawlPageLayout.tsx     # Shared page template (hero, about, share, more crawls, footer)
+│   ├── BaseScrollMap.tsx       # Shared map/interaction logic — accepts theme + renderCard
+│   ├── BasePubCard.tsx         # Shared card body content — accepts wrapper for per-crawl shell
+│   ├── MonopolyScrollMap.tsx   # Per-crawl: theme + card component + BaseScrollMap wrapper
+│   ├── BeatlesScrollMap.tsx
+│   ├── ...ScrollMap.tsx        # One per crawl (~160–260 lines each)
 │   ├── SiteNav.tsx             # Sticky nav
 │   ├── SiteFooter.tsx          # Footer
-│   ├── InteractiveMap.tsx      # Shared map wrapper (Leaflet)
 │   ├── CrawlCard.tsx           # Homepage directory card
-│   ├── StatBlock.tsx           # Individual stat display
-│   ├── SectionLabel.tsx        # Overline label component
-│   ├── HowItWorksStep.tsx      # How It Works step
-│   ├── PubCarousel.tsx         # Horizontal pub card carousel
-│   ├── RouteSpine.tsx          # Vertical route spine
-│   ├── Ticker.tsx              # Stats ticker bar
-│   ├── MonopolyPubCard.tsx     # Monopoly-themed pub card
-│   ├── MonopolyMap.tsx         # Monopoly map configuration
-│   ├── CircleLinePubCard.tsx   # Circle Line-themed pub card
-│   ├── CircleLineMap.tsx       # Circle Line map configuration
-│   ├── RipperStationCard.tsx   # Jack the Ripper-themed pub card
-│   ├── RipperMap.tsx           # Ripper map configuration
 │   └── ui/                     # Generic UI primitives
-└── lib/
-    └── utils.ts                # Shared utilities
+├── lib/
+│   └── siteConfig.ts           # Centralised domain, site name, email
+└── scripts/
+    └── validate-crawls.ts      # Build-time data validation (runs as prebuild)
 ```
 
 ### Code Rules
 
-1. **One component per file.** No 1,900-line page files. Extract components.
-2. **Crawl page template is generic.** `[slug]/page.tsx` should be a single reusable template that receives crawl data as props and renders the correct themed pub card based on slug. It should NOT contain per-crawl page components.
-3. **Props over conditionals.** Themed components (pub cards, map configs) are separate files selected by slug — not giant switch statements inside a single component.
-4. **Tailwind for styling.** Use Tailwind utility classes. Avoid inline styles except in per-crawl pub cards where bespoke styling is the point.
+1. **One component per file.** Extract components into separate files.
+2. **Shared infrastructure over duplication.** Page layout, map logic, and card content are shared components (`CrawlPageLayout`, `BaseScrollMap`, `BasePubCard`). Per-crawl files contain only the theme config and card design.
+3. **Config registry over conditionals.** Per-crawl components are registered in `crawlConfig.tsx` and looked up by slug — no if/else chains or switch statements.
+4. **Tailwind for styling.** Use Tailwind utility classes. Per-crawl pub cards use `style jsx` for bespoke card CSS.
 5. **Mobile-first.** Write mobile styles first, use `md:` and `lg:` breakpoints to scale up. Most users will be on their phone during the crawl.
-6. **Lazy-load maps.** Use `next/dynamic` with `ssr: false` for Leaflet components.
+6. **Lazy-load maps.** Use `next/dynamic` with `ssr: false` for ScrollMap components.
 7. **Images:** Use `next/image` with lazy loading and blur placeholders where possible.
-8. **Static generation:** Use `generateStaticParams` for all crawl pages. No SSR, no client-side data fetching for page content.
-9. **Content stays in `/content/`.** Never hardcode pub data or crawl metadata in components or page files.
+8. **Static generation:** `generateStaticParams` generates all crawl pages at build time. No SSR, no client-side data fetching for page content.
+9. **Content stays in `/content/`.** Never hardcode pub data or crawl metadata in components or page files. Domain/site name live in `src/lib/siteConfig.ts`.
 10. **Semantic HTML.** Use `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>` appropriately.
 
 ### Tailwind Config
@@ -182,15 +181,17 @@ fontFamily: {
 
 ## Content Model
 
-Each crawl is a self-contained TypeScript file exporting its data. The shared type interface lives in `src/content/crawls/index.ts`.
+Each crawl has a data file in `src/content/crawls/` and an entry in the crawl index (`index.ts`). The shared `BasePub` interface lives in `types.ts`.
 
-**Core crawl fields:** slug, title, tagline, neighbourhood, description (editorial), duration, distance, pubCount, difficulty, bestTime, tubeStart, tubeEnd, status, pubs array, SEO metadata.
+**Core crawl fields (in index.ts):** slug, name, tagline, editorialDescription, duration, difficulty, area, live, pubCount, accentColor, secondaryColor, pubs array.
 
-**Core pub fields:** id, pubName, address, postcode, lat, lng, googlePlaceId, review (crawl-specific editorial), website, image.
+**Core pub fields (BasePub in types.ts):** id, pubName, address, postcode, lat, lng, review (crawl-specific editorial), website?, image?, googlePlaceId?.
 
-Some crawls have additional fields (Monopoly has `property`, `color`, `colorGroup`, `price`, `pintQuantity`). These are crawl-specific extensions, not part of the base schema.
+Each crawl's pub interface extends `BasePub` with crawl-specific fields (e.g. Monopoly adds `property`, `colorGroup`, `price`, `pintQuantity`; Beatles adds `connection`; Ripper adds `walkToNext`).
 
 Pub descriptions are crawl-specific — the same pub described differently depending on the crawl theme. There is no shared pub database at V1.
+
+**Build-time validation:** `scripts/validate-crawls.ts` runs as a `prebuild` hook and checks all live crawls for: non-empty pub arrays, sequential IDs, required BasePub fields, London lat/lng bounds, valid UK postcodes, review length.
 
 ---
 
@@ -208,132 +209,68 @@ Every crawl page must have:
 
 ## Crawl Page Architecture
 
-### File Structure (per crawl)
+### Shared Infrastructure
 
-Each crawl requires two files:
+The crawl page system is built on four shared components:
 
-1. **Data file:** `src/content/crawls/{slug}.ts` — exports the pub array, stats, and helper functions
-2. **Scroll map component:** `src/components/{Name}ScrollMap.tsx` — the unified map + pub list component
+- **`CrawlPageLayout.tsx`** — shared page template that owns all common sections: Schema.org JSON-LD, SiteNav, hero (claret background, name, tagline, stat pills), About This Crawl, `{beforeMap}` slot, `{children}` (ScrollMap), `{afterMap}` slot, Share & Save (WhatsApp + Print), More Crawls (2 cards), SiteFooter. Changing this file changes every crawl page.
 
-The crawl page itself lives at `src/app/[slug]/page.tsx` which contains a dedicated page component per crawl (e.g. `MonopolyCrawlPage`, `CircleLineCrawlPage`, `RipperCrawlPage`).
+- **`BaseScrollMap.tsx`** — shared map + interaction logic (510 lines). Handles: MapLibre GL JS init, CARTO Voyager basemap, markers, route lines, fitBounds, flyTo, marker highlighting, scroll-to-card, mobile toggle, progress pill, responsive layout. Accepts `theme` (colours) and `renderCard` (per-crawl card JSX) as props. Uses a ref-based pattern (`selectPubRef`) to avoid stale closures in marker click handlers.
 
-### Data File (`src/content/crawls/{slug}.ts`)
+- **`BasePubCard.tsx`** — shared card body content: address, review text (trimmed to 3 sentences), action links (Maps, Website, Directions). Each per-crawl card provides its themed outer shell and header, then renders `BasePubCardBody` for the shared inner content. Also exports `getMapsUrl()` and `getDirectionsUrl()` helpers.
 
-Each data file exports:
+- **`BasePub` (in `types.ts`)** — shared interface all per-crawl pub types extend. Fields: `id`, `pubName`, `address`, `postcode`, `lat`, `lng`, `review`, `website?`, `image?`, `googlePlaceId?`. Crawl-specific fields (e.g. Monopoly's `property`, `colorGroup`) are extensions.
 
-- **Interface:** `{Name}Pub` — the pub type for this crawl. Minimum fields: `id`, `pubName`, `address`, `postcode`, `lat`, `lng`, `review`, `walkToNext` (or transport equivalent). Crawl-specific fields are allowed (Monopoly has `property`, `colorGroup`, `price`, etc.).
-- **Pub array:** `{name}Pubs` — the ordered array of all pubs
-- **Stats object:** `{name}Stats` — computed totals (`totalPubs`, etc.)
-- **Helper functions:** `get{Name}MapsUrl(pub)` and `get{Name}DirectionsUrl(from, to)` — Google Maps URL generators
+### Page Routing
 
-The crawl must also have an entry in `src/content/crawls/index.ts` with slug, name, tagline, editorialDescription, duration, difficulty, `live: true`, etc.
+`src/app/[slug]/page.tsx` is a server component with `generateStaticParams`. It validates the slug, then renders `CrawlPageContent` (a client component) which looks up the crawl data + config and renders `CrawlPageLayout` with the appropriate `ScrollMap`.
 
-### Scroll Map Component (`src/components/{Name}ScrollMap.tsx`)
+`src/app/[slug]/crawlConfig.tsx` is the registry mapping each slug to its `ScrollMap` component, `pubCount`, and optional `beforeMap`/`afterMap` slots (e.g. Ripper's Victims Memorial, Bermondsey's freshness caveat).
 
-This is the core interactive component. Every crawl's scroll map follows the same pattern:
+### Per-Crawl ScrollMap (~160–260 lines each)
 
-**Architecture:**
-- Client component (`'use client'`)
-- MapLibre GL JS with CARTO Voyager basemap (`https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json`)
-- No SSR — dynamically imported in the page with `next/dynamic` and `ssr: false`
-- All pub data imported from the crawl's data file, never hardcoded
-
-**State:**
-- `activePubId` — which pub is currently selected (starts at 1)
-- `showMap` — mobile map toggle visibility
-- Refs: `mapRef` (MapLibre instance), `markersRef` (marker DOM elements), `cardRefs` (card DOM elements for scroll targeting), `listRef` (list panel for scroll control)
-
-**Map setup (in useEffect):**
-- Initialise MapLibre map in a container ref
-- `scrollZoom: false`, `dragRotate: false`, `touchZoomRotate: true`, `touchPitch: false`
-- Navigation control (zoom only, no compass) top-right
-- `fitBounds` on load to show all pubs
-- Two GeoJSON line sources: `route-bg` (full route, always visible, solid) and `route-progress` (draws progressively as pubs are selected)
-- DOM markers created for each pub, colour-coded per crawl theme, numbered, stored in `markersRef`
-- Marker click calls `selectPub(pubId)`
-
-**Core interactions:**
-- `selectPub(pubId)` — the single function that drives everything:
-  - Sets active pub state
-  - `flyTo()` with zoom 15.5–16, duration 1200ms, cubic ease-out: `easing: (t) => 1 - Math.pow(1 - t, 3)`
-  - Highlights active marker (add active class, scale 1.5x), dims others (opacity 0.4)
-  - Updates progressive route line via `setData()` on the GeoJSON source
-  - Scrolls the list panel so the selected card is at the top (50ms delay to let accordion open first)
-
-**Layout (mobile-first CSS with `lg:` desktop override):**
-
-Mobile (default):
-- Vertical stack: map toggle button → map panel (35vh, collapsible) → pub list (scrollable, max-height 55vh)
-- Tapping a pub expands an inline themed card, scrolls it into view
-
-Desktop (`@media min-width: 1024px`):
-- Horizontal split: map panel (flex: 1, takes majority) | pub list (320px fixed, right side)
-- 85vh height, bordered top and bottom with `var(--ink)`
-- Map panel has right border
-- List panel: `width: 320px !important; max-width: 320px !important; flex-shrink: 0; flex-grow: 0`
-- Expanded card: 280px wide, centred with `margin: auto`, portrait proportions
-
-**Pub list rows (compact state):**
-- Each row: themed number dot + pub name
-- Click to select (expands card, flies map)
-- Active row gets `background: var(--surface)` and a coloured left border
-
-**Expanded card (active pub):**
-- Themed to the crawl (Monopoly = property deed, Circle Line = tube stop sign, Ripper = Victorian dark)
-- Shows: themed header band, pub name (Playfair Display), address, review text (Spectral/font-card, 2–3 sentences), action links (Open in Maps, Website, Directions)
-- On desktop: fixed width 280px, portrait proportions, centred in the 320px column
-
-**Progress pill:**
-- Positioned bottom-left over the map
-- Frosted glass background
-- Shows progress bar + "X/total" count
-
-**Marker styles (global CSS):**
-- 26px circles, numbered, themed colours
-- Active: scale 1.5x, themed border/shadow
-- Dimmed: opacity 0.4
-- Hover: scale 1.3x, opacity restored
-
-### Crawl Page Component (`[slug]/page.tsx`)
-
-Each crawl has a dedicated function component that follows this section order:
-
-1. **Schema.org structured data** — TouristAttraction JSON-LD
-2. **SiteNav**
-3. **Hero** — claret background, crawl name (Playfair Display), tagline (italic), stat pills (Chip components for pub count, duration, difficulty). Back link ("All Crawls") in white.
-4. **About This Crawl** — editorial description, max-width 800px (only renders if editorialDescription exists)
-5. **Crawl-specific sections** — e.g. Ripper has the Victims Memorial between About and the scroll map
-6. **ScrollMap component** — dynamically imported, replaces both old map and pub card sections
-7. **Share & Save** — WhatsApp share link + Print Route button
-8. **Build Your Own CTA** — dark section linking to /build
-9. **More Crawls** — 2 cards for other live crawls
-10. **SiteFooter**
-
-The page component is wired into the main `CrawlPage` export via a slug check:
-```
-if (slug === 'monopoly') return <MonopolyCrawlPage crawl={crawl} />;
-if (slug === 'circle-line') return <CircleLineCrawlPage crawl={crawl} />;
-if (slug === 'jack-the-ripper') return <RipperCrawlPage crawl={crawl} />;
-return <GenericCrawlPage crawl={crawl} />;
-```
+Each crawl has one ScrollMap file (e.g. `MonopolyScrollMap.tsx`) containing only:
+1. Theme config (`ScrollMapTheme` — marker colours, route colour)
+2. Card component — the themed expanded card JSX + card-specific CSS
+3. A thin wrapper rendering `<BaseScrollMap pubs={...} theme={...} renderCard={...} />`
 
 ### Per-Crawl Theming
 
 Theming is limited to the scroll map component:
-- **Marker colours** — match the crawl identity (Monopoly = property group colours, Circle Line = yellow with dark border, Ripper = dark with red border)
+- **Marker colours** — match the crawl identity
 - **Route line colour** — crawl's primary colour
 - **Expanded card design** — unique per crawl (deed, tube stop, Victorian newspaper, etc.)
 - **Number dot colours** in the compact list
 
-Everything else (hero, nav, footer, share section, CTA, More Crawls) uses the unified design system with no per-crawl variation.
+Everything else (hero, nav, footer, share section, More Crawls) uses the unified design system with no per-crawl variation.
 
-### Adding a New Crawl
+### How-To Checklists
 
-Each new crawl needs:
-1. A data file in `src/content/crawls/`
-2. An entry in `src/content/crawls/index.ts`
-3. A scroll map component in `src/components/` themed to the crawl
-4. A page component entry in `src/app/[slug]/page.tsx` following the section order above
+**To add a new crawl:**
+1. Create data file: `src/content/crawls/{slug}.ts` — interface extending `BasePub`, pub array, stats export
+2. Add to index: `src/content/crawls/index.ts` — add entry with `live: true`
+3. Create ScrollMap: `src/components/{Name}ScrollMap.tsx` — theme + card component + `<BaseScrollMap>` wrapper
+4. Register config: `src/app/[slug]/crawlConfig.tsx` — add entry mapping slug → ScrollMap + pubCount
+5. Add pub data to validator: `scripts/validate-crawls.ts` — import pubs, add to `pubArrays` map
+6. Run `npm run build` — validates data, generates static page, updates sitemap
+
+**To change the design system:**
+1. Update CSS variables in `src/app/globals.css` (`:root` block)
+2. Tailwind utilities auto-update via `@theme inline` directive
+3. All components using `var(--claret)`, `bg-[var(--ink)]`, etc. update automatically
+
+**To add a new field to all pub cards:**
+1. Add field to `BasePub` in `src/content/crawls/types.ts`
+2. Add rendering to `BasePubCardBody` in `src/components/BasePubCard.tsx`
+3. All 10 crawl cards pick it up automatically
+
+**To change the page layout for all crawls:**
+1. Edit `src/components/CrawlPageLayout.tsx`
+2. All crawl pages update — hero, about, share, more crawls, footer
+
+**To change map behaviour for all crawls:**
+1. Edit `src/components/BaseScrollMap.tsx`
+2. All scroll maps update — markers, route lines, interactions, layout
 
 ---
 

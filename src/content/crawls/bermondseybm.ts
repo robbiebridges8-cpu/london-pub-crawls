@@ -1,14 +1,8 @@
-export interface BermondseyPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface BermondseyPub extends BasePub {
   style: string;
   walkToNext: string | null;
-  website?: string;
 }
 
 export const bermondseyPubs: BermondseyPub[] = [
@@ -20,7 +14,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4953,
     lng: -0.0629,
     style: 'Pale ales & stouts',
-    review: 'Where it all started. The Kernel opened in 2009 and single-handedly created the Beer Mile. Moved to this bigger Spa Road taproom in 2024 with two dozen taps and a Japanese kitchen residency. Their pale ales are still the benchmark.',
+    review: 'The brewery that started the Beer Mile before the Beer Mile had a name. Evin O\'Riordain founded Kernel in 2010 under a railway arch and has been making some of London\'s best pale ales ever since. The Pale Ale \u2014 dry, bitter, and packed with American hops \u2014 is a London modern classic. The taproom is bare-bones: you\'re here for the beer, not the d\u00e9cor. Opens Saturdays only.',
     walkToNext: '2 min walk',
   },
   {
@@ -31,7 +25,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4948,
     lng: -0.0640,
     style: 'West Coast IPA',
-    review: 'West Coast American brewing in a South London arch. Hop-forward IPAs and a relaxed taproom with good outdoor space. Named after a cycling trip across the States. Their TropiCali IPA is dangerously easy drinking.',
+    review: 'A newer addition to the Mile, opened in 2021 by a former Kernel brewer. Small-batch and experimental \u2014 expect the tap list to change every visit. They don\'t do safe or predictable, which is exactly what makes them worth the stop.',
     walkToNext: '2 min walk',
   },
   {
@@ -42,7 +36,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4955,
     lng: -0.0660,
     style: 'Seasonal IPAs & DIPAs',
-    review: 'Manchester\'s finest set up a London outpost here and it\'s become the heart of the Mile. Twenty taps, beautiful fit-out, and some of the best hoppy beer in the country. Their seasonal DIPAs are world-class. Often the busiest spot.',
+    review: 'Manchester\'s most celebrated craft brewery, with a permanent Bermondsey taproom. Their IPAs and pale ales are consistently among the best in the UK \u2014 clean, balanced, and unapologetically hop-forward. The taproom is more polished than some of the grittier arches on the Mile. Usually has a queue on Saturday afternoons.',
     walkToNext: '2 min walk',
   },
   {
@@ -53,7 +47,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4960,
     lng: -0.0670,
     style: 'Mead',
-    review: 'London\'s first and only mead bar. Eight varieties on draught of the world\'s oldest alcoholic drink. Sweet, dry, sparkling, or hopped — mead is nothing like you\'d expect. A welcome curveball and a break from hops.',
+    review: 'The wildcard on the Mile. Gosnells make mead, not beer \u2014 every batch is brewed with British honey. If you think mead is a novelty for medieval fairs, this will change your mind. Try the citra-hopped variety. The taproom is small and friendly.',
     walkToNext: '5 min walk',
   },
   {
@@ -64,7 +58,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4978,
     lng: -0.0720,
     style: 'Porter & mixed styles',
-    review: 'Old-school meets new-school. Their Porter is a proper London classic — rich, roasty, perfect — but they also do guava sours and West Coast DIPAs. Twelve taps and a reliably excellent vibe.',
+    review: 'One of the Mile\'s anchor breweries, established in 2013 by Paul Anspach and Jack Hobday. Their Porter \u2014 rich, roasty, with a long chocolate finish \u2014 is a proper London porter in the tradition of the style that was invented in this city. But they also range into sours, IPAs, and lagers. Twelve taps, usually busy, reliably excellent.',
     walkToNext: '3 min walk',
   },
   {
@@ -75,7 +69,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4983,
     lng: -0.0740,
     style: 'Honey beer',
-    review: 'Every brew uses British honey, giving their range a distinctive sweetness. The taproom is light and airy with the Mile\'s biggest beer garden. Right next to Maltby Street Market — grab a toastie, bring it in, settle in.',
+    review: 'Another honey brewery, but making beer rather than mead \u2014 every brew incorporates British honey, giving the range a distinctive sweetness. The taproom is lighter and airier than most of the arches, with the Beer Mile\'s biggest outdoor seating area. Directly adjacent to Maltby Street Market \u2014 combine the two on a Saturday.',
     walkToNext: '2 min walk',
   },
   {
@@ -86,7 +80,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.4985,
     lng: -0.0755,
     style: 'Barrel-aged & sours',
-    review: 'Two hundred oak barrels line the walls and 24 taps pour what comes out of them. A London Beer Factory spin-off focused entirely on barrel-aged and sour beers. The interior looks like a wine cave that decided to rebel.',
+    review: 'A London Beer Factory spin-off dedicated entirely to barrel-aged and sour beers. The taproom has 200 oak barrels lining the walls and 24 taps pouring the results. The interior is genuinely impressive \u2014 it looks like a wine cellar that switched sides. If you like sours and wild ales, this is the highlight of the Mile.',
     walkToNext: '3 min walk',
   },
   {
@@ -97,7 +91,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     lat: 51.5000,
     lng: -0.0785,
     style: 'Traditional English ale',
-    review: 'The elder statesman of the Mile. Thirty years of brewing and one of London\'s oldest craft operations. Their Bermondsey Best is a proper English ale — the kind of pint your dad would approve of. A grounded finish before you stumble to London Bridge.',
+    review: 'One of the longer-running operations on the Mile. Their Bermondsey Best is an English bitter \u2014 the kind of straightforward, well-made pint that doesn\'t need a backstory. A solid, unpretentious finish before the walk to London Bridge. Good place to sit down and take stock of how many thirds you\'ve actually had.',
     walkToNext: null,
   },
 ];

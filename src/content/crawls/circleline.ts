@@ -1,21 +1,14 @@
 // Circle Line Pub Crawl - 27 stations, 27 pubs
 
-export interface CircleLinePub {
-  id: number;
+import { BasePub } from './types';
+
+export interface CircleLinePub extends BasePub {
   station: string;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
   rating: number;
   startTime: string;
   endTime: string;
   transportToNext: 'Circle Line' | null;
   transportTime: number | null;
-  review: string;
-  website?: string;
-  image?: string;
 }
 
 export const circleLinePubs: CircleLinePub[] = [

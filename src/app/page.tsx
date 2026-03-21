@@ -1,9 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { crawls } from '@/content/crawls';
 import {
-  SiteNav,
   SiteFooter,
   CrawlCard,
 } from '@/components';
@@ -39,16 +37,28 @@ const valueProps = [
   },
 ];
 
+// Ordered by popularity (most-taken first)
+const CRAWL_ORDER = [
+  'monopoly',
+  'circle-line',
+  'bermondsey-beer-mile',
+  'jack-the-ripper',
+  'south-bank',
+  'beatles',
+  'criminal-london',
+  'historic-london',
+  'literary-london',
+];
+
 export default function Home() {
-  const displayCrawls = [
-    ...crawls.filter((c) => c.live),
-    ...crawls.filter((c) => !c.live).slice(0, 4),
-  ];
+  const liveCrawls = crawls.filter((c) => c.live);
+  const displayCrawls = CRAWL_ORDER
+    .map((slug) => liveCrawls.find((c) => c.slug === slug))
+    .filter((c): c is typeof liveCrawls[number] => !!c);
+  const totalPubs = liveCrawls.reduce((sum, c) => sum + (c.pubCount ?? c.pubs.length), 0);
 
   return (
     <>
-      <SiteNav />
-
       <main id="main-content">
         {/* Hero Section */}
         <section
@@ -75,7 +85,7 @@ export default function Home() {
               <div className="flex justify-center gap-8 md:gap-12 mb-6">
                 <div className="text-center">
                   <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
-                    {crawls.filter(c => c.live).length}
+                    {liveCrawls.length}
                   </div>
                   <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)]">
                     Crawls
@@ -83,7 +93,7 @@ export default function Home() {
                 </div>
                 <div className="text-center">
                   <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
-                    101
+                    {totalPubs}
                   </div>
                   <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)]">
                     Pubs
@@ -109,14 +119,11 @@ export default function Home() {
                 <CrawlNameScramble className="text-2xl md:text-3xl lg:text-4xl" />
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {/* CTA Button */}
+              <div className="flex justify-center">
                 <a href="#crawls" className="btn-primary text-lg px-8 py-4">
                   Explore the Crawls
                 </a>
-                <Link href="/build" className="btn-ghost text-lg px-8 py-4">
-                  Build Your Own
-                </Link>
               </div>
             </div>
           </div>
@@ -132,6 +139,44 @@ export default function Home() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-20 px-6 scroll-mt-20">
+          <div className="max-w-[800px] mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
+                About London on Tap
+              </h2>
+            </div>
+
+            <div className="space-y-6 font-body text-lg text-[var(--muted)] leading-relaxed">
+              <p>
+                I walked the Monopoly Board in 2023. Twenty-six pubs, one for each property on the board.
+                Old Kent Road to Mayfair. It took twelve hours, several wrong turns, and one very memorable
+                night in a Whitechapel pub I&apos;d never have found otherwise.
+              </p>
+              <p>
+                That&apos;s when I realised: there&apos;s no good resource for this. Just scattered Reddit posts,
+                outdated blogs, and closed pubs. So I started mapping them myself.
+              </p>
+              <p>
+                London on Tap is what I wish existed when I started. Proper routes, researched pubs,
+                interactive maps. Free, no booking, no app to download. Just great pubs and the stories
+                that make them special.
+              </p>
+              <p className="text-[var(--ink)] font-medium">
+                Every route on this site has been walked by someone who genuinely loves London pubs.
+                I hope you enjoy them as much as I did.
+              </p>
+            </div>
+
+            <div className="mt-8 pt-8 border-t border-[var(--muted)]/30">
+              <p className="font-label text-sm uppercase tracking-wider text-[var(--muted)]">
+                — Robbie, Founder
+              </p>
             </div>
           </div>
         </section>
@@ -152,32 +197,6 @@ export default function Home() {
                 <CrawlCard key={crawl.id} crawl={crawl} />
               ))}
             </div>
-
-            {/* View All Link */}
-            <div className="text-center mt-12">
-              <Link href="/crawls" className="btn-ghost">
-                View All Crawls
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Build Your Own CTA */}
-        <section className="py-20 px-6 bg-[var(--ink)]">
-          <div className="max-w-[800px] mx-auto text-center">
-            <p className="font-label text-xs uppercase tracking-[0.2em] text-[var(--gold)] mb-4">
-              Coming Soon
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Build Your Own Crawl
-            </h2>
-            <p className="font-body text-lg text-white/70 leading-relaxed mb-8 max-w-lg mx-auto">
-              Pick your pubs. Set your route. Share it with your mates.
-              Design a completely custom pub crawl through London.
-            </p>
-            <Link href="/build" className="inline-block px-8 py-4 bg-[var(--claret)] text-white font-label text-sm uppercase tracking-wider font-bold hover:bg-[var(--claret-dark)] transition-colors">
-              Find Out More
-            </Link>
           </div>
         </section>
 
@@ -210,43 +229,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-20 px-6 scroll-mt-20">
-          <div className="max-w-[800px] mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
-                The Story
-              </h2>
-            </div>
-
-            <div className="space-y-6 font-body text-lg text-[var(--muted)] leading-relaxed">
-              <p>
-                I walked the Monopoly Pub Crawl in 2023. Twenty-six pubs, one for each property on the board.
-                Old Kent Road to Mayfair. It took twelve hours, several wrong turns, and one very memorable
-                night in a Whitechapel pub I&apos;d never have found otherwise.
-              </p>
-              <p>
-                That&apos;s when I realised: there&apos;s no good resource for this. Just scattered Reddit posts,
-                outdated blogs, and closed pubs. So I started mapping them myself.
-              </p>
-              <p>
-                London on Tap is what I wish existed when I started. Proper routes, researched pubs,
-                interactive maps. Free, no booking, no app to download. Just great pubs and the stories
-                that make them special.
-              </p>
-              <p className="text-[var(--ink)] font-medium">
-                Every route on this site has been walked by someone who genuinely loves London pubs.
-                I hope you enjoy them as much as I did.
-              </p>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-[var(--muted)]/30">
-              <p className="font-label text-sm uppercase tracking-wider text-[var(--muted)]">
-                — Robbie, Founder
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
 
       <SiteFooter />

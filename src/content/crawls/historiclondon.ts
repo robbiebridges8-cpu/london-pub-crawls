@@ -1,16 +1,10 @@
 // Historic London Pub Crawl - Fleet Street to Wapping
 
-export interface HistoricLondonPub {
-  id: number;
-  pubName: string;
-  address: string;
-  postcode: string;
-  lat: number;
-  lng: number;
-  review: string;
+import { BasePub } from './types';
+
+export interface HistoricLondonPub extends BasePub {
   established: string;
   walkToNext: string | null;
-  website?: string;
 }
 
 export const historicLondonPubs: HistoricLondonPub[] = [
@@ -22,7 +16,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5142,
     lng: -0.1084,
     established: '1667',
-    review: 'Rebuilt one year after the Great Fire. Dickens, Twain, Yeats, and Wodehouse all drank here. Samuel Smith\'s runs it now — cash only, no music, no phone signal. A stuffed parrot called Polly sits behind the bar. She lived here from 1895 to 1926 and swore in multiple languages.',
+    review: 'Rebuilt in 1667, one year after the Great Fire of London destroyed the original. The vaulted cellars may be 13th-century, remnants of a Carmelite monastery. Samuel Johnson, Charles Dickens, Mark Twain, W.B. Yeats, Arthur Conan Doyle, and P.G. Wodehouse all drank here at various points across three centuries. Samuel Smith\'s runs it now \u2014 cash only, no music, no phone signal. A stuffed parrot called Polly sat behind the bar from 1895 to 1926, swearing at customers in multiple languages.',
     walkToNext: '8 min walk',
   },
   {
@@ -33,7 +27,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5185,
     lng: -0.1076,
     established: '1770s',
-    review: 'Hidden down an alley so well that most Londoners don\'t know it exists. Built on the site of the Bishop of Ely\'s London estate. The stump of a cherry tree in the bar is said to be the one Elizabeth I danced around. Finding it is half the fun — look for the sign on Hatton Garden.',
+    review: 'Hidden down an alley between Hatton Garden and Ely Place that most Londoners have never found. The current building dates from the 1770s, on a site that was part of the Bishop of Ely\'s London estate from 1290. A cherry tree stump preserved in the bar is said to be from the tree Elizabeth I danced around \u2014 though that claim is better as a pub story than as history. Finding the entrance is half the experience.',
     walkToNext: '5 min walk',
   },
   {
@@ -44,7 +38,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5186,
     lng: -0.1120,
     established: 'site since 1430',
-    review: 'There\'s been a pub on this site for nearly six centuries. The current building is a 1920s replica but the effect is extraordinary — a vast Gothic hall with enormous wine vats above the bar, individual booths with their own fireplaces, and a ceiling that feels like a medieval banqueting hall.',
+    review: 'A pub has stood on this site since around 1430, making it one of the oldest licensed premises in London. The current building is a 1924 reconstruction by the architects of the Trocadero, but the effect is extraordinary \u2014 a cavernous Gothic hall with a 50-foot ceiling, enormous wine vats above the bar, and individual booths with their own coal fireplaces. One of the most impressive pub interiors in the city.',
     walkToNext: '10 min walk',
   },
   {
@@ -55,7 +49,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5122,
     lng: -0.1252,
     established: 'site since 1623',
-    review: 'Down an alley behind Covent Garden. Nicknamed \'The Bucket of Blood\' for the bare-knuckle boxing upstairs. The poet Dryden was nearly beaten to death in the alley outside in 1679. Dickens drank here as a young man. Fuller\'s ales, low ceilings, Victorian woodwork.',
+    review: 'First licensed in 1772, though the building on this Covent Garden alleyway dates to at least 1623. Known as "The Bucket of Blood" for the bare-knuckle prize fights held in the upstairs room throughout the 18th and 19th centuries. On 18 December 1679, the poet John Dryden was attacked and nearly beaten to death in the alley outside by thugs hired by the Duchess of Portsmouth. The young Charles Dickens drank here when he was working at a nearby blacking factory.',
     walkToNext: '15 min walk',
   },
   {
@@ -66,7 +60,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5121,
     lng: -0.1038,
     established: '1875',
-    review: 'Not the oldest pub on this crawl but arguably the most beautiful. Built on the site of a Dominican priory, redecorated in 1905 in jaw-dropping Art Nouveau. Mosaics, marble, bronze reliefs of jolly monks everywhere. Nearly demolished in the 1960s; saved by John Betjeman.',
+    review: 'Built in 1875 on the site of a 13th-century Dominican priory \u2014 hence the name. The interior was transformed in 1905 by the architect Herbert Fuller-Clark and the sculptor Henry Poole into one of London\'s finest examples of Arts and Crafts design. Mosaic friezes, marble columns, alabaster, and bronze reliefs of monks in various states of revelry cover every surface. The pub was scheduled for demolition in 1964 to make way for a road scheme; John Betjeman led the successful campaign to save it.',
     walkToNext: '15 min walk across Blackfriars Bridge',
   },
   {
@@ -77,7 +71,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5046,
     lng: -0.0897,
     established: '1676 (site since 1542)',
-    review: 'London\'s last surviving galleried coaching inn. Shakespeare drank here — the Globe was around the corner. Now owned by the National Trust. The cobbled courtyard with its timber balconies is one of the most atmospheric spots in London.',
+    review: 'London\'s only surviving galleried coaching inn and a Grade I listed building, owned by the National Trust since 1937. An inn has occupied this site since at least 1542. The current structure was rebuilt in 1676 after a catastrophic fire swept through Southwark. In the coaching era, passengers boarded horse-drawn coaches in the cobbled yard for journeys to Kent, Sussex, and the Channel ports. Dickens referenced it in Little Dorrit. Shakespeare almost certainly knew the earlier building \u2014 the Globe was a ten-minute walk.',
     walkToNext: '5 min walk',
   },
   {
@@ -88,7 +82,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5070,
     lng: -0.0912,
     established: 'modern (medieval site)',
-    review: 'Sitting in the shadow of Winchester Palace, whose medieval rose window still looms above. The riverside terrace has views of the Thames and the City skyline. A breather between the weight of history at the George and the final stretch east.',
+    review: 'The building is modern, but the location is medieval. It sits directly beneath the surviving ruins of Winchester Palace \u2014 the 12th-century London residence of the Bishops of Winchester, whose great hall rose window still looms over the pub\'s terrace. From here, the Bishops controlled Bankside\'s theatres, bear-baiting pits, and licensed brothels (whose workers were known as "Winchester Geese"). A riverside terrace with views across to the City.',
     walkToNext: '25 min walk along the Thames',
   },
   {
@@ -99,7 +93,7 @@ export const historicLondonPubs: HistoricLondonPub[] = [
     lat: 51.5066,
     lng: -0.0553,
     established: 'c.1520',
-    review: 'London\'s oldest riverside pub. Originally \'The Devil\'s Tavern\' — named for the thieves, smugglers, and pirates who drank here. Pepys came. Dickens came. Turner painted the Thames from the balcony. The flagstone floor and pewter bar are original. Five hundred years of drinking history under your feet.',
+    review: 'Dating to around 1520, this is the strongest claim to the title of London\'s oldest riverside pub. It was originally called The Devil\'s Tavern \u2014 a name earned by its regular clientele of river thieves, smugglers, and pirates. The pub was renamed after a Whitby coal ship that used to moor alongside. Samuel Pepys visited. Dickens set scenes nearby. Turner painted the Thames from the first-floor balcony. The flagstone floor and pewter-topped bar are original Tudor features.',
     walkToNext: null,
   },
 ];

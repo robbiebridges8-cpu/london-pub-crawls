@@ -3,17 +3,16 @@
 import { useState, useEffect } from 'react';
 import { TextScramble } from './text-scramble';
 
-const crawlNames = [
+const CRAWL_NAMES = [
   'Monopoly',
-  'Circle Line',
-  'Bermondsey',
   'Jack the Ripper',
   'Beatles',
-  'Historic London',
+  'Circle Line',
   'South Bank',
   'Criminal London',
+  'Bermondsey',
+  'Historic London',
   'Literary London',
-  'Haunted London',
 ];
 
 export function CrawlNameScramble({ className }: { className?: string }) {
@@ -22,7 +21,7 @@ export function CrawlNameScramble({ className }: { className?: string }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % crawlNames.length);
+      setCurrentIndex((prev) => (prev + 1) % CRAWL_NAMES.length);
       setTrigger(true);
     }, 3000);
 
@@ -41,7 +40,7 @@ export function CrawlNameScramble({ className }: { className?: string }) {
           onScrambleComplete={() => setTrigger(false)}
           key={currentIndex}
         >
-          {crawlNames[currentIndex]}
+          {CRAWL_NAMES[currentIndex]}
         </TextScramble>
         <span className="font-display font-bold text-[var(--ink)]">
           Pub Crawl

@@ -1,5 +1,7 @@
 import { CrawlPub } from '../pubs';
 
+export type { BasePub } from './types';
+
 export interface CrawlLogistics {
   tubeStart: string;
   tubeEnd: string;
@@ -23,6 +25,8 @@ export interface Crawl {
   url?: string;
   accentColor: string;
   secondaryColor: string;
+  pubCount?: number;
+  freshnessCaveat?: string;
   pubs: CrawlPub[];
   logistics?: CrawlLogistics;
 }
@@ -31,7 +35,7 @@ export const crawls: Crawl[] = [
   {
     id: '1',
     slug: 'monopoly',
-    name: 'Monopoly Pub Crawl',
+    name: 'Monopoly Board',
     tagline: 'All 28 board spaces. All by foot.',
     description: 'Visit 26 pubs mapped to every property on the Monopoly board. From Old Kent Road to Mayfair.',
     editorialDescription: 'The ultimate London pub crawl. Twenty-six pubs, one for each property on the Monopoly board. Start at Old Kent Road, finish at Mayfair — if you make it. This isn\'t a casual afternoon; it\'s a proper expedition through London\'s drinking history, mapped onto the world\'s most famous board game.',
@@ -40,6 +44,7 @@ export const crawls: Crawl[] = [
     area: 'Central London',
     live: true,
     url: 'https://monopolypubcrawl.com',
+    pubCount: 26,
     accentColor: '#D4001A',
     secondaryColor: '#1E8449',
     pubs: [
@@ -76,46 +81,42 @@ export const crawls: Crawl[] = [
     description: 'Follow the trail through the historic pubs of the East End where Victorian London\'s darkest chapter unfolded.',
     editorialDescription: 'Whitechapel, 1888. The East End\'s fog-shrouded streets held secrets that still echo today. This crawl takes you through the pubs where the victims drank, where suspects were questioned, and where Victorian London confronted its darkest hour. Not for the faint-hearted — in any sense.',
     duration: '4 hours',
-    difficulty: 'Medium',
+    difficulty: 'Easy',
     area: 'Whitechapel',
     live: true,
     accentColor: '#8B1A1A',
     secondaryColor: '#1C1C1C',
+    pubCount: 6,
     pubs: [
       {
-        pubId: 'ten-bells-spitalfields',
-        description: 'The most famous Ripper pub in existence. Annie Chapman and Mary Kelly were regulars here. The pub briefly renamed itself \'Jack the Ripper\' in the 1970s before reverting under protest in 1988.',
-        historicNotes: 'Two canonical victims were last seen drinking here. Elizabeth Stride was once thrown out for being drunk.',
-      },
-      {
         pubId: 'white-hart-whitechapel',
-        description: 'Ripper suspect George Chapman ran a barbershop in the basement. Martha Tabram is believed to have drunk here the night she died. Still displays Ripper memorabilia and is home to the famous \'Ripper Corner\'.',
-        historicNotes: 'Martha Tabram\'s murder took place 50 feet from the back of the pub.',
+        description: 'Martha Tabram was drinking here on the night of 7 August 1888 before she was murdered in George Yard next door. The cellar housed the barber shop of Severin Klosowski, later convicted as the serial poisoner George Chapman and named as a Ripper suspect.',
+        historicNotes: 'Tabram\'s killing is considered by many Ripperologists to be the first in the Whitechapel series.',
       },
       {
-        pubId: 'blind-beggar-whitechapel',
-        description: 'Where Ronnie Kray shot George Cornell dead in 1966 — the most infamous pub shooting in British criminal history. Also historically linked to the Ripper era and the founding of the Salvation Army nearby.',
-        historicNotes: 'Ronnie Kray walked in and shot George Cornell at the bar in broad daylight.',
+        pubId: 'ten-bells-spitalfields',
+        description: 'The most famous pub in Ripper history. Annie Chapman was seen drinking here alone on the morning of 8 September 1888. Mary Jane Kelly was a regular. Renamed "The Jack the Ripper" in 1976, reverted after a Reclaim the Night campaign in 1988.',
+        historicNotes: 'The original Victorian ceramic tiling — including a painted mural of "Spitalfields in ye Olden Time" — is intact.',
       },
       {
         pubId: 'culpeper-whitechapel',
-        description: 'Formerly the Princess Alice, where Frances Coles met her murderer in 1891. Early Ripper suspect \'Leather Apron\' was said to be a regular here.',
-        historicNotes: 'Now a stylish gastro-pub but formerly one of the East End\'s most notorious drinking dens.',
+        description: 'Formerly The Princess Alice — where John Pizer, known as "Leather Apron", became the first prime Ripper suspect in September 1888. Frances Coles, the last official victim, was last seen alive leaving here in February 1891.',
+        historicNotes: 'Pizer was cleared at Annie Chapman\'s inquest. The building has been heavily refurbished.',
       },
       {
-        pubId: 'kings-stores-whitechapel',
-        description: 'One of the oldest pubs in the area with direct Ripper-era connections. Same building reportedly used by Henry VIII as an arsenal centuries earlier.',
-        historicNotes: 'A regular stop on organised Ripper pub tours.',
+        pubId: 'pride-of-spitalfields',
+        description: 'Then called the Romford Arms, this was the local of George Hutchinson — the witness who gave police a detailed description of a man seen with Mary Kelly on the night of her murder, 9 November 1888.',
+        historicNotes: 'One of the last unreconstructed Victorian boozers in Spitalfields. CAMRA\'s East London Pub of the Year, 2013.',
       },
       {
-        pubId: 'bell-pub-aldgate',
-        description: 'Near Mitre Square, site of Catherine Eddowes\' murder. A classic end-point for Ripper tours, steeped in the atmosphere of the old City fringe.',
-        historicNotes: 'Close to the spot where one of the five canonical victims was found.',
+        pubId: 'alma-whitechapel',
+        description: 'One of the few surviving pubs from the Whitechapel of 1888. Two minutes from Durward Street — formerly Buck\'s Row — where Polly Nichols, the first canonical victim, was found on 31 August 1888.',
+        historicNotes: 'Ripper walking tours stop here. The second floor has period posters and artwork from the case.',
       },
       {
-        pubId: 'duke-of-wellington-spitalfields',
-        description: 'Closest pub to the location of Jack the Ripper\'s most gruesome murder. A proper East End local with Victorian bones.',
-        historicNotes: 'Consistently cited as the pub nearest to Mary Kelly\'s murder site.',
+        pubId: 'blind-beggar-whitechapel',
+        description: 'End with a different chapter of East End violence. On 9 March 1966, Ronnie Kray walked in and shot George Cornell of the Richardson gang in the head. William Booth preached his first Salvation Army sermon outside in 1865.',
+        historicNotes: 'Nothing to do with the Ripper — everything to do with the thread of darkness that runs through Whitechapel across the centuries.',
       },
     ],
     logistics: {
@@ -130,7 +131,7 @@ export const crawls: Crawl[] = [
   {
     id: '3',
     slug: 'beatles',
-    name: 'Beatles Pub Crawl',
+    name: 'The Beatles',
     tagline: "Follow the Fab Four through London's drinking spots",
     description: 'Visit the pubs where John, Paul, George and Ringo hung out during their London years.',
     editorialDescription: "The Beatles didn't just change music in London — they lived it, pub by pub. From Brian Epstein's Belgravia local to the Soho haunts of Swinging London, from the Apple Corps offices in Mayfair to a 15th-century riverside pub in Chiswick where they filmed Help!, this crawl traces the Fab Four's London through the places they actually drank. Eight pubs. Four decades of history. One legendary band.",
@@ -189,9 +190,10 @@ export const crawls: Crawl[] = [
     description: 'A pub at every Circle Line station. Complete the loop before the Tube closes.',
     editorialDescription: 'The Circle Line Challenge is London\'s ultimate pub crawl endurance test. One pub at every station on the Circle Line — 27 stops, 27 pubs, one continuous loop through Zone 1. You start at Edgware Road and work your way around the entire circle before the Tube closes. Most groups don\'t make it past Embankment. The ones who complete the loop earn bragging rights that last a lifetime.',
     duration: '10 hours',
-    difficulty: 'Hard',
+    difficulty: 'Legendary',
     area: 'Zone 1',
     live: true,
+    pubCount: 27,
     accentColor: '#FFD300',
     secondaryColor: '#003688',
     pubs: [
@@ -253,7 +255,7 @@ export const crawls: Crawl[] = [
   {
     id: '5',
     slug: 'south-bank',
-    name: 'South Bank Pub Crawl',
+    name: 'South Bank',
     tagline: "London's greatest riverside pubs, Blackfriars to Wapping",
     description: 'Three miles along the Thames, six pubs, and 500 years of London drinking history.',
     editorialDescription: "Three miles along the Thames, six pubs, and 500 years of London drinking history. Start at the Art Nouveau splendour of the Black Friar, cross to the South Bank for views of St Paul's and Shakespeare's Globe, duck into London's last coaching inn, then follow the river east past Tower Bridge to finish at the oldest riverside pub in London. This is the Thames at its best \u2014 and you're walking the whole thing.",
@@ -261,6 +263,7 @@ export const crawls: Crawl[] = [
     difficulty: 'Easy',
     area: 'South Bank & Wapping',
     live: true,
+    pubCount: 6,
     accentColor: '#0098D4',
     secondaryColor: '#C0C0C0',
     pubs: [
@@ -292,68 +295,57 @@ export const crawls: Crawl[] = [
   {
     id: '7',
     slug: 'criminal-london',
-    name: 'Criminal London Pub Crawl',
+    name: 'Criminal London',
     tagline: 'Gangsters, smugglers, and the pubs where it all went down',
-    description: 'Eight pubs where London\'s most notorious crimes were planned, committed, or punished.',
-    editorialDescription: 'London\'s criminal history didn\'t happen in dark alleys — it happened in pubs. The Great Train Robbery was planned over pints in a Belgravia mews. Ronnie Kray committed murder in a Whitechapel saloon bar. Body snatchers drugged their victims next to a hospital. Pirates were hanged outside a riverside tavern. This crawl visits eight pubs where London\'s most notorious crimes were planned, committed, or punished. Not for the faint-hearted — but the beer\'s good.',
+    description: 'Six pubs where London\'s most notorious crimes were planned, committed, or punished.',
+    editorialDescription: 'London\'s criminal history didn\'t happen in dark alleys — it happened in pubs. Ronnie Kray committed murder in a Whitechapel saloon bar. Body snatchers drugged their victims next to a hospital. Pirates were hanged outside a riverside tavern. This crawl visits six pubs where London\'s most notorious crimes were planned, committed, or punished — east to west, from the Krays\' Whitechapel to the Old Bailey.',
     duration: 'Full day',
-    difficulty: 'Medium',
+    difficulty: 'Easy',
     area: 'Central London, Wapping & East End',
     live: true,
     accentColor: '#1A1A2E',
     secondaryColor: '#8B1A1A',
+    pubCount: 6,
     pubs: [
       {
         pubId: 'blind-beggar-whitechapel',
-        description: 'Where Ronnie Kray shot George Cornell dead in 1966 — the most infamous pub shooting in British criminal history.',
-        historicNotes: 'Ronnie Kray walked in and shot George Cornell at the bar in broad daylight.',
+        description: 'The most infamous pub murder in British criminal history. On 9 March 1966, Ronnie Kray walked in and shot George Cornell in the head as he sat at the bar drinking a light ale.',
+        historicNotes: 'Cornell was a member of the rival Richardson gang. His murder led directly to the police investigation that brought the Krays down.',
       },
       {
         pubId: 'carpenters-arms-bethnal-green',
-        description: 'Owned by the Kray twins themselves in the 1960s. Ronnie and Reggie used it as their local and a meeting point for their firm. A genuine piece of criminal London history.',
-        historicNotes: 'The Krays bought this pub and ran it as their own. Their mother lived around the corner.',
+        description: 'The Kray twins bought this pub in the 1960s and ran it as the headquarters of The Firm. Reggie Kray reportedly had a drink here before heading to murder Jack "The Hat" McVitie in 1967.',
+        historicNotes: 'The single entrance — the one the Krays insisted on, so they could watch the door — is still the only way in.',
       },
       {
-        pubId: 'white-hart-whitechapel',
-        description: 'Ripper suspect George Chapman ran a barbershop in the basement. Still displays Ripper memorabilia and is home to the famous \'Ripper Corner\'.',
-        historicNotes: 'Martha Tabram\'s murder took place 50 feet from the back of the pub.',
+        pubId: 'town-of-ramsgate-wapping',
+        description: 'In December 1688, Judge Jeffreys — "the Hanging Judge" — was caught here disguised as a coal merchant, trying to escape to France. Next door, Wapping Old Stairs lead to where convicted pirates were chained at low tide.',
+        historicNotes: 'A mob recognised Jeffreys and nearly beat him to death. He was taken to the Tower and died there four months later.',
       },
       {
-        pubId: 'ten-bells-spitalfields',
-        description: 'A Kray-era East End institution. The Krays operated in the same East End territory as the Ripper murders, decades later.',
-        historicNotes: 'Deep criminal history spanning centuries.',
+        pubId: 'prospect-of-whitby-wapping',
+        description: 'Dating to around 1520, originally called The Devil\'s Tavern for its clientele of smugglers, thieves, and pirates. A hangman\'s noose hangs over the river terrace as a memorial to Execution Dock.',
+        historicNotes: 'Pirates including Captain Kidd were hanged here and left on display until three tides had washed over them.',
       },
       {
-        pubId: 'ye-olde-cheshire-cheese',
-        description: 'Rebuilt after the Great Fire of 1666. One of London\'s most atmospheric historic pubs. Allegedly a haunt of highwaymen and criminals in the 17th century.',
-        historicNotes: 'The pub has barely changed since the 1600s.',
-      },
-      {
-        pubId: 'horns-tavern-kennington',
-        description: 'A Victorian pub with a dark criminal past. South London gangs used this area extensively. Charlie Richardson, rival of the Krays, operated in this part of London.',
-        historicNotes: 'South London\'s criminal history is as rich as the East End\'s.',
-      },
-      {
-        pubId: 'george-inn-southwark',
-        description: 'London\'s only surviving galleried coaching inn. A meeting point for London\'s criminal underworld for centuries.',
-        historicNotes: 'The most atmospheric pub in all of London.',
+        pubId: 'rising-sun-cloth-fair',
+        description: 'In the early 1830s, body snatchers John Bishop and Thomas Williams — the London Burkers — frequented this pub next to St Bartholomew\'s Hospital. Their case led directly to the Anatomy Act of 1832.',
+        historicNotes: 'They would drug victims with rum laced with laudanum, drown them in a well, and sell the corpses to the hospital\'s anatomy school.',
       },
       {
         pubId: 'viaduct-tavern-holborn',
-        description: 'Built in 1875 on the site of Newgate Prison. Five original prison cells are still visible in the basement. A stunning Victorian gin palace.',
-        historicNotes: 'The original cells can be viewed on request.',
-      },
-      {
-        pubId: 'lamb-and-flag-covent-garden',
-        description: 'Known as the \'Bucket of Blood\' after bare-knuckle fights held here. A West End institution since 1638.',
-        historicNotes: 'Dryden was attacked outside in 1679.',
-      },
-      {
-        pubId: 'cittie-of-yorke',
-        description: 'Vast historic cellar pub with ancient cubicles perfect for plotting. Used by lawyers and journalists for centuries.',
-        historicNotes: 'The current building dates from 1430s, rebuilt 1695.',
+        description: 'End the crawl opposite the Old Bailey. London\'s last surviving Victorian gin palace, built in 1875 directly above the cells of the old Giltspur Street Compter, a debtors\' prison.',
+        historicNotes: 'The original holding cells are still accessible in the cellar.',
       },
     ],
+    logistics: {
+      tubeStart: 'Whitechapel',
+      tubeEnd: 'St Paul\'s',
+      suggestedStart: '12:00 PM',
+      bestDay: 'Saturday',
+      pacingTips: 'The Wapping stretch is the longest gap — use the Overground. One pint per pub, eat around stop 3 or 4.',
+      specialNotes: 'The route runs east to west. Some riverside pubs get busy on weekend afternoons — arrive before the crowds.',
+    },
   },
   {
     id: '8',
@@ -507,8 +499,9 @@ export const crawls: Crawl[] = [
     tagline: 'South London\'s legendary brewery trail, arch by arch',
     description: 'Eight of the best taprooms on the Beer Mile, from The Kernel to Southwark Brewing.',
     editorialDescription: 'The Beer Mile started in 2009 when The Kernel set up under a railway arch in Bermondsey. Now there are twenty-odd taprooms packed into the arches between Bermondsey and London Bridge, pouring everything from hop-forward pale ales to barrel-aged sours to London\'s only draught mead. This is our pick of the best — eight stops that give you the full range of what the Mile has to offer without destroying you before lunch.',
+    freshnessCaveat: 'Bermondsey Beer Mile taprooms change frequently \u2014 they move, close, and adjust their hours without much warning. Most are open Saturdays only, roughly 11am to 6pm. A few also open Fridays and Sundays. Always check before you go. This guide was last verified in March 2026.',
     duration: '4–6 hours',
-    difficulty: 'Easy',
+    difficulty: 'Medium',
     area: 'Bermondsey',
     live: true,
     accentColor: '#D4A03C',
@@ -565,21 +558,38 @@ export const crawls: Crawl[] = [
         historicNotes: 'One of the UK\'s earliest craft beer champions, opened 2006.',
       },
     ],
+    logistics: {
+      tubeStart: 'Bermondsey',
+      tubeEnd: 'London Bridge',
+      suggestedStart: '11:00 AM',
+      bestDay: 'Saturday',
+      pacingTips: 'Stick to thirds and halves — eight taprooms adds up fast. Eat at Maltby Street Market around stop 5 or 6.',
+      specialNotes: 'Most taprooms are Saturday only. Check individual opening hours before you go. Some also open Fridays and Sundays.',
+    },
   },
   {
     id: '13',
     slug: 'historic-london',
-    name: 'Historic London Pub Crawl',
+    name: 'Historic London',
     tagline: "London's oldest and most storied pubs, Fleet Street to Wapping",
     description: 'Eight of London\'s most historic pubs, spanning 500 years of drinking history.',
     editorialDescription: "Every pub on this crawl has survived something — the Great Fire, the Blitz, the developers, or just the slow grind of centuries. From a Fleet Street tavern rebuilt in 1667 to a riverside den where Tudor pirates drank, this is a walk through London's drinking history. Eight pubs spanning 500 years. Dickens drank in at least four of them. You'll understand why.",
     duration: '5\u20136 hours',
-    difficulty: 'Easy',
+    difficulty: 'Medium',
     area: 'Fleet Street to Wapping',
     live: true,
+    pubCount: 8,
     accentColor: '#8B4513',
     secondaryColor: '#F5E6C8',
     pubs: [],
+    logistics: {
+      tubeStart: 'Chancery Lane',
+      tubeEnd: 'Wapping',
+      suggestedStart: '12:00 PM',
+      bestDay: 'Saturday',
+      pacingTips: 'The Fleet Street pubs are close together — pace yourself early. The walk from Southwark to Wapping is the longest stretch.',
+      specialNotes: 'Ye Olde Cheshire Cheese and Ye Olde Mitre close early on weekends. Check times before you go.',
+    },
   },
   {
     id: '12',
@@ -634,32 +644,26 @@ export const crawls: Crawl[] = [
   {
     id: '14',
     slug: 'literary-london',
-    name: 'Literary London Pub Crawl',
+    name: 'Literary London',
     tagline: "Where London's writers drank \u2014 Dickens, Orwell, Woolf, and more",
     description: "Eight pubs where London's greatest writers drank, argued, and left manuscripts under their chairs.",
     editorialDescription: "London's greatest writers didn't write in isolation. They wrote in pubs, argued in pubs, fell in love in pubs, and occasionally left their manuscripts under the chair. This crawl traces the drinking habits of the literary canon \u2014 from the Fitzrovia boozers where Orwell and Dylan Thomas held court, through the Bloomsbury local where Dickens was a regular, to the Fleet Street tavern where Johnson, Twain, and Yeats all raised a glass. Eight pubs. Five centuries of literature. Bring a book.",
     duration: '4\u20135 hours',
-    difficulty: 'Easy',
+    difficulty: 'Medium',
     area: 'Fitzrovia, Soho & Southwark',
     live: true,
+    pubCount: 8,
     accentColor: '#2E4057',
     secondaryColor: '#F5E6C8',
     pubs: [],
-  },
-  {
-    id: '15',
-    slug: 'haunted-london',
-    name: 'Haunted London Pub Crawl',
-    tagline: 'London\'s most haunted pubs and the ghosts that haunt them',
-    description: 'Eight of London\'s most convincingly haunted pubs, from a gin palace built on a prison to a pub where a murdered soldier moves objects every September.',
-    editorialDescription: 'Every old London pub has a ghost story. Most of them are nonsense. These ones might not be. From a Victorian gin palace built on a prison to a Belgravia mews pub where a murdered soldier moves objects every September, this crawl takes you through the capital\'s most convincingly haunted drinking holes. Eight pubs. Poltergeists, body snatchers, highwaymen, and a ghost with a live camera feed. Best done after dark. Obviously.',
-    duration: 'Full evening',
-    difficulty: 'Medium',
-    area: 'Central London & Highgate',
-    live: true,
-    accentColor: '#2C1810',
-    secondaryColor: '#F5E6C8',
-    pubs: [],
+    logistics: {
+      tubeStart: 'Goodge Street',
+      tubeEnd: 'London Bridge',
+      suggestedStart: '1:00 PM',
+      bestDay: 'Thursday or Friday',
+      pacingTips: 'Fitzrovia and Soho pubs are within walking distance of each other. The jump to Fleet Street and then Borough requires the Tube.',
+      specialNotes: 'The French House serves half pints only — that\'s tradition, not a suggestion. Ye Olde Cheshire Cheese is cash only.',
+    },
   },
 ];
 

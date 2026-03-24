@@ -140,7 +140,7 @@ export default function CrawlPageLayout({
         <main id="main-content">
           {/* Hero */}
           <div className="crawl-hero">
-            <Link href="/" className="inline-flex items-center gap-1.5 !text-white hover:opacity-80 transition-opacity mb-3 text-xs font-label uppercase tracking-widest">
+            <Link href="/#crawls" className="inline-flex items-center gap-1.5 !text-white hover:opacity-80 transition-opacity mb-3 text-xs font-label uppercase tracking-widest">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -180,12 +180,8 @@ export default function CrawlPageLayout({
                   <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] mb-0.5">Finish</div>
                   <div className="font-body text-sm text-[var(--ink)]">{crawl.logistics.tubeEnd}</div>
                 </div>
-                <div className="bg-[var(--surface)] rounded p-3">
-                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] mb-0.5">Best Time</div>
-                  <div className="font-body text-sm text-[var(--ink)]">{crawl.logistics.suggestedStart}, {crawl.logistics.bestDay}</div>
-                </div>
-                <div className="bg-[var(--surface)] rounded p-3">
-                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] mb-0.5">Pacing</div>
+                <div className="bg-[var(--surface)] rounded p-3 col-span-2">
+                  <div className="font-label text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] mb-0.5">Tips</div>
                   <div className="font-body text-sm text-[var(--ink)]">{crawl.logistics.pacingTips}</div>
                 </div>
               </div>
@@ -312,6 +308,10 @@ export default function CrawlPageLayout({
             width: 45%;
             padding-top: 4.5rem !important;
             overflow-x: hidden;
+          }
+          .map-btn-hide,
+          .map-btn-show {
+            display: none !important;
           }
 
           .crawl-sticky-header {

@@ -73,7 +73,7 @@ export default function SiteFooter() {
         {/* Bottom row */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-white/40">
-            &copy; {new Date().getFullYear()} London on Tap. Made with love in London.
+            &copy; {new Date().getFullYear()} London on Tap.
           </p>
           <p className="font-body text-xs text-white/40">
             Drink responsibly. Know your limits.

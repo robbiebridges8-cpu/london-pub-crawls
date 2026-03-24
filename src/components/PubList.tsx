@@ -45,62 +45,33 @@ export default function PubList<T extends BasePub>({
       if (dots.length === 0) return;
 
       const spineRect = spine.getBoundingClientRect();
-      // The fixed map covers the top of the viewport on mobile.
-      // Find its bottom edge so we know where visible content starts.
-      const mapEl = document.querySelector('.map-fixed');
-      const mapBottom = mapEl ? mapEl.getBoundingClientRect().bottom : 0;
-      const navHeight = 72; // 4.5rem
-      const contentStart = Math.max(mapBottom, navHeight);
-      // Trigger: midpoint of the visible content area (between map bottom and viewport bottom)
-      const triggerY = contentStart + (window.innerHeight - contentStart) * 0.5;
+
+      // The "cursor" sits at the middle of the viewport
+      const cursorY = window.innerHeight * 0.5;
+
+      // How far the cursor is into the spine (in spine-local coords)
+      const cursorInSpine = cursorY - spineRect.top;
+
+      // Get first dot and end bookend positions relative to spine
       const firstDot = dots[0];
-      const firstDotY = firstDot.getBoundingClientRect().top + 14 - spineRect.top;
+      const endEl = spine.querySelector('.tl-bookend-end .tl-bookend-dot') as HTMLElement | null;
+      const lastEl = endEl || dots[dots.length - 1];
 
-      // Find which dots we've passed and interpolate between them
-      let lastPassedIdx = -1;
-      let nextIdx = 0;
-      let interpProgress = 0;
+      const firstCenter = firstDot.getBoundingClientRect().top + firstDot.offsetHeight / 2 - spineRect.top;
+      const endCenter = lastEl.getBoundingClientRect().top + lastEl.offsetHeight / 2 - spineRect.top;
 
-      for (let i = 0; i < dots.length; i++) {
-        const dotCenter = dots[i].getBoundingClientRect().top + dots[i].offsetHeight / 2;
-        if (dotCenter <= triggerY) {
-          lastPassedIdx = i;
-        } else {
-          nextIdx = i;
-          break;
-        }
-        if (i === dots.length - 1) nextIdx = i;
-      }
+      // Clamp the fill to between first dot and end
+      const fillTo = Math.min(endCenter, Math.max(firstCenter, cursorInSpine));
+      const fillHeight = fillTo - firstCenter;
 
-      // Calculate continuous fill height by interpolating between last passed and next dot
-      let fillHeight = 0;
-      if (lastPassedIdx >= 0) {
-        const passedDotRect = dots[lastPassedIdx].getBoundingClientRect();
-        const passedY = passedDotRect.top + dots[lastPassedIdx].offsetHeight / 2 - spineRect.top;
-        fillHeight = passedY - firstDotY;
-
-        // Interpolate towards next dot if there is one
-        if (nextIdx > lastPassedIdx && nextIdx < dots.length) {
-          const nextDotRect = dots[nextIdx].getBoundingClientRect();
-          const nextDotCenter = nextDotRect.top + dots[nextIdx].offsetHeight / 2;
-          const passedDotCenter = passedDotRect.top + dots[lastPassedIdx].offsetHeight / 2;
-          const gap = nextDotCenter - passedDotCenter;
-          if (gap > 0) {
-            const scrolledPast = triggerY - passedDotCenter;
-            interpProgress = Math.min(1, Math.max(0, scrolledPast / gap));
-            const nextY = nextDotRect.top + dots[nextIdx].offsetHeight / 2 - spineRect.top;
-            fillHeight = (passedY - firstDotY) + interpProgress * (nextY - passedY);
-          }
-        }
-      }
-
-      progress.style.top = `${firstDotY}px`;
+      progress.style.top = `${firstCenter}px`;
       progress.style.height = `${Math.max(0, fillHeight)}px`;
 
-      // Update dot states
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('tl-dot-filled', i <= lastPassedIdx);
-        dot.classList.toggle('tl-dot-unfilled', i > lastPassedIdx);
+      // Dot states: filled if they're above the cursor
+      dots.forEach((dot) => {
+        const dotY = dot.getBoundingClientRect().top + dot.offsetHeight / 2 - spineRect.top;
+        dot.classList.toggle('tl-dot-filled', dotY <= fillTo + 2);
+        dot.classList.toggle('tl-dot-unfilled', dotY > fillTo + 2);
       });
     };
 

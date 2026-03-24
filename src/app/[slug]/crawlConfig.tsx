@@ -39,7 +39,7 @@ function RipperVictimsMemorial() {
     <section className="py-8 px-6 bg-[#1C1C1C] rounded-lg mb-6">
       <div className="text-center mb-6">
         <p className="font-label text-xs uppercase tracking-[0.2em] mb-3" style={{ color: '#8B1A1A' }}>In Memoriam</p>
-        <h2 className="font-display text-xl font-bold" style={{ color: '#F5F0E6' }}>The Five Canonical Victims</h2>
+        <h2 className="font-display text-xl font-bold" style={{ color: '#F5F0E6' }}>The Five Victims</h2>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {canonicalVictims.map((victim, i) => (
@@ -60,7 +60,7 @@ function BermondseyFreshnessCaveat() {
     <div className="p-4 bg-[var(--surface)] border-l-4 border-[var(--gold)] rounded mb-6">
       <div className="font-label text-xs uppercase tracking-[0.1em] text-[var(--gold)] mb-2">A living crawl</div>
       <p className="font-body text-sm text-[var(--ink)] leading-relaxed">
-        The Beer Mile is an informal collection of independent taprooms — they open, close, move, and change hours constantly. Check individual taproom websites before you go, especially on weekdays. Saturday is the only day everything is reliably open.
+        The Beer Mile is an informal collection of independent taprooms — they open, close, move, and change hours constantly. Check individual taproom websites before you go, especially on weekdays. Saturday is the only day everything is reliably open. Last verified March 2026.
       </p>
     </div>
   );

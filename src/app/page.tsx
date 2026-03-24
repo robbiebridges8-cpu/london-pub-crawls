@@ -2,6 +2,7 @@
 
 import { crawls } from '@/content/crawls';
 import {
+  SiteNav,
   SiteFooter,
   CrawlCard,
 } from '@/components';
@@ -29,7 +30,7 @@ const valueProps = [
   {
     icon: (
       <svg className="w-12 h-12 text-[var(--claret)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 9.5a4 4 0 00-7 2.633V15m-1.5-2.5h7M8 15c0 1.5.5 3 3 3h1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
     title: 'Completely Free',
@@ -57,8 +58,27 @@ export default function Home() {
     .filter((c): c is typeof liveCrawls[number] => !!c);
   const totalPubs = liveCrawls.reduce((sum, c) => sum + (c.pubCount ?? 0), 0);
 
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "London Pub Crawls",
+    description: "Free, self-guided pub crawls through London",
+    numberOfItems: displayCrawls.length,
+    itemListElement: displayCrawls.map((crawl, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://londonontap.com/${crawl.slug}`,
+      name: crawl.name,
+    })),
+  };
+
   return (
     <>
+      <SiteNav hideUntilScroll />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <main id="main-content">
         {/* Hero Section */}
         <section
@@ -154,18 +174,19 @@ export default function Home() {
 
             <div className="space-y-6 font-body text-lg text-[var(--muted)] leading-relaxed">
               <p>
-                I walked the Monopoly Board in 2023. Twenty-six pubs, one for each property on the board.
-                Old Kent Road to Mayfair. It took twelve hours, several wrong turns, and one very memorable
-                night in a Whitechapel pub I&apos;d never have found otherwise.
+                I walked the Monopoly Board Pub Crawl with friends in 2025. 26 pubs in a single day,
+                one for each property on the board. It took over 12 hours, and completing it was a
+                logistical feat as much as it was a drinking one.
               </p>
               <p>
-                That&apos;s when I realised: there&apos;s no good resource for this. Just scattered Reddit posts,
-                outdated blogs, and closed pubs. So I started mapping them myself.
+                That&apos;s when I realised: there&apos;s no good resource for this. Scattered Reddit posts
+                and half-dead blog posts, nearly all of which were out of date. I ended up having to
+                research the whole crawl myself.
               </p>
               <p>
-                London on Tap is what I wish existed when I started. Proper routes, researched pubs,
-                interactive maps. Free, no booking, no app to download. Just great pubs and the stories
-                that make them special.
+                London on Tap is what I wish existed when I started. Actual routes, researched pubs,
+                and interactive maps. More importantly, free and accessible, needing no booking or app
+                download. Pure focus on the routes, pubs, and stories behind them.
               </p>
               <p className="text-[var(--ink)] font-medium">
                 Every route on this site has been walked by someone who genuinely loves London pubs.

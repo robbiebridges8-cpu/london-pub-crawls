@@ -16,6 +16,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Pale ales & stouts',
     review: 'The Kernel started the Bermondsey Beer Mile before anyone called it that. Evin O\'Riordain founded the brewery in 2010 under a railway arch, and The Kernel\'s Pale Ale — dry, bitter, loaded with American hops — became a London modern classic. The taproom is bare-bones: concrete floor, no frills, just exceptional beer at source. Opens Saturdays only.',
     walkToNext: '5 min walk west',
+    website: 'https://www.thekernelbrewery.com',
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Belgian-leaning & guest beers',
     review: 'Mash Paddle Brewery is a brewing membership club and taproom that doubles as an incubator for start-up brewers. Up to 14 keg lines with a Belgian focus, live music on Fridays, and pizza on Saturdays. A newer addition to the Mile that\'s already earned its spot.',
     walkToNext: '2 min walk',
+    website: 'https://www.mashpaddlebrewery.com',
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Craft beer',
     review: 'Enid Street Tavern opened in 2023 as a second taproom for Bianca Road Brewery. Eight keg taps pour Enid Street-branded beers brewed by Bianca Road alongside rotating guests. A small, relaxed space between the bigger names on the Mile.',
     walkToNext: '1 min walk',
+    website: 'https://enidstreettavern.com',
   },
   {
     id: 4,
@@ -49,6 +52,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Rare imports & nano-brewery',
     review: 'Craft Beer Junction is a bar and bottle shop specialising in rare American imports alongside UK and international beers. Founded in 2021 by beer importer Marcin Clos, with up to 10 taps plus a huge fridge of cans and bottles. They added an on-site nano-brewery in 2024. A good place to pick up something to take home.',
     walkToNext: '2 min walk',
+    website: 'https://www.craftbeerjunction.co.uk',
   },
   {
     id: 5,
@@ -60,6 +64,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Small-batch & experimental',
     review: 'Bianca Road Brew Co is one of the Mile\'s newer operations, founded by a former Kernel brewer. Small-batch and experimental — the tap list changes every visit and they don\'t do safe or predictable. The taproom is intimate and the brewers are usually pouring their own beer.',
     walkToNext: '1 min walk',
+    website: 'https://biancaroad.com',
   },
   {
     id: 6,
@@ -71,6 +76,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'IPAs & pale ales',
     review: 'Cloudwater is Manchester\'s most celebrated craft brewery, with a permanent Bermondsey taproom. Their IPAs and pale ales are consistently among the best in the UK — clean, balanced, and unapologetically hop-forward. The taproom is more polished than some of the grittier arches on the Mile. Usually has a queue on Saturday afternoons.',
     walkToNext: 'Next door',
+    website: 'https://cloudwaterbrew.co',
   },
   {
     id: 7,
@@ -82,6 +88,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Mead',
     review: 'Gosnells is the wildcard on the Bermondsey Beer Mile — they make mead, not beer. Every batch is brewed with British honey, and if you think mead is a novelty for medieval fairs, Gosnells will change your mind. Try the citra-hopped variety. Small, friendly taproom.',
     walkToNext: '5 min walk',
+    website: 'https://www.gosnells.co.uk',
   },
   {
     id: 8,
@@ -93,6 +100,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Porter & mixed styles',
     review: 'Anspach & Hobday is one of the Bermondsey Beer Mile\'s anchor breweries, established in 2013. Their Porter — rich, roasty, with a long chocolate finish — is a proper London porter in the tradition of the style that was invented in this city. Twelve taps, usually busy, reliably excellent.',
     walkToNext: '2 min walk',
+    website: 'https://www.anspachandhobday.com',
   },
   {
     id: 9,
@@ -104,6 +112,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Honey beer',
     review: 'Hiver Taproom brews every beer with British honey, giving the range a distinctive sweetness you won\'t find elsewhere on the Mile. The taproom is lighter and airier than most of the arches, with the Beer Mile\'s biggest outdoor seating area. Right next to Maltby Street Market — combine the two on a Saturday.',
     walkToNext: '2 min walk',
+    website: 'https://hiverbeers.com',
   },
   {
     id: 10,
@@ -115,6 +124,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Barrel-aged & sours',
     review: 'The Barrel Project is a London Beer Factory spin-off dedicated entirely to barrel-aged and sour beers. Two hundred oak barrels line the walls and 24 taps pour the results. The interior looks like a wine cellar that switched sides. If you like sours and wild ales, The Barrel Project is the highlight of the Mile.',
     walkToNext: '2 min walk',
+    website: 'https://thebarrelproject.co.uk',
   },
   {
     id: 11,
@@ -126,6 +136,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Craft beer & cocktails',
     review: 'The Doodle Bar is a warehouse-style bar in a railway arch where the walls are giant chalkboards and you\'re encouraged to draw on them. Craft beers, cocktails, ping pong, and burgers — not a brewery, but a good place to take a breather from the hops. Capacity of around 250, so it rarely feels crowded.',
     walkToNext: '2 min walk',
+    website: 'https://www.thedoodlebar.com',
   },
   {
     id: 12,
@@ -137,6 +148,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Traditional English ale',
     review: 'Southwark Brewing Company is one of the longest-running operations on the Bermondsey Beer Mile. Their Bermondsey Best is an English bitter — the kind of straightforward, well-made pint that doesn\'t need a backstory or a flavour wheel. A solid, unpretentious stop near the western end of the Mile.',
     walkToNext: '3 min walk',
+    website: 'https://www.southwarkbrewing.co.uk',
   },
   {
     id: 13,
@@ -148,6 +160,7 @@ export const bermondseyPubs: BermondseyPub[] = [
     style: 'Craft beer & skatepark',
     review: 'Hop Kingdom is an indoor skatepark and bar spanning two railway arches on the Bermondsey Beer Mile — free to skate, free to enter for drinkers. Run by Hop King, the associated beer brand, with own-brand beers on tap and in cans. Adults only after 6pm. Not your typical taproom.',
     walkToNext: null,
+    website: 'https://hopking.org',
   },
 ];
 

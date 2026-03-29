@@ -16,6 +16,7 @@ export const ripperPubs: RipperPub[] = [
     lng: -0.0712,
     walkToNext: 3,
     review: 'Martha Tabram was drinking at The White Hart on the night of 7 August 1888 before she was murdered in George Yard - the alleyway next door, now Gunthorpe Street. Tabram\'s killing is considered by many Ripperologists to be the first in the Whitechapel series. The cellar housed the barber shop of Severin Klosowski, later convicted as the serial poisoner George Chapman, and named as a Ripper suspect by the officer who arrested him.',
+    website: 'https://www.thewhitehartlondon.co.uk',
   },
   {
     id: 2,
@@ -37,6 +38,7 @@ export const ripperPubs: RipperPub[] = [
     lng: -0.0737,
     walkToNext: 5,
     review: 'The Culpeper (formerly The Princess Alice) is the pub where John Pizer, known as "Leather Apron", threatened local women with a knife and became the first prime Ripper suspect in September 1888. He was cleared at Annie Chapman\'s inquest. Frances Coles, the last official victim of the Whitechapel Murders, was last seen alive leaving here in February 1891. The building has been heavily refurbished and is now a gastropub, but it sits on ground soaked in the case.',
+    website: 'https://www.theculpeper.com',
   },
   {
     id: 4,

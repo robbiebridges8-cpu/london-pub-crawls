@@ -32,6 +32,7 @@ export const beatlesPubs: BeatlesPub[] = [
     bonus: false,
     review: 'Another mews pub just minutes from the Horse & Groom, and part of the same Belgravia circuit that London\'s 1960s elite moved through. The Star Tavern\'s other claim to fame: the Great Train Robbers, led by Bruce Reynolds, are said to have planned the August 1963 heist in the upstairs room, meeting in groups of four to avoid suspicion. A proper Fuller\'s pub with one of the best hidden beer gardens in central London.',
     walkToNext: '15 min walk or Tube to Oxford Circus',
+    website: 'https://www.star-tavern-belgravia.co.uk',
   },
   {
     id: 3,
@@ -44,6 +45,7 @@ export const beatlesPubs: BeatlesPub[] = [
     bonus: false,
     review: 'John Lennon used The Shakespeare\'s Head as a starting point for evenings out in Soho in 1963 and 1964, when Carnaby Street was the centre of Swinging London. The London Palladium, where the Beatles performed on Sunday Night at the London Palladium on 13 October 1963, the broadcast widely credited with igniting Beatlemania, is a two-minute walk away. A bust of Shakespeare with a hand missing (courtesy of the Luftwaffe) looks down from the first floor.',
     walkToNext: '5 min walk',
+    website: 'https://www.jdwetherspoon.com/pubs/all-pubs/england/london/the-shakespeares-head-london',
   },
   {
     id: 4,
@@ -56,6 +58,7 @@ export const beatlesPubs: BeatlesPub[] = [
     bonus: false,
     review: 'De Hems is a Dutch-style pub in the heart of Soho that was a hub for the 1960s music industry. Andrew Loog Oldham, who did PR work for Brian Epstein promoting the Beatles before managing the Rolling Stones, was among the music business regulars. The Ad Lib Club, where the Beatles were regulars, was around the corner on Leicester Place. Trident Studios, where they recorded Hey Jude and several White Album tracks in 1968, was on nearby St Anne\'s Court. The pub also served as the Dutch Resistance HQ in London during WWII.',
     walkToNext: '10 min walk',
+    website: 'https://www.dehems.co.uk',
   },
   {
     id: 5,
@@ -92,6 +95,7 @@ export const beatlesPubs: BeatlesPub[] = [
     bonus: true,
     review: 'A Grade II listed Victorian pub on Kentish Town Road, in the heart of the north London territory John Lennon frequented during his years living in the area. The 1898 interior is one of the finest surviving Victorian pub designs in north London. No Beatles memorabilia or tourist trade — just a proper period pub in Lennon\'s old neighbourhood. Requires tube from the central stretch.',
     walkToNext: 'Take Overground to Kew Bridge',
+    website: 'https://www.assemblyhousenw5.co.uk',
   },
   {
     id: 8,
@@ -104,6 +108,7 @@ export const beatlesPubs: BeatlesPub[] = [
     bonus: true,
     review: 'The City Barge is worth the journey to Chiswick. This 15th-century riverside pub (records go back to 1484) is where the Beatles filmed the tiger-in-the-cellar scene for their 1965 film Help! Ringo\'s line, ordering "two lagers and lime, and two lagers and lime," was delivered at this bar. The Thames-side terrace and the alleyway the band ran down are both intact. Best reached via Kew Bridge station on the Overground.',
     walkToNext: null,
+    website: 'https://www.citybargechiswick.com',
   },
 ];
 

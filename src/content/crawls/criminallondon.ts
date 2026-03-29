@@ -16,6 +16,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Kray murder of George Cornell',
     review: 'The Blind Beggar is the site of the most infamous pub murder in British criminal history. On 9 March 1966, Ronnie Kray walked in and shot George Cornell in the head as he sat at the bar drinking a light ale. The barmaid ducked. The jukebox needle stuck. Cornell was a member of the rival Richardson gang, and his murder was the beginning of the end for the Krays - it led directly to the police investigation that brought them down three years later.',
     walkToNext: '10 min walk north to Bethnal Green',
+    website: 'https://theblindbeggar.com',
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Kray twins\' headquarters',
     review: 'The Kray twins bought The Carpenter\'s Arms in the 1960s and ran it as the headquarters of The Firm. Meetings were held here, and the Kray family\'s Christmas parties were local legend. Reggie Kray reportedly took a carving knife from the kitchen and had a drink at this bar before heading to Stoke Newington to murder Jack "The Hat" McVitie in 1967. The single entrance that the Krays insisted on, so they could watch the door, is still the only way in. Now a quiet gastropub.',
     walkToNext: 'Tube: Bethnal Green to Wapping (Overground, ~15 min)',
+    website: 'https://www.thecarpentersarms.net',
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Judge Jeffreys captured',
     review: 'At The Town of Ramsgate in December 1688, Judge Jeffreys - the Lord Chancellor known as "the Hanging Judge" for sentencing over 300 people to death after the Monmouth Rebellion - was caught here disguised as a coal merchant, trying to escape to France. A mob recognised him and nearly beat him to death before soldiers intervened. He was taken to the Tower of London and died there four months later. Next door, Wapping Old Stairs lead down to the Thames foreshore where convicted pirates were chained at low tide and left to drown.',
     walkToNext: '5 min walk east along the river',
+    website: 'https://townoframsgate.pub',
   },
   {
     id: 4,
@@ -49,6 +52,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Pirates, smugglers & Execution Dock',
     review: 'The Prospect of Whitby dates to around 1520, making it London\'s oldest riverside pub. It was originally called The Devil\'s Tavern - named for its clientele of smugglers, thieves, and pirates. A hangman\'s noose hangs over the river terrace as a memorial to Execution Dock, where pirates including Captain Kidd were hanged and left on display until three tides had washed over them. Judge Jeffreys is said to have watched the executions from the balcony.',
     walkToNext: 'Tube: Wapping to Barbican (~18 min via Overground and Hammersmith & City)',
+    website: 'https://www.greeneking-pubs.co.uk/pubs/tower-hamlets/prospect-of-whitby',
   },
   {
     id: 5,
@@ -60,6 +64,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Body snatchers',
     review: 'The Rising Sun was frequented in the early 1830s by body snatchers John Bishop and Thomas Williams, known as the London Burkers, who operated next to St Bartholomew\'s Hospital. They would drug victims with rum laced with laudanum, drown them in a well, and sell the corpses to the hospital\'s anatomy school. They were convicted of murder in 1831 and hanged at Newgate, a five-minute walk from this pub. Their case led directly to the Anatomy Act of 1832.',
     walkToNext: '5 min walk south-west',
+    website: 'https://risingsunbarbican.co.uk',
   },
   {
     id: 6,
@@ -71,6 +76,7 @@ export const criminalLondonPubs: CriminalLondonPub[] = [
     crime: 'Built on Newgate Prison cells',
     review: 'The Viaduct Tavern sits opposite the Old Bailey, the Central Criminal Court of England and Wales. This is London\'s last surviving Victorian gin palace, built in 1875 directly above the cells of the old Giltspur Street Compter, a debtors\' prison. The original holding cells are still accessible in the cellar. Enjoy a pint here with a prison beneath your feet and a criminal court across the street.',
     walkToNext: null,
+    website: 'https://www.viaducttavern.co.uk',
   },
 ];
 

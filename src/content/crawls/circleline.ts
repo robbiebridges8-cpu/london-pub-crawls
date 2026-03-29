@@ -122,6 +122,7 @@ export const circleLinePubs: CircleLinePub[] = [
     transportToNext: 'Circle Line',
     transportTime: 2,
     review: 'The Mitre is a reliable local near Bayswater station. Nothing fancy but serves a good pint and keeps you moving on the crawl. Opens at noon — the route is timed so you arrive right on cue.',
+    website: 'https://www.themitrehydepark.com',
   },
   {
     id: 8,
@@ -153,6 +154,7 @@ export const circleLinePubs: CircleLinePub[] = [
     transportToNext: 'Circle Line',
     transportTime: 2,
     review: 'The Elephant & Castle is a charming backstreet pub in Kensington with excellent Fuller\'s ales. A proper London local tucked away from the high street bustle.',
+    website: 'https://www.nicholsonspubs.co.uk/restaurants/london/theelephantandcastlekensingtonlondon',
   },
   {
     id: 10,
@@ -184,6 +186,7 @@ export const circleLinePubs: CircleLinePub[] = [
     transportToNext: 'Circle Line',
     transportTime: 2,
     review: 'The Hoop & Toy is a handsome Victorian pub opposite the V&A. Great people-watching from the terrace and solid pub food if you need to refuel.',
+    website: 'https://www.greeneking.co.uk/pubs/greater-london/hoop-and-toy',
   },
   {
     id: 12,
@@ -407,6 +410,7 @@ export const circleLinePubs: CircleLinePub[] = [
     transportToNext: 'Circle Line',
     transportTime: 2,
     review: 'The Globe is a reliable City pub with a good range of ales. Not the most exciting stop but keeps the crawl moving through the northern City.',
+    website: 'https://www.nicholsonspubs.co.uk/restaurants/london/theglobemoorgatelondon',
   },
   {
     id: 26,

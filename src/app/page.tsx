@@ -29,9 +29,9 @@ const valueProps = [
   },
   {
     icon: (
-      <svg className="w-12 h-12 text-[var(--claret)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 9.5a4 4 0 00-7 2.633V15m-1.5-2.5h7M8 15c0 1.5.5 3 3 3h1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
+      <div className="w-12 h-12 rounded-full border-[1.5px] border-[var(--claret)] flex items-center justify-center">
+        <span className="text-[var(--claret)] font-display text-2xl font-bold leading-none" style={{ marginTop: -1 }}>£</span>
+      </div>
     ),
     title: 'Completely Free',
     description: 'No booking fees, no sign-ups, no hidden costs. Just brilliant pubs and good company.',
@@ -99,10 +99,10 @@ export default function Home() {
           }} />
 
           {/* Hero Content */}
-          <div className="relative z-10 flex flex-col items-center px-6 pt-12 md:pt-24 pb-8">
+          <div className="relative z-10 flex flex-col items-center px-6 pt-16 md:pt-24 pb-8">
             <div className="text-center max-w-4xl mx-auto">
               {/* Stats */}
-              <div className="flex justify-center gap-8 md:gap-12 mb-6">
+              <div className="flex justify-center gap-8 md:gap-12 mb-16 md:mb-6">
                 <div className="text-center">
                   <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
                     {liveCrawls.length}
@@ -129,15 +129,15 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-[var(--ink)] mb-8 tracking-tight">
-                London on Tap
-              </h1>
-
               {/* Scrambling Crawl Names */}
-              <div className="mb-12">
+              <div className="mb-4 md:mb-6">
                 <CrawlNameScramble className="text-2xl md:text-3xl lg:text-4xl" />
               </div>
+
+              {/* Main Headline */}
+              <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-[var(--ink)] mb-32 md:mb-16 tracking-tight">
+                London on Tap
+              </h1>
 
               {/* CTA Button */}
               <div className="flex justify-center">
@@ -163,8 +163,27 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Crawls Section */}
+        <section id="crawls" className="pt-20 pb-10 px-6 scroll-mt-20">
+          <div className="max-w-[1200px] mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--ink)]">
+                The Crawls
+              </h2>
+            </div>
+
+            {/* Crawl Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-[var(--ink)]">
+              {displayCrawls.map((crawl) => (
+                <CrawlCard key={crawl.id} crawl={crawl} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
-        <section id="about" className="py-20 px-6 scroll-mt-20">
+        <section id="about" className="pt-10 pb-20 px-6 scroll-mt-20">
           <div className="max-w-[800px] mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)]">
@@ -198,25 +217,6 @@ export default function Home() {
               <p className="font-label text-sm uppercase tracking-wider text-[var(--muted)]">
                 — Robbie, Founder
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Crawls Section */}
-        <section id="crawls" className="py-20 px-6 scroll-mt-20">
-          <div className="max-w-[1200px] mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-12">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--ink)]">
-                The Crawls
-              </h2>
-            </div>
-
-            {/* Crawl Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-[var(--ink)]">
-              {displayCrawls.map((crawl) => (
-                <CrawlCard key={crawl.id} crawl={crawl} />
-              ))}
             </div>
           </div>
         </section>

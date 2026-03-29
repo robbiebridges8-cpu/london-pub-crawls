@@ -59,7 +59,7 @@
 .hero-bg {
   background-image: url('https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1920&q=80');
   background-size: 220%;
-  background-position: center 1%;
+  background-position: center 75%;
 }
 @media (min-width: 1024px) {
   .hero-bg {

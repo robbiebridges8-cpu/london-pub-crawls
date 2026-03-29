@@ -18,6 +18,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'The Black Friar sits at the north end of Blackfriars Bridge — technically not the South Bank, but it\'s two minutes\' walk from the river and the best possible way to start a Thames crawl. Built in 1875 on the site of a 13th-century Dominican priory, the interior was transformed in 1905 into London\'s finest example of Arts and Crafts pub design. Mosaics, marble, bronze reliefs of jolly monks on every surface. John Betjeman saved it from demolition in the 1960s.',
     walkToNext: 'Cross Blackfriars Bridge, 5 min walk',
+    website: 'https://www.nicholsonspubs.co.uk/restaurants/london/theblackfriarblackfriars',
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'Doggett\'s Coat and Badge is named after Thomas Doggett, the 18th-century actor who organised the London Bridge to Chelsea rowing race in 1715 — said to be the oldest continuous sporting event in the UK. A large Nicholson\'s pub spread over four floors at the south end of Blackfriars Bridge, with 10 handpumps and a river terrace stacked with views. The building is post-war concrete that gives little away from outside — inside it\'s much bigger than you\'d expect.',
     walkToNext: '8 min walk east along the river',
+    website: 'https://www.doggettscoatandbadge.co.uk',
   },
   {
     id: 3,
@@ -42,6 +44,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'The Founders Arms is a modern pub with no historical interest and no pretence otherwise. You\'re here for the view — St Paul\'s Cathedral framed perfectly across the river from the terrace. On a clear day it\'s one of the best pub views in London. A good place to settle in with the first proper pint of the crawl.',
     walkToNext: '5 min walk east past Tate Modern',
+    website: 'https://www.foundersarms.co.uk',
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'The Anchor Bankside has had a pub on this site since at least the early 1600s, when Bankside was London\'s red-light entertainment district — theatres, bear pits, and brothels shoulder to shoulder. Samuel Pepys is said to have watched the Great Fire of London from here on 2 September 1666. The current building is 18th century. Shakespeare\'s Globe is next door.',
     walkToNext: '5 min walk east via Clink Street',
+    website: 'https://www.greeneking-pubs.co.uk/pubs/southwark/anchor-bankside',
   },
   {
     id: 5,
@@ -66,6 +70,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'The Mudlark is named after the Victorian mudlarks — scavengers who waded into the Thames at low tide to pick through the filth for coins, nails, bones, and anything they could sell. A small, no-fuss pub tucked under the arches near London Bridge with well-kept ales and a useful position between Borough Market and the river.',
     walkToNext: '3 min walk east',
+    website: 'https://www.mudlarkpub.co.uk',
   },
   {
     id: 6,
@@ -78,6 +83,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: false,
     review: 'The Horniman at Hays occupies a corner of Hays Galleria — the former Hay\'s Wharf, once the largest wharf in the Port of London and known as "the Larder of London." The pub is named after Frederick Horniman, the Victorian tea merchant whose warehouse stood on this site. Recently refurbished with a new mezzanine bar overlooking HMS Belfast. Grand staircase, marble countertops, and a terrace right on the river.',
     walkToNext: '20 min walk east through Bermondsey to bonus pubs',
+    website: 'https://www.nicholsonspubs.co.uk/restaurants/london/thehornimanathayslondonbridge',
   },
   {
     id: 7,
@@ -102,6 +108,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: true,
     review: 'The Angel is a Grade II listed riverside pub dating to the 1830s, built on the site of a 15th-century monks\' guesthouse. Now a Samuel Smith\'s house — cash only, no music, traditional ales at traditional prices. The upstairs balcony is said to be where Turner painted The Fighting Temeraire. Captain Cook and Samuel Pepys are both associated with the site.',
     walkToNext: '5 min walk south-east',
+    website: 'https://www.theangelbermondsey.co.uk',
   },
   {
     id: 9,
@@ -114,6 +121,7 @@ export const southBankPubs: SouthBankPub[] = [
     bonus: true,
     review: 'The Mayflower sits at the mooring point where the Pilgrim Fathers\' ship departed for America in 1620. The pub opened in 1780 as "The Shippe" and was renamed in 1958. CAMRA\'s Lambeth and Southwark Pub of the Year in 2024 and 2025. The wooden jetty over the Thames, the candlelit dining room, and the real ales make The Mayflower one of the finest riverside pubs in London.',
     walkToNext: null,
+    website: 'https://www.themayflowerpub.co.uk',
   },
 ];
 

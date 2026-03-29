@@ -36,6 +36,7 @@ export const monopolyPubs: MonopolyPub[] = [
     color: "#8B4513",
     colorGroup: "brown",
     image: "/pubs/monopoly/lord-nelson.jpeg",
+    website: 'https://www.lordnelsonsouthwark.com',
   },
   {
     id: 2,
@@ -539,6 +540,7 @@ export const monopolyPubs: MonopolyPub[] = [
     color: "#228B22",
     colorGroup: "green",
     image: "/pubs/monopoly/duke-of-york.jpeg",
+    website: 'https://www.greeneking.co.uk/pubs/greater-london/duke-of-york',
   },
   {
     id: 26,

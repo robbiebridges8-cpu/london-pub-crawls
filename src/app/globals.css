@@ -323,16 +323,22 @@ a:hover {
   }
 
   body {
-    font-family: -apple-system, sans-serif !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
     font-size: 11pt !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
   }
 
-  /* Hide everything except the print route */
-  nav, footer, header, section, .no-print,
-  .sm-layout, .sm-map-panel, .sm-progress,
-  .btn-primary, .btn-ghost,
-  [class*="map"], [class*="Map"] {
+  /* Hide everything */
+  nav, footer, header, section,
+  .no-print, .map-fixed, .map-btn-hide, .map-btn-show {
+    display: none !important;
+  }
+
+  /* Hide all children of main except the print route */
+  main > *:not(.print-route),
+  .scroll-content > *:not(main),
+  .crawl-hero,
+  .tl-spine {
     display: none !important;
   }
 
@@ -345,83 +351,78 @@ a:hover {
 
   .print-route h1 {
     font-family: Georgia, serif !important;
-    font-size: 22pt !important;
+    font-size: 18pt !important;
     font-weight: bold !important;
-    margin: 0 0 4pt !important;
+    margin: 0 0 2pt !important;
     padding: 0 !important;
   }
 
   .print-route-meta {
-    font-size: 10pt !important;
+    font-size: 9pt !important;
     color: #555 !important;
-    margin: 0 0 2pt !important;
+    margin: 0 0 4pt !important;
   }
 
   .print-route-logistics {
-    font-size: 9pt !important;
-    color: #777 !important;
-    margin: 0 0 16pt !important;
-    padding-bottom: 8pt !important;
-    border-bottom: 1px solid #ccc !important;
+    font-size: 8pt !important;
+    color: #555 !important;
+    margin: 0 0 10pt !important;
   }
 
-  .print-route-list {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+  .print-route-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 8.5pt !important;
+    line-height: 1.3 !important;
   }
 
-  .print-route-pub {
-    padding: 10pt 0 !important;
-    border-bottom: 1px solid #ddd !important;
-    page-break-inside: avoid;
+  .print-route-table thead tr {
+    border-bottom: 2px solid #000 !important;
   }
 
-  .print-route-pub-header {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 8pt !important;
-    margin-bottom: 4pt !important;
-  }
-
-  .print-route-num {
-    font-family: Georgia, serif !important;
-    font-size: 14pt !important;
+  .print-route-table th {
+    text-align: left !important;
     font-weight: bold !important;
-    min-width: 20pt !important;
+    padding: 3pt 4pt !important;
+    font-size: 8pt !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5pt !important;
   }
 
-  .print-route-pub-header strong {
-    font-size: 12pt !important;
+  .print-route-table td {
+    padding: 4pt 4pt !important;
+    border-bottom: 0.5pt solid #ddd !important;
+    vertical-align: top !important;
   }
 
-  .print-route-addr {
-    font-size: 9pt !important;
-    color: #666 !important;
+  .print-col-num {
+    width: 20pt !important;
+    font-weight: bold !important;
   }
 
-  .print-route-desc {
-    font-size: 10pt !important;
-    line-height: 1.5 !important;
-    margin: 4pt 0 0 28pt !important;
+  .print-col-pub {
+    width: 30% !important;
+    font-weight: bold !important;
+  }
+
+  .print-col-addr {
+    width: 35% !important;
     color: #333 !important;
   }
 
-  .print-route-transport {
-    font-size: 9pt !important;
+  .print-col-next {
+    width: 25% !important;
+    color: #555 !important;
     font-style: italic !important;
-    color: #888 !important;
-    margin: 6pt 0 0 28pt !important;
-    padding-top: 4pt !important;
   }
 
   .print-route-footer {
-    font-size: 8pt !important;
+    font-size: 7pt !important;
     color: #aaa !important;
     text-align: center !important;
-    margin-top: 16pt !important;
-    padding-top: 8pt !important;
-    border-top: 1px solid #ccc !important;
+    margin-top: 8pt !important;
+    padding-top: 4pt !important;
+    border-top: 0.5pt solid #ccc !important;
   }
 
   a {

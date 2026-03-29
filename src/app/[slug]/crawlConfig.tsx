@@ -66,14 +66,26 @@ function BermondseyFreshnessCaveat() {
   );
 }
 
-function toPrintPubs(pubs: { pubName: string; address: string; postcode: string; review: string; walkToNext?: string | number | null }[]): PrintPub[] {
-  return pubs.map((p) => ({
-    name: p.pubName,
-    address: p.address,
-    postcode: p.postcode,
-    review: p.review,
-    walkToNext: p.walkToNext ?? null,
-  }));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toPrintPubs(pubs: any[]): PrintPub[] {
+  return pubs.map((p) => {
+    let transport: string | number | null = null;
+    if (p.walkToNext != null) {
+      transport = p.walkToNext;
+    } else if (p.transportToNext != null) {
+      const mode = p.transportToNext as string;
+      const time = p.transportTime as number | null;
+      transport = time ? `${mode}, ${time} min` : mode;
+    }
+    return {
+      name: p.pubName,
+      address: p.address,
+      postcode: p.postcode,
+      review: p.review,
+      walkToNext: transport,
+      website: p.website ?? undefined,
+    };
+  });
 }
 
 // Monopoly custom marker

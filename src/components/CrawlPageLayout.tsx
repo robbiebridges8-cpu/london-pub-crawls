@@ -27,6 +27,7 @@ export interface PrintPub {
   postcode: string;
   review: string;
   walkToNext: string | number | null;
+  website?: string;
 }
 
 interface CrawlPageLayoutProps {
@@ -140,12 +141,12 @@ export default function CrawlPageLayout({
         <main id="main-content">
           {/* Hero */}
           <div className="crawl-hero">
-            <Link href="/#crawls" className="inline-flex items-center gap-1.5 !text-white hover:opacity-80 transition-opacity mb-3 text-xs font-label uppercase tracking-widest">
+            <a href="/#crawls" className="inline-flex items-center gap-1.5 !text-white hover:opacity-80 transition-opacity mb-3 text-xs font-label uppercase tracking-widest">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               All Crawls
-            </Link>
+            </a>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">{crawl.name}</h1>
             <p className="font-display text-lg italic text-white opacity-90 mb-4">{crawl.tagline}</p>
             <div className="flex gap-3 flex-wrap">
@@ -188,6 +189,17 @@ export default function CrawlPageLayout({
             </div>
           )}
 
+          <div className="py-6 px-6 bg-[var(--surface)] rounded-lg mx-6 mb-6 no-print">
+            <div className="text-center">
+              <h2 className="font-display text-lg font-bold text-[var(--ink)] mb-1">Doing this crawl?</h2>
+              <p className="font-body text-sm text-[var(--muted)] mb-4">Send it to the group chat or print the route.</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <a href={`https://wa.me/?text=${encodeURIComponent(finalShareText)}`} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2 text-sm">{WHATSAPP_ICON} WhatsApp</a>
+                <button onClick={() => window.print()} className="btn-ghost inline-flex items-center gap-2 text-sm">Print Route</button>
+              </div>
+            </div>
+          </div>
+
           {beforeMap}
           <div className="px-6 pb-6">
             <CrawlContext.Provider value={{ onPubClick: handlePubClick }}>
@@ -201,20 +213,35 @@ export default function CrawlPageLayout({
             <div className="print-route">
               <h1>{crawl.name}</h1>
               <p className="print-route-meta">{pubCount} {stopsLabel} · {crawl.duration} · {crawl.area}</p>
-              <ol className="print-route-list">
-                {printPubs.map((pub, i) => (
-                  <li key={i} className="print-route-pub">
-                    <div className="print-route-pub-header">
-                      <span className="print-route-num">{i + 1}</span>
-                      <div><strong>{pub.name}</strong><span className="print-route-addr"> — {pub.address}, {pub.postcode}</span></div>
-                    </div>
-                    <p className="print-route-desc">{pub.review}</p>
-                    {pub.walkToNext && i < printPubs.length - 1 && (
-                      <p className="print-route-transport">→ {typeof pub.walkToNext === 'number' ? `${pub.walkToNext} min walk` : pub.walkToNext}</p>
-                    )}
-                  </li>
-                ))}
-              </ol>
+              {crawl.logistics && (
+                <p className="print-route-logistics">
+                  Start: {crawl.logistics.tubeStart} · Finish: {crawl.logistics.tubeEnd}
+                  {crawl.logistics.specialNotes && <> · {crawl.logistics.specialNotes}</>}
+                </p>
+              )}
+              <table className="print-route-table">
+                <thead>
+                  <tr>
+                    <th className="print-col-num">#</th>
+                    <th className="print-col-pub">Pub</th>
+                    <th className="print-col-addr">Address</th>
+                    <th className="print-col-next">Getting there</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {printPubs.map((pub, i) => (
+                    <tr key={i}>
+                      <td className="print-col-num">{i + 1}</td>
+                      <td className="print-col-pub">{pub.name}</td>
+                      <td className="print-col-addr">{pub.address}, {pub.postcode}</td>
+                      <td className="print-col-next">{i === 0 ? '—' : (printPubs[i - 1].walkToNext ? (typeof printPubs[i - 1].walkToNext === 'number' ? `${printPubs[i - 1].walkToNext} min walk` : printPubs[i - 1].walkToNext) : '—')}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="print-route-footer">
+                londonontap.com · {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </p>
             </div>
           )}
 

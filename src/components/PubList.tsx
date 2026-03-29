@@ -46,8 +46,12 @@ export default function PubList<T extends BasePub>({
 
       const spineRect = spine.getBoundingClientRect();
 
-      // The "cursor" sits at the middle of the viewport
-      const cursorY = window.innerHeight * 0.5;
+      // The "cursor" sits at the middle of the visible content area
+      // When the map is open on mobile, offset past it
+      const mapEl = document.querySelector('.map-fixed.map-open') as HTMLElement | null;
+      const mapBottom = mapEl ? mapEl.getBoundingClientRect().bottom : 0;
+      const visibleTop = Math.max(mapBottom, 0);
+      const cursorY = visibleTop + (window.innerHeight - visibleTop) * 0.5;
 
       // How far the cursor is into the spine (in spine-local coords)
       const cursorInSpine = cursorY - spineRect.top;

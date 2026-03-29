@@ -99,10 +99,10 @@ export default function Home() {
           }} />
 
           {/* Hero Content */}
-          <div className="relative z-10 flex flex-col items-center px-6 pt-16 md:pt-24 pb-8">
+          <div className="relative z-10 flex flex-col items-center px-6 pt-8 md:pt-24 pb-8">
             <div className="text-center max-w-4xl mx-auto">
               {/* Stats */}
-              <div className="flex justify-center gap-8 md:gap-12 mb-16 md:mb-6">
+              <div className="flex justify-center gap-8 md:gap-12 mb-4 md:mb-6">
                 <div className="text-center">
                   <div className="font-display text-2xl md:text-3xl font-bold text-[var(--ink)]">
                     {liveCrawls.length}
@@ -130,8 +130,8 @@ export default function Home() {
               </div>
 
               {/* Scrambling Crawl Names */}
-              <div className="mb-4 md:mb-6">
-                <CrawlNameScramble className="text-2xl md:text-3xl lg:text-4xl" />
+              <div className="mb-3 md:mb-6 h-[42px] md:h-[48px] lg:h-[56px] overflow-hidden">
+                <CrawlNameScramble className="text-xl md:text-3xl lg:text-4xl" />
               </div>
 
               {/* Main Headline */}

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Playfair_Display, Barlow_Condensed, Barlow, Spectral } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { SITE_URL, SITE_NAME } from "@/lib/siteConfig";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-68GCKCY9XS";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-display",
@@ -79,6 +82,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
       <head>
         {/* Leaflet CSS */}
         <link

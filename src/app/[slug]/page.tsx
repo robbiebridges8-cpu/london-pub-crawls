@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: CrawlPageProps): Promise<Meta
 
   const title = `${crawl.name} Pub Crawl`;
   const description =
-    crawl.editorialDescription?.slice(0, 155) ||
+    crawl.metaDescription ||
     crawl.description.slice(0, 155);
   const url = `${SITE_URL}/${crawl.slug}`;
 

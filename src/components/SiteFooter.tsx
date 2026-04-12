@@ -39,6 +39,14 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li className="pt-2">
+                <Link
+                  href="/pubs"
+                  className="font-body text-sm text-white/80 hover:text-white transition-colors"
+                >
+                  All Pubs →
+                </Link>
+              </li>
             </ul>
           </div>
 

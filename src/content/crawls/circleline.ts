@@ -26,7 +26,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '10:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Parcel Yard opens at 8am - the earliest on the Circle Line — making it the ideal launchpad. A vast Fuller\'s pub in the restored Victorian parcel office at King\'s Cross. Great architecture, a solid breakfast menu, and a good selection of ales to line your stomach before the long haul ahead.',
+    review: 'The Parcel Yard opens at 8am, which makes it the earliest start on the Circle Line and the obvious launchpad. It sits in the restored Victorian parcel office above King\'s Cross \u2014 the old Great Northern Railway mail depot, built in 1852 and converted into a Fuller\'s pub in 2012. Two floors, multiple drinking areas, original industrial features, and a view down onto the station concourse through a double-height atrium. Prince Charles came for the opening. Get a proper breakfast here and take your time \u2014 you have twenty-six pubs ahead of you, and the pace picks up fast after this one.',
     website: 'https://www.parcelyard.co.uk',
   },
   {
@@ -42,7 +42,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '10:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Euston Flyer opens at 9am on Saturdays — one of the few pubs on the line ready this early. A large Fuller\'s pub opposite Euston station. Cheap drinks and quick service to keep you moving.',
+    review: 'A big Fuller\'s pub opposite Euston station, the Euston Flyer opens at 9am on Saturdays and gets the crawl\'s second drink out of the way without fuss. The interior is decorated with old railway photos, including one of the original Euston Arch that was demolished in 1961 \u2014 a decision so controversial it helped launch the conservation movement. There\'s sport on the screens and a standard Fuller\'s menu if you\'re doubling up on breakfast. Service is quick, which matters more than ambience at this stage.',
     website: 'https://www.eustonflyer.co.uk',
   },
   {
@@ -58,7 +58,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '11:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Albany is a stylish pub on Great Portland Street with good cocktails and ales. Opens at 11am on Saturdays — the timing works perfectly from the Euston Flyer.',
+    review: 'The Albany dates to the 1860s and was rebuilt in 1898, though it spent a brief identity crisis as the Fitz & Firkin in 1996 before reverting to its proper name. This is Fitzrovia \u2014 the neighbourhood that gave us Orwell and Dylan Thomas \u2014 and the pub has a basement venue called the LowDown that hosts comedy and live music. It had a full refurbishment in 2023 that kept the bones intact while widening the beer range. Opens at 11am on Saturdays, so the timing slots in neatly from the Euston Flyer. Don\'t get comfortable in the basement.',
     website: 'https://www.thealbany.co.uk',
   },
   {
@@ -74,7 +74,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '11:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'A proper Victorian pub near Baker Street station. Solid ales, traditional interior, and a good atmosphere to settle into the rhythm of the crawl.',
+    review: 'Named after the Royal Marylebone Volunteers formed during the Napoleonic Wars, The Volunteer sits a few doors from 221B Baker Street \u2014 or where it would be if it existed. The building dates to around 1815 and is Grade II listed. Underneath it are the original cellars from the Neville family mansion that burned down in 1654, which may explain why staff report a ghost in breeches and a surcoat. The wood-panelled interior mixes period features with enough modernity to keep it from feeling like a museum. A proper settling-in pub for the early phase of the crawl.',
     website: 'https://www.volunteernw1.co.uk',
   },
   {
@@ -90,7 +90,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '12:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Green Man sits right next to Edgware Road station. A PubLove pub with craft beers, burgers, and a relaxed atmosphere. Opens at 9am daily, though by now you won\'t need the early start.',
+    review: 'The oldest surviving licensed premises on Edgware Road, dating from 1720. The Green Man was rebuilt in 1867 as a mid-Victorian corner pub with etched bow windows and a marbled facade, and in 2007 it became the birthplace of PubLove \u2014 the hostel-above-a-pub concept now found across London. Backpackers sleep upstairs; you drink downstairs. Craft beer and burgers are the main draws. It\'s right next to the station, which at this point in the crawl you\'ll appreciate more than architecture.',
     website: 'https://www.publove.co.uk/pubs/green-man',
   },
   {
@@ -106,7 +106,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '12:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Victoria is a traditional Victorian pub tucked away near Paddington Station. Good real ales and a cosy atmosphere. Gets the western arc properly started.',
+    review: 'Built in 1837 \u2014 the year Queen Victoria took the throne, which is either coincidence or marketing \u2014 The Victoria on Strathearn Place is Grade II listed with one of the oldest surviving mahogany bars in the country. The back fittings date to 1864, and upstairs you\'ll find fixtures salvaged from the Gaiety Theatre after it was demolished in 1957. Legend says Dickens wrote parts of Our Mutual Friend here. Fuller\'s Pub of the Year in 2007 and 2009, CAMRA West London Pub of the Year in 2024. We\'d linger if the crawl allowed it.',
   },
   {
     id: 7,
@@ -121,7 +121,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '13:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Mitre is a reliable local near Bayswater station. Nothing fancy but serves a good pint and keeps you moving on the crawl. Opens at noon — the route is timed so you arrive right on cue.',
+    review: 'Grade II listed and a two-star entry on CAMRA\'s National Inventory \u2014 that\'s \u201cinterior of very special national historic interest,\u201d which is not a phrase they throw around. The Mitre was Lord Craven\'s town house before it became a pub in 1859, and the first-floor dining rooms are still named after him. Look for the etched glass, the mosaic floors, and the door panels advertising a \u201cladies only\u201d snug that no longer enforces its policy. A Young\'s pub with an unusual pair of curved entrance doors at the corner. You\'ll be in and out quickly, but notice the glass on your way through.',
     website: 'https://www.themitrehydepark.com',
   },
   {
@@ -137,7 +137,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '13:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Churchill Arms is one of London\'s most recognisable pubs, its exterior smothered in flowers and hanging baskets. A proper Fuller\'s pub with excellent ales and legendary Thai food served in the conservatory out back. Named after Winston Churchill\'s grandparents, who were regulars. Three minutes from Notting Hill Gate station.',
+    review: 'You\'ll recognise it before you reach it. The Churchill Arms spends twenty-five thousand pounds a year on flowers, and the result is the most photographed pub exterior in London \u2014 hanging baskets and window boxes from pavement to roofline. Named after Winston Churchill\'s grandparents, who were regulars when it was still the Bedford Arms in the 1820s. Inside: Churchill memorabilia, Fuller\'s ales, and what claims to be London\'s first pub Thai restaurant, running since the late 1980s in a butterfly-themed conservatory out back. Three minutes from Notting Hill Gate station. The only pub to have won Chelsea Flower Show.',
     website: 'https://www.churchillarmskensington.co.uk',
   },
   {
@@ -153,7 +153,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '14:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Elephant & Castle is a charming backstreet pub in Kensington with excellent Fuller\'s ales. A proper London local tucked away from the high street bustle.',
+    review: 'First licensed as a beer house in 1865, The Elephant & Castle on Holland Street has barely been touched since a 1950s refit that left it looking like a time capsule. The Charrington\'s three-sided mirrored bar-back is the centrepiece \u2014 illuminated panels lettered \u201cWines & Spirits\u201d and \u201cToby Ale\u201d with a small Toby jug image on the right. Historic front pages line the walls, a nod to the journalists who\'ve been drinking here for decades. A backstreet Kensington pub that rewards you for finding it.',
     website: 'https://www.nicholsonspubs.co.uk/restaurants/london/theelephantandcastlekensingtonlondon',
   },
   {
@@ -169,7 +169,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '14:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Stanhope Arms is a traditional pub right by the station. Good spot for a quick half and keeping the momentum going through South Kensington.',
+    review: 'Built in 1869 when this stretch was called Stanhope Terrace, after the Earls of Harrington who owned the land. The wedge-shaped building has gold-painted pilasters on the ground floor and an Edwardian bar-back with mirrored panels and a broken pediment. CAMRA lists it as a one-star National Inventory pub. The bar counter is still in its original position, having once served three separate rooms that have since been opened up. A Greene King pub right opposite Gloucester Road station \u2014 grab a half and keep moving south.',
     website: 'https://www.stanhopearms.co.uk',
   },
   {
@@ -185,7 +185,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '15:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Hoop & Toy is a handsome Victorian pub opposite the V&A. Great people-watching from the terrace and solid pub food if you need to refuel.',
+    review: 'Probably the oldest established tavern in Kensington, dating to around 1515 when it was called the Grapes. The name changed to Hoop & Grapes, then Hoop & Toy in 1784 \u2014 the \u201ctoy\u201d being a rum-soaked leather peg used to stop horses grinding their teeth, which is the kind of fact you can\'t make up. The pub sits opposite the V&A, and its history includes a connection to London\'s first congestion charge in 1796: the owner built a second pub up the road to dodge the toll at Brompton Gate. Rebuilt in 1844, front redone in red brick in 1927.',
     website: 'https://www.greeneking.co.uk/pubs/greater-london/hoop-and-toy',
   },
   {
@@ -201,7 +201,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '15:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Antelope is a proper Chelsea pub with a traditional interior and excellent ales. One of the highlights of the southern arc of the Circle Line.',
+    review: 'Two front doors, one pub. The Antelope was built in 1827 for the servants of the Belgravia gentry \u2014 one entrance for the butler and grander household staff, another for those of lower rank. Both doors are still there, but the class system inside has flattened to pin-stripe suits and builders sharing the island bar. It\'s a Fuller\'s pub on a quiet Eaton Terrace side street near Sloane Square, with etched glass windows and wood-panelled rooms upstairs. The southern arc of the crawl is about to get good \u2014 savour this one.',
     website: 'https://www.antelopepub.com',
   },
   {
@@ -217,7 +217,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '16:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'A craft beer paradise with 10 cask ales and dozens of keg lines. Essential stop for beer lovers. One of the best pubs on the whole crawl.',
+    review: 'London\'s first craft beer-focused pub, opened in 2009 in a former estate pub on Charlwood Street. Ten handpumps, around twenty keg lines, and a cellar of over two thousand vintage bottles \u2014 some of the last examples in the world, curated since day one. The building is Grade II listed, the corner-site layout is compact, and on Sundays there\'s live folk music from half four. CAMRA branch Pub of the Year in 2019 and again in 2025. If you\'re going to spend an extra ten minutes anywhere on the crawl, spend them here. Order a half of something you\'ve never heard of.',
     website: 'https://www.caskpubandkitchen.com',
   },
   {
@@ -233,7 +233,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '16:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Red Lion is a Westminster institution where MPs and civil servants have been drinking for centuries. The division bell still rings for Commons votes.',
+    review: 'A tavern called Hopping Hall stood on this spot as early as 1434. The current Red Lion dates from about 1890, and its regulars are MPs, lobbyists, and civil servants \u2014 it sits on Parliament Street, a minute\'s walk from Downing Street and the Palace of Westminster. The division bell is still installed, though it\'s largely ceremonial now that MPs have phones. Charles Dickens visited as a boy. The occasional ringing still confuses tourists who think it\'s a fire alarm.',
     website: 'https://www.redlionwestminster.co.uk',
   },
   {
@@ -249,7 +249,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '17:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'A magnificent Victorian pub opposite Big Ben with ornate glass and woodwork. Political history oozes from every corner. A must-visit.',
+    review: 'Named after St Stephen\'s Chapel, the original meeting place of the House of Commons. There\'s been a pub here since at least the eighteenth century, but the current building dates from 1875 \u2014 French Renaissance architecture, Grade II listed, with ornate ceilings you can inspect from a Victorian-era mezzanine. Baldwin, Churchill, and Macmillan all drank here. The pub closed in the 1980s during Jubilee Line construction and Portcullis House building work, then reopened in 2003 after a full restoration by Hall & Woodhouse. The division bell was restored at the same time. Big Ben is directly across the road.',
     website: 'https://www.ststephenstavern.co.uk',
   },
   {
@@ -265,7 +265,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '17:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Sherlock Holmes is a themed pub with a recreation of Holmes\' study upstairs. Touristy but fun, and conveniently close to the station.',
+    review: 'Until 1957, this was the Northumberland Arms \u2014 and before that, the Northumberland Hotel, which may be the one Conan Doyle used in The Hound of the Baskervilles. Whitbread bought the entire Festival of Britain Sherlock Holmes exhibit after its world tour and installed it upstairs: a full recreation of 221B Baker Street behind plate glass, curated by the Sherlock Holmes Society of London. The building dates from 1736. It\'s a Greene King pub now, and yes, it\'s touristy, but the recreation is genuinely detailed \u2014 Persian slipper for the tobacco, gasogene for Watson\'s soda, jack-knife for the correspondence.',
     website: 'https://www.sherlockholmespub.com',
   },
   {
@@ -281,7 +281,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '18:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'An independent brewpub on Essex Street with its own microbrewery in the basement. Open Saturdays until midnight — a rarity in this part of London. The house-brewed ales are worth trying, and it\'s right next door to Temple station.',
+    review: 'An independent brewpub on Essex Street with a five-barrel brew house visible from the bar and from street level. Opened in 2014 as the Essex Street Brewery, it became Temple Brew House after a 2022 refit following a two-year closure. The basement \u2014 which is said to be the original street level from the 1670s, when entrepreneur Nicholas Barbon redeveloped the old Essex House grounds \u2014 is where the brewing happens. Part of the City Pub Group\'s micro-brew chain alongside Bath and Cambridge. Right next to Temple station.',
     website: 'https://www.templebrewhouse.com',
   },
   {
@@ -297,7 +297,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '18:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The most extraordinary pub interior in London. An Arts and Crafts masterpiece with marble walls and bronze friars. Nearly demolished in 1964 but saved by John Betjeman\'s campaign. Unmissable.',
+    review: 'The most extraordinary pub interior in London, and we\'re not being hyperbolic. Built in 1875 on the site of a Dominican friary, the ground-floor interior was redesigned around 1905 by architect H. Fuller-Clark and artist Henry Poole in an Arts and Crafts style that borders on the hallucinatory: marble walls, bronze reliefs of jolly friars, mosaic ceilings, and carved aphorisms like \u201cHaste Is Slow\u201d above the bar. In the 1960s it was nearly demolished for a road-widening scheme. John Betjeman led the campaign that saved it. CAMRA National Inventory. Stop rushing. Drink slowly. Look up.',
     website: 'https://www.nicholsonspubs.co.uk/theblackfriarlondon',
   },
   {
@@ -313,7 +313,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '19:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'Built in 1668 using timber from ships broken up after the Great Fire, Ye Olde Watling is one of the oldest pubs in the City. Open Saturdays noon to 8pm — check the time, as the crawl arrives around 7pm. A Nicholson\'s pub with good cask ales and a proper sense of history.',
+    review: 'Rebuilt by Christopher Wren in 1668 to house the workers constructing St Paul\'s Cathedral, using timber salvaged from decommissioned ships. The plans for St Paul\'s were supposedly drawn up in what is now the dining room upstairs. The old-world timber-framed interior largely dates from a sympathetic 1901 refit. Open Saturdays noon to 8pm \u2014 the crawl arrives around 7pm, so check the time and don\'t dawdle at Blackfriars. A Nicholson\'s pub on the ancient Roman road of Watling Street. You\'re in the City now, and the City closes early.',
     website: 'https://www.nicholsonspubs.co.uk/restaurants/london/yeoldewatlingwatlingstreetlondon',
   },
   {
@@ -329,7 +329,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '19:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Hydrant is a Fuller\'s pub on Monument Street, open Saturdays unlike most City pubs. A solid mid-crawl stop with a good range of ales and reliable food if you need refuelling for the final push.',
+    review: 'A Fuller\'s pub at the foot of the Monument, renamed in 2015 from The Fine Line with a light fire-brigade theme \u2014 appropriate given it\'s two hundred feet from where the Great Fire started. The building is modern, the beer range is decent, and the main virtue at this stage of the crawl is that it opens on Saturdays when most City pubs don\'t. If you need food, this is your last reliable chance before the final push.',
     website: 'https://www.thehydrant.co.uk',
   },
   {
@@ -345,7 +345,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '20:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Monument pub sits right at the foot of the Monument to the Great Fire. A solid City pub with good views and a convenient location.',
+    review: 'A Greene King pub at 18 Fish Street Hill, directly beneath the Monument to the Great Fire. The column itself is 202 feet tall and 202 feet from the Pudding Lane bakery where the fire began in 1666 \u2014 designed by Robert Hooke, not Wren, which is worth knowing for pub-quiz purposes. The pub is a straightforward City local: cask ales, British menu, screens showing sport. At this point you\'re twenty pubs deep and the quality of the architecture matters less than the fact that it\'s open and serving.',
     website: 'https://www.monumentpub.co.uk',
   },
   {
@@ -361,7 +361,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '20:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Hung Drawn and Quartered is named after the gruesome fate of traitors at the nearby Tower. A large Fuller\'s pub with good food and views toward the Tower of London.',
+    review: 'Named after the execution method historically performed at nearby Tower Hill, where everyone from the Archbishop of Canterbury (1381) to Lord Lovat (1747, the last public execution on the site) lost their heads. The building was a bank, and before that part of Christ\'s Hospital, a school founded in 1552. It\'s a Fuller\'s Ale & Pie pub now, Grade II listed, with high ceilings, wood panelling, and portraits of monarchs on the walls. Views toward the Tower of London if you can still focus.',
     website: 'https://www.hung-drawn-and-quartered.co.uk',
   },
   {
@@ -377,7 +377,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '21:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'One of the few timber-framed buildings to survive both the Great Fire and the Blitz. The crooked floors and leaning walls are part of the charm. Historic and atmospheric.',
+    review: 'The Great Fire of 1666 stopped fifty yards short of this building. That\'s why it\'s still standing \u2014 one of the few sixteenth-century timber-framed structures left in the City. The front leans noticeably outward, held together by extensive restoration work, and the floors inside are not level. Grade II* listed. The exposed wooden beams and period windows are the real thing, not a reproduction. Opposite Aldgate station. You\'re in the home stretch now \u2014 four pubs to go.',
     website: 'https://www.hoopandgrapes.co.uk',
   },
   {
@@ -393,7 +393,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '21:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'A former ballroom inside Liverpool Street station with extraordinary gilded ceilings and baroque plasterwork. One of London\'s most spectacular pub interiors, inexplicably inside a train station.',
+    review: 'Wetherspoon\'s first-ever station pub, opened in 1991 inside the former ballroom of the Great Eastern Hotel at Liverpool Street. Named after Lord Claud Hamilton, chairman of the Great Eastern Railway from 1893 to 1923. The Rococo interior \u2014 modelled on the Palais Soubise in Paris during a 1901 redesign \u2014 is Grade II* listed: gilded plasterwork, painted panels, and a mezzanine that once held the ballroom orchestra. It is a genuinely surreal place to have your twenty-fourth drink. Cheap, grand, and always busier than you\'d expect.',
     website: 'https://www.jdwetherspoon.com',
   },
   {
@@ -409,7 +409,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '22:25',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Globe is a reliable City pub with a good range of ales. Not the most exciting stop but keeps the crawl moving through the northern City.',
+    review: 'A Nicholson\'s pub on a prominent Moorgate corner, with an elaborate French classical stucco facade that dates from an 1870s refit of an early-nineteenth-century building. The name comes from the Portuguese globe emblem, advertising the fine Portuguese wines once served here. In 2008 it absorbed the neighbouring John Keats pub \u2014 named for the Romantic poet who may have been born on the site in 1795, though this is disputed. Late in the crawl, low on glamour, but it keeps a decent range of cask ales and it\'s open when you need it to be.',
     website: 'https://www.nicholsonspubs.co.uk/restaurants/london/theglobemoorgatelondon',
   },
   {
@@ -425,7 +425,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '22:55',
     transportToNext: 'Circle Line',
     transportTime: 2,
-    review: 'The Fox & Anchor is a beautifully restored Victorian pub on Charterhouse Street, open until 1am on Saturdays. The ornate tiled facade and etched glass interior are among the best-preserved in London. Famous for its full English breakfasts, though at this hour you\'re here for the ales. The penultimate stop — don\'t linger, Farringdon awaits.',
+    review: 'The Art Nouveau tiled facade \u2014 running from pavement to roofline gable, dated 1898 \u2014 was designed by William J. Neatby of Doulton & Co., the same artist who did the interior of Harrods\' food hall. The Fox & Anchor sits on the edge of Smithfield Market and held one of London\'s early-morning licences: it used to open at 6:30am for the meat porters. Black-and-white portraits of the butchers and porters line the interior. Open until 1am on Saturdays, with six bedrooms upstairs if the crawl has broken you. The penultimate stop \u2014 Farringdon is ten minutes away.',
     website: 'https://www.foxandanchor.com',
   },
   {
@@ -441,7 +441,7 @@ export const circleLinePubs: CircleLinePub[] = [
     endTime: '23:25',
     transportToNext: null,
     transportTime: null,
-    review: 'You made it. Formerly the Jerusalem Tavern, renamed in 2022 but otherwise unchanged — a tiny, perfectly preserved 18th-century pub still serving St Peter\'s ales from Suffolk. Last orders around 22:45, so don\'t dawdle at Barbican. 27 stations, 27 pubs, one legend.',
+    review: 'You made it. Formerly the Jerusalem Tavern \u2014 renamed in 2022 when St Peter\'s Brewery didn\'t renew the lease, but otherwise unchanged. The building is a 1720 town house with an 1810 shopfront, and it became a pub in 1996 when it was leased to St Peter\'s as their only London outlet. It\'s tiny, perfectly preserved, and still serves St Peter\'s ales from Suffolk. The site sits within the old grounds of the Clerkenwell Priory, headquarters of the Knights Hospitaller in England. Last orders come early, so don\'t linger at Fox & Anchor. Twenty-seven stations, twenty-seven pubs.',
     website: 'https://theholytavern.com',
   },
 ];

@@ -1,7 +1,9 @@
 'use client';
 
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { BasePub } from '@/content/crawls/types';
+import { getPubSlug } from '@/lib/pubs';
 import { useCrawlContext } from './CrawlContext';
 
 export interface PubListProps<T extends BasePub> {
@@ -25,6 +27,7 @@ export default function PubList<T extends BasePub>({
 }: PubListProps<T>) {
   const { onPubClick: contextPubClick } = useCrawlContext();
   const handlePubClick = onPubClick ?? contextPubClick;
+  const [expandedPubs, setExpandedPubs] = useState<Set<number>>(new Set());
   const mc = markerColor;
   const mtc = markerTextColor;
   const spineRef = useRef<HTMLDivElement>(null);
@@ -128,9 +131,35 @@ export default function PubList<T extends BasePub>({
               </div>
               <div className="tl-content">
                 {renderLabel && renderLabel(pub)}
-                <h3 className="tl-name">{pub.pubName}</h3>
+                <h3 className="tl-name">
+                  {(() => {
+                    const slug = getPubSlug(pub.pubName, pub.address);
+                    return slug ? (
+                      <Link href={`/pubs/${slug}`} className="tl-pub-link" onClick={e => e.stopPropagation()}>
+                        {pub.pubName}
+                      </Link>
+                    ) : pub.pubName;
+                  })()}
+                </h3>
                 <p className="tl-addr">{pub.address}, {pub.postcode}</p>
-                <p className="tl-desc">{pub.review}</p>
+                {expandedPubs.has(pub.id) ? (
+                  <>
+                    <p className="tl-desc">{pub.review}</p>
+                    <button
+                      className="tl-toggle"
+                      onClick={(e) => { e.stopPropagation(); setExpandedPubs(prev => { const next = new Set(prev); next.delete(pub.id); return next; }); }}
+                    >
+                      Show less
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="tl-toggle"
+                    onClick={(e) => { e.stopPropagation(); setExpandedPubs(prev => new Set(prev).add(pub.id)); }}
+                  >
+                    Read more
+                  </button>
+                )}
                 <div className="tl-links">
                   <a href={mapsUrl(pub)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
                     Open in Maps
@@ -202,6 +231,10 @@ export default function PubList<T extends BasePub>({
           cursor: pointer;
         }
         .tl-pub:hover .tl-name { color: var(--claret); }
+        .tl-pub-link {
+          color: inherit; text-decoration: none;
+        }
+        .tl-pub-link:hover { text-decoration: underline; }
 
         .tl-dot {
           position: absolute; left: -38px; top: 0;
@@ -236,6 +269,14 @@ export default function PubList<T extends BasePub>({
           color: #3D2E1F; line-height: 1.6;
           margin: 0 0 10px;
         }
+        .tl-toggle {
+          font-family: var(--font-body);
+          font-size: 13px; font-weight: 500;
+          color: var(--teal); background: none; border: none;
+          padding: 0; margin: 0 0 10px; cursor: pointer;
+        }
+        .tl-toggle:hover { text-decoration: underline; }
+
         .tl-links {
           display: flex; align-items: center; gap: 6px;
         }

@@ -1,0 +1,237 @@
+---
+name: crawl-copywriter
+description: Writes three kinds of crawl-level copy for London on Tap — the one-line summary (homepage card, meta description, hero tagline), the full intro essay (400-600 word editorial opener on the crawl page), and the logistics block (structured start/end/duration/distance facts). Use this skill when the user wants copy for any crawl-level element: a one-liner, a tagline, a summary, a crawl intro, an "About this crawl" section, the logistics panel, or the top-of-page content for a crawl landing page. Also trigger on phrases like "write the crawl page for X", "tagline for the Beatles crawl", "one-line summary for Bermondsey", "the Monopoly intro needs redoing", or any request for crawl-level content. Handles all three modes; ask the user which one(s) they want if unclear. Do NOT use this for individual pub descriptions — there's a separate pub-copywriter skill for that.
+---
+
+# Crawl Copywriter
+
+This skill writes the crawl-level copy for London on Tap. Every crawl page has three distinct pieces of crawl-level content, each with a different job and different rules:
+
+1. **The one-liner** — a single sentence (under 15 words) used on the homepage grid, meta description, hero, and "more crawls" cards. The most-read copy on the site per character.
+2. **The intro essay** — 400-600 words of prose with a thesis, at the top of the crawl page. The piece that gets indexed and cited.
+3. **The logistics block** — structured facts (start, end, duration, distance, hazards). Terse. Close to data, not prose.
+
+These are three genuinely different jobs. Do not conflate them. A good one-liner is not a short essay; a good essay is not an expanded one-liner; a good logistics block is not a prose paragraph.
+
+When the user invokes this skill, figure out which piece(s) they want. Ask if unclear. Handle each mode using its own rules below.
+
+---
+
+## Mode 1: The one-liner
+
+The one-liner is a single sentence that describes what makes this specific crawl what it is. It appears everywhere — homepage card, page hero, meta description, social cards, "more crawls" sections. It is the single highest-leverage piece of copy on the site per character.
+
+### Rules
+
+**Length:** 8-14 words. Hard ceiling at 15. Meta description has ~155 character cap but that's not the constraint here — punch is.
+
+**Structure options** (use the one that fits the crawl, don't force a pattern):
+
+- **The rule.** States the crawl's defining constraint. "A pub for every space on the London Monopoly board." "One pub per station on the original Circle Line loop."
+- **The claim.** A specific factual statement about the crawl. "London's most concentrated stretch of independent breweries, a mile of railway arches." (Too long — tighten.)
+- **The place + angle.** Descriptor that anchors geography and theme. "Whitechapel's darkest corners, one pint at a time." (From the PRD — works.)
+- **The implicit question.** Poses the thing without stating it. "Where London's writers actually drank — not where the plaques say they did."
+
+Avoid: the "X meets Y" formula ("History meets happy hour"), rhyming/alliteration for its own sake, questions as taglines, anything starting with "Discover" or "Explore" or "Journey through."
+
+### Banned phrases — instant rewrite
+
+- "Discover", "Explore" (as opener), "Journey through", "Step into", "Uncover"
+- "Legendary", "iconic", "ultimate", "epic" — all dead from overuse
+- "One pint at a time" is fine ONCE across the 10 crawls (it's already on Jack the Ripper in the PRD). Don't repeat.
+- "Drink your way through [anything]"
+- "A pub crawl like no other"
+- "The best pub crawl in London"
+- "Not for the faint of heart" and similar challenge-framings
+- Any adjective + "history" ("rich history," "fascinating history," "dark history")
+
+### Test for the one-liner
+
+A good one-liner passes two tests:
+
+1. **Specificity:** Could this sentence describe any other pub crawl? If yes, it's too generic. Rewrite until it could only describe this one.
+2. **Honesty:** Is the claim true? "London's most haunted pubs" is true-ish. "London's 10 most haunted pubs" is a falsifiable claim you should only make if it's defensible.
+
+### The existing set — benchmark
+
+From the PRD:
+
+- Monopoly: "A pub for every space on the London Monopoly board" — works (8 words, specific, true)
+- Circle Line: "One pub per station on the original Circle Line loop" — works
+- Bermondsey: "South London's legendary brewery trail" — "legendary" banned, "trail" vague. Rewrite candidate: "Fifteen breweries along a mile of railway arches."
+- Jack the Ripper: "Whitechapel's darkest corners, one pint at a time" — works
+- Beatles: "Follow the Fab Four through London's drinking spots" — passable but "drinking spots" is weak. Also, per the thesis, the Beatles barely drank in London. Candidate: "The London pubs the Beatles knew — recording breaks, not nights out."
+- Historic London: "London's oldest and most storied pubs" — "storied" banned. Candidate: "London's oldest pubs, and the fictions they've chosen to keep."
+- South Bank: "London's greatest riverside pubs, Blackfriars to Wapping" — works (specific, geographic, honest)
+- Criminal London: "Gangsters, smugglers, and the pubs where it all went down" — "where it all went down" is tired. Candidate: "The East End's criminal folklore, told in the pubs that keep it alive."
+- Literary London: "Where London's writers drank — Dickens, Orwell, and more" — passable, the name-drop works
+- Haunted London: "London's most haunted pubs and the ghosts that haunt them" — tautological. Candidate: "The pubs with ghost stories, and who benefits from telling them."
+
+Some of those rewrites are more honest/editorial than the PRD versions, which were written fast. When the user invokes this mode, show them the existing one-liner and a rewrite candidate, and let them pick.
+
+### When writing one-liners in bulk
+
+If doing multiple at once, vary the structure across crawls. Don't write 10 one-liners that all follow the same pattern. Mix rules, claims, place-angles, and implicit-questions. Sameness of structure across the grid is the single biggest tell that they were all LLM-generated.
+
+---
+
+## Mode 2: The intro essay
+
+The intro essay is 400-600 words of prose at the top of the crawl page. This is the piece that gets indexed, cited by LLMs, and decides whether the crawl page is any good.
+
+### The non-negotiable rule — every essay needs a thesis
+
+A slop intro tells the reader what the crawl is. A good intro tells the reader what the crawl *means* — what's interesting or strange or specific about this particular crawl that isn't true of any other.
+
+**If you can't articulate the thesis in one sentence, you're not ready to write the essay. Go back to research.**
+
+Provisional theses for the 10 launch crawls (draft positions, argue with them):
+
+- **Monopoly:** The board maps onto a wealth gradient you walk through in real time — from Old Kent Road's £60 to Mayfair's £400 — and by the time you reach the greens you're staggering through streets most Londoners can't afford to live on.
+- **Jack the Ripper:** The discomfort of drinking pints in streets where women were murdered, and how the pubs have handled — or failed to handle — that history. (Flag to user: this is an editorial position. Confirm before writing.)
+- **Bermondsey Beer Mile:** A specific, recent, commercially-driven phenomenon — fifteen independent breweries ended up in disused railway arches because of Zone 2 rents and Saturday licensing. It didn't exist in 2010 and it might not exist in 2035.
+- **Circle Line:** An older London pub crawl tradition, predating most of the internet-era ones, using the tube as armature. The original loop TfL broke up in 2009; the crawl pretends it didn't happen.
+- **Historic London:** London's oldest pubs are almost all rebuilds or reconstructions. The interesting thing isn't their age but how they perform age — what each one has decided to present as its history.
+- **Literary London:** Writers drank in pubs because pubs were warm and cheap, not because pubs were inspiring. The Fitzrovia circuit is less literary pilgrimage than acknowledgement that a lot of important books were written by people who were quite drunk.
+- **South Bank:** The riverside pub as a London subgenre — the specific pleasure of drinking on the Thames at tide, and how a stretch of water changes what a pub is trying to be.
+- **Criminal London:** East End criminal folklore is more myth than history, and the pubs are where the myth gets maintained. The Krays specifically loom larger in memory than in fact.
+- **Beatles:** The Beatles were a Liverpool band who spent most of their London time in recording studios. The "Beatles pub crawl" is honestly about adjacent pubs and near-miss venues. Be honest about this.
+- **Haunted London:** Ghost stories attached to London pubs are almost entirely 19th-century inventions, repeated until they became part of the pubs' identities. The crawl is a tour of successful myth-making.
+
+Always confirm the thesis with the user before writing prose.
+
+### The voice — Robbie's
+
+Read the pub-copywriter skill's voice corpus for the benchmark. Core patterns:
+
+- First-person-plural ("we did this crawl four times before we got it right")
+- Direct second-person address ("you'll want to start at...")
+- Dry undercutting, sparingly deployed
+- Practical detail woven into prose, not siloed
+- No cosy pub-writing register
+
+The essay can be slightly more reflective than pub entries — it has room to breathe — but don't become literary. Don't pastiche Sinclair or Macfarlane. It's a person who has done this crawl telling you what it's actually like.
+
+### Structural rules for the essay
+
+**Length:** 400-600 words. Under 400 won't rank; over 600 readers bail. 450-500 is the sweet spot.
+
+**Opening:** Do NOT open with "The [Crawl Name] is..." or "Welcome to..." or any framing sentence. Open in the middle of something — a scene, a fact, a claim, a memory. Examples:
+
+- Monopoly: "The oldest London Monopoly board was printed in 1936. Most of the streets on it still exist. A few — Vine Street, for one — don't, which is its own kind of problem for a pub crawl that promises to visit them all."
+- Bermondsey: "Until about 2012, the railway arches between London Bridge and Bermondsey stations were mostly full of mechanics. Then a few people started brewing beer in them."
+- Jack the Ripper: "Five women were murdered in Whitechapel in the autumn of 1888. They had names. They are not the reason you're on this pub crawl, but they should be."
+
+No throat-clearing. No "welcome to London Crawl." Start in the material.
+
+**Body:** Weave the practical and the narrative. The reader needs to know things (start point, length, how long it takes, what to expect) but shouldn't feel the information being delivered as a list. Aim for sentences like: "you'll want to start at Old Kent Road, partly because it's the cheapest square on the board and there's something apt about that, partly because by the time you reach Mayfair eleven hours later you'll want the payoff of ending somewhere that still has doormen." One sentence, three pieces of information, no list.
+
+**No subheadings in the essay.** Continuous prose only. If you find yourself wanting to break into "History" / "Route" / "Tips" — stop, you've lost the thread.
+
+**Ending:** The essay stops. It does not summarise. It does not encourage the reader to book or share. No CTAs inside the essay — the page has CTAs elsewhere. End on whatever the last substantive thing was.
+
+### Banned phrases — essay mode
+
+All of the pub-copywriter banned list applies. In addition:
+
+- "Welcome to [anything]"
+- "The ultimate [crawl type]"
+- "Everything you need to know"
+- "Whether you're a local or a tourist"
+- "Without further ado"
+- "Embark on a journey"
+- "Take on the challenge"
+- "Discover the hidden"
+- Sentences starting with "Get ready to..."
+- Closing lines of the shape "So grab your mates and [verb]"
+
+---
+
+## Mode 3: The logistics block
+
+The logistics block is structured data about the crawl. It sits beneath the essay as the terse practical counterpart. Deliberate contrast: the essay has a voice, the logistics block is just facts.
+
+### What it contains
+
+Required items (all crawls):
+- **Start:** Nearest tube/rail station to the first pub. Named station, not "central London."
+- **End:** Nearest tube/rail station to the last pub.
+- **Pubs:** Count.
+- **Distance:** Approximate walking distance in miles, from the first pub to the last, following the crawl order. Round to nearest half-mile.
+- **Duration:** Realistic total time, including transport between pubs and time in each pub. For drinking-focused crawls (Monopoly), assume 20 min per pub plus transport. For relaxed crawls (Bermondsey), assume longer. State whether most people finish.
+- **Best day/time:** When the pubs are open and when it's genuinely enjoyable. Saturday-only venues flagged.
+
+Optional items (where relevant):
+- **Known hazards:** Crawl-specific operational advice that catches people out. "The Ten Bells closes its upstairs after 8pm, which is where the Ripper history actually is." "Kernel and Fourpure queue early — go there first." Must be specific. Generic tips are banned.
+
+### Format
+
+Short bullet points. Four to seven items max. No adjectives. No flourishes. No prose.
+
+Good:
+> - **Start:** London Bridge (Bermondsey Street exit)
+> - **End:** South Bermondsey
+> - **Pubs:** 15
+> - **Distance:** ~1.5 miles
+> - **Duration:** 6-8 hours; most people hit 8-10 venues
+> - **Best day:** Saturday 11am-7pm — most taprooms are Saturday-only
+> - **Known hazard:** Kernel and Fourpure queue early; start there
+
+Bad (the anti-pattern):
+> - **Comfortable shoes:** Most of the route is on foot...
+> - **Stay hydrated:** Pace yourself with water breaks...
+> - **Eat along the way:** Stick to meal deals...
+
+Every generic tip. If the advice applies to any crawl, it doesn't go here. Only crawl-specific operational advice makes it in.
+
+### Data sources
+
+Most logistics fields can be extracted from the crawl's pub data file (the TypeScript files in `src/content/crawls/`). Specifically:
+
+- **Pub count:** length of the pubs array
+- **Distance:** sum of haversine distances between consecutive pubs, plus rough adjustment for real-walking overhead (~1.3x straight-line)
+- **Duration:** sum of `transportTime` values + (pub count × 20 min average in each pub)
+- **Start/end stations:** nearest tube station to first and last pub coordinates
+
+If generating logistics for a crawl, pull what you can from the data file first, then ask the user to confirm and fill in the "best day" and "known hazards" fields, which are editorial judgments the data doesn't capture.
+
+---
+
+## The process — what to do when invoked
+
+1. **Identify which mode(s) the user wants.** One-liner, essay, logistics, or some combination. Ask if unclear.
+
+2. **For one-liners:**
+   - Show the existing one-liner from the PRD (if any)
+   - Propose 2-3 rewrite candidates using different structures
+   - Let the user pick or push back
+
+3. **For essays:**
+   - Thesis check first — propose or confirm the thesis in one sentence before writing prose
+   - Research pass — web search for origin, history, current state, notable attempts. Build a dossier of 8-12 specific facts.
+   - Draft the essay — 400-600 words following the structural rules
+   - Self-check — run through the banned list, check for subheadings, check for bow-ending
+   - Return the draft plus a note on stated thesis and any research flags
+
+4. **For logistics:**
+   - Pull what can be extracted from the crawl data file
+   - Ask user to confirm calculated values (distance, duration) and fill in editorial fields (best day, hazards)
+   - Return the block
+
+5. **If all three are requested for a single crawl:** do them in order — one-liner, then essay, then logistics. The one-liner is the fastest feedback loop and often surfaces the thesis for the essay.
+
+## What to push back on
+
+- "Tips for the X crawl" beyond the known-hazard field — generic tips are slop. Ask if the user has specific operational advice from personal experience; if not, skip.
+- An FAQ section — push back unless the user has real questions real people ask. A generic FAQ is worse than no FAQ.
+- A "Why do this crawl" sales section — the essay is that job. Don't create a separate section.
+- SEO-optimised copy with keyword density — push back. The site's SEO strategy is editorial quality, schema, and internal linking, not keyword stuffing.
+- Multiple one-liners glued together — one-liner means one sentence, not three.
+
+## What this skill does not do
+
+- Individual pub descriptions (use pub-copywriter)
+- Homepage copy beyond crawl cards
+- SEO meta tags beyond the one-liner (meta descriptions may use the one-liner or a longer variant; that's a separate templating job)
+- Blog posts (not in V1 scope)
+- "More Crawls" card copy (uses the one-liner directly)

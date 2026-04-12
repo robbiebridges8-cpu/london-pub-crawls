@@ -31,12 +31,20 @@ export default function SiteNav({ hideUntilScroll = false }: { hideUntilScroll?:
         pointerEvents: visible ? 'auto' : 'none',
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6 flex items-center" style={{ height: '4.5rem' }}>
+      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between" style={{ height: '4.5rem' }}>
         <Link href="/" className="flex items-center">
           <span className="font-display text-xl font-bold tracking-tight text-[var(--ink)]">
             London on Tap
           </span>
         </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/crawls" className="font-label text-xs uppercase tracking-[0.15em] text-[var(--ink)] hover:text-[var(--claret)] transition-colors">
+            Crawls
+          </Link>
+          <Link href="/pubs" className="font-label text-xs uppercase tracking-[0.15em] text-[var(--ink)] hover:text-[var(--claret)] transition-colors">
+            Pubs
+          </Link>
+        </div>
       </div>
     </nav>
   );

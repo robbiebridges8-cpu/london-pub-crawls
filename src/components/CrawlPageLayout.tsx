@@ -46,6 +46,35 @@ interface CrawlPageLayoutProps {
   createMarker?: (pub: BasePub) => HTMLDivElement;
 }
 
+function AboutSection({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const paragraphs = text.split('\n\n');
+
+  return (
+    <div className="px-6 py-6">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 group w-full text-left"
+      >
+        <h2 className="font-display text-xl font-bold text-[var(--ink)]">About This Crawl</h2>
+        <svg
+          className={`w-4 h-4 text-[var(--muted)] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="font-body text-base text-[var(--muted)] leading-relaxed space-y-4 mt-3">
+          {paragraphs.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CrawlPageLayout({
   crawl,
   pubCount,
@@ -157,10 +186,7 @@ export default function CrawlPageLayout({
           </div>
 
           {crawl.editorialDescription && (
-            <div className="px-6 py-6">
-              <h2 className="font-display text-xl font-bold text-[var(--ink)] mb-3">About This Crawl</h2>
-              <p className="font-body text-base text-[var(--muted)] leading-relaxed">{crawl.editorialDescription}</p>
-            </div>
+            <AboutSection text={crawl.editorialDescription} />
           )}
 
           {crawl.freshnessCaveat && (

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { crawls } from '@/content/crawls';
+import { getAllPubs } from '@/lib/pubs';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://londonontap.com';
 
@@ -11,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.8,
+  }));
+
+  const pubPages: MetadataRoute.Sitemap = getAllPubs().map((pub) => ({
+    url: `${SITE_URL}/pubs/${pub.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.5,
   }));
 
   return [
@@ -27,11 +35,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/pubs`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
       url: `${SITE_URL}/build`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     ...crawlPages,
+    ...pubPages,
   ];
 }

@@ -17,7 +17,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1347,
     writer: 'Orwell & Dylan Thomas',
     walkToNext: '2 min walk',
-    review: 'The Fitzroy Tavern gave Fitzrovia its name - the neighbourhood was christened by the bohemian writers and artists who made this their headquarters in the 1930s and 40s. George Orwell was a regular while writing Keep the Aspidistra Flying. Dylan Thomas drank here heavily and often. Augustus John called it "the Clapham Junction of the world." The Writers and Artists Bar downstairs still has portraits of its famous regulars on the walls.',
+    review: 'The pub that named a neighbourhood. Judah \u201cPop\u201d Kleinfeld, a Polish-Jewish ex-tailor from Savile Row, took over in 1919 and turned it into the centre of London\'s bohemian scene \u2014 so much so that the journalist Tom Driberg coined the term \u201cFitzrovia\u201d after it in the 1940s. Orwell was a regular while writing Keep the Aspidistra Flying. Dylan Thomas arrived in 1933 and kept coming back, scribbling verses on beer mats and handing them to women at the bar. Augustus John called it \u201cthe Clapham Junction of the world.\u201d The Writers and Artists Bar downstairs still has portraits of the old regulars on the walls. Start here \u2014 it sets the tone for everything that follows.',
     website: 'https://fitzroytavern.co.uk',
   },
   {
@@ -29,7 +29,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1339,
     writer: 'Dylan Thomas',
     walkToNext: '12 min walk',
-    review: 'The second pillar of Fitzrovia\'s literary pub scene, a minute\'s walk from the Fitzroy Tavern. Dylan Thomas met his future wife Caitlin Macnamara here in 1936 - Augustus John, who was seeing Caitlin at the time, made the introduction. Julian Maclaren-Ross, the model for X. Donavon in Anthony Powell\'s A Dance to the Music of Time, held court at the bar. Anthony Burgess was also a regular.',
+    review: 'A minute\'s walk from the Fitzroy Tavern, and the second pillar of the Fitzrovia circuit. Dylan Thomas met his future wife Caitlin Macnamara here in April 1936 \u2014 Augustus John, who was seeing Caitlin at the time, made the introduction, which tells you something about the social dynamics. Julian Maclaren-Ross held court at the bar in his trademark teddy-bear overcoat and silver-knobbed cane; he became the model for X. Trapnell in Anthony Powell\'s A Dance to the Music of Time. Orwell drank here too, and is said to have thrown up over the bar. Anthony Burgess was a regular. The Wheatsheaf writers were a recognised group for a while \u2014 Orwell, Thomas, Edwin Muir, Humphrey Jennings. Now it\'s a Nicholson\'s pub, well kept, and quieter than it deserves.',
     website: 'https://www.nicholsonspubs.co.uk/restaurants/london/wheatsheaf',
   },
   {
@@ -41,7 +41,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1199,
     writer: 'Charles Dickens',
     walkToNext: '15 min walk',
-    review: 'The Lamb was Dickens\' local when he lived around the corner on Doughty Street between 1837 and 1839 - the house is now the Dickens Museum, a five-minute walk away. Ted Hughes and Sylvia Plath drank here during their time in London in the early 1960s. The pub\'s most distinctive feature is its surviving Victorian "snob screens" - etched glass partitions on a swivel that allowed drinkers to order without being seen by the room.',
+    review: 'Dickens\'s local when he lived around the corner on Doughty Street between 1837 and 1839 \u2014 the house is now the Dickens Museum, a five-minute walk away. The Lamb dates from the 1720s and still has its original Victorian snob screens: etched glass panels on swivels at the bar that let you order without being seen by the rest of the room. They were popular in the 1890s and almost none survive. Ted Hughes used to drink here and arranged early meetings with Sylvia Plath at the pub. There\'s a working polyphon \u2014 a predecessor to the gramophone \u2014 that you can play for charity. Lamb\'s Conduit Street itself is one of the best stretches of independent shops in central London, worth arriving early for.',
     website: 'https://www.thelamblondon.com',
   },
   {
@@ -53,7 +53,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1310,
     writer: 'George Orwell',
     walkToNext: '2 min walk',
-    review: 'George Orwell\'s Soho local. He celebrated here when Animal Farm was selected as Book of the Month in the United States in 1946. The upstairs room is named after him. The pub dates from 1734 and sits on the site of the Duke of Monmouth\'s residence. The Grade II listed Victorian interior of glazed tiles, ornamental glass, and mahogany is one of the best-preserved in Soho. Madonna has also been in. Less important.',
+    review: 'Orwell\'s Soho local, and the pub where he celebrated in August 1945 when Animal Farm was selected by the American Book of the Month Club. The landlord had managed to get hold of a bottle of 135 proof absinthe for the occasion, which tells you what kind of place this was. The current building dates from 1897, designed by Francis Chambers for Cannon Brewery, and the Grade II listed interior of glazed tiles, ornamental glass, and mahogany is on CAMRA\'s National Inventory of Historic Pub Interiors. John Constable used to nip in from his house around the corner in the early 1800s. The upstairs dining room is named after Orwell. Madonna has also been in. Less important.',
     website: 'https://www.nicholsonspubs.co.uk/restaurants/london/thedogandducksoholondon',
   },
   {
@@ -65,7 +65,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1315,
     writer: 'Dylan Thomas & De Gaulle',
     walkToNext: '2 min walk',
-    review: 'The French House is the most famous bohemian pub in London. Charles de Gaulle drafted his "\u00C0 tous les Fran\u00E7ais" appeal to the French people in the upstairs dining room on 18 June 1940. Dylan Thomas left the only manuscript of Under Milk Wood under his chair here - it was found by the staff and returned. Brendan Behan, Francis Bacon, and Lucian Freud were all regulars. Beer is served by the half pint only - always has been, no exceptions. There is also no TV, no music, and a no phones at the bar rule.',
+    review: 'Victor Berlemont banned pint glasses in the 1920s because French sailors kept smashing them over each other\'s heads. The half-pint rule has held ever since \u2014 no exceptions, no arguments. Charles de Gaulle drafted his \u201cA tous les Francais\u201d appeal to the French people in the upstairs dining room on 18 June 1940. Dylan Thomas left the only manuscript of Under Milk Wood under his chair and the staff had to rescue it. Brendan Behan, Francis Bacon, and Lucian Freud were all regulars. No TV, no music, and a no-phones-at-the-bar policy. The French House sells more Ricard than anywhere else in Britain, which makes sense once you\'ve been. It\'s a small pub and it gets packed \u2014 don\'t expect a seat after six.',
     website: 'https://www.frenchhousesoho.com',
   },
   {
@@ -77,7 +77,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1302,
     writer: 'Jeffrey Bernard & Private Eye',
     walkToNext: '15 min walk',
-    review: 'The most literary pub in Soho. Jeffrey Bernard wrote his Spectator "Low Life" column from a barstool here for decades — his legendary absences inspired the 1989 West End play Jeffrey Bernard Is Unwell, starring Peter O\'Toole, which recreated the pub\'s interior on stage. Private Eye magazine held regular lunches here for years; it was their unofficial canteen. Norman Balon, landlord for over 60 years, was known as "London\'s rudest landlord" and wrote a memoir about it. Grade II listed and still on Greek Street, a minute from The French House.',
+    review: 'Jeffrey Bernard wrote his Spectator \u201cLow Life\u201d column from a barstool here for decades. When he didn\'t show up, the magazine ran the headline \u201cJeffrey Bernard Is Unwell\u201d \u2014 which became the title of the 1989 West End play starring Peter O\'Toole, performed on a set that recreated this pub\'s interior. Private Eye held its fortnightly lunches upstairs for forty years, with Richard Ingrams, William Rushton, and Peter Cook in attendance. Norman Balon ran the place from 1943 until 2006, earned the title \u201cLondon\'s Rudest Landlord,\u201d and wrote a memoir called You\'re Barred, You Bastards. Grade II listed and still on Greek Street, thirty seconds from the French House. The current incarnation bills itself as London\'s first vegetarian pub.',
     website: 'https://www.coachandhorsessoho.pub',
   },
   {
@@ -89,7 +89,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.1084,
     writer: 'Johnson, Dickens, Twain, Yeats',
     walkToNext: 'Take Northern line to London Bridge',
-    review: 'The literary pub to end all literary pubs. Rebuilt in 1667 after the Great Fire. Samuel Johnson, whose house is around the corner on Gough Square, was a regular and is said to have had a favourite seat by the fireplace. Dickens, Wilkie Collins, Mark Twain, W.B. Yeats (who co-founded the Rhymers\' Club here in 1890), Arthur Conan Doyle, G.K. Chesterton, and P.G. Wodehouse all drank in this building. The cellars are labyrinthine and may predate the Fire.',
+    review: 'Rebuilt in 1667 after the Great Fire, on a site that\'s had a pub since 1538. Samuel Johnson\'s house is around the corner on Gough Square, and he\'s said to have had a favourite seat by the fireplace. W.B. Yeats co-founded the Rhymers\' Club here in 1890 \u2014 he later called the other poets \u201cCompanions of the Cheshire Cheese\u201d in his poem The Grey Rock. Dickens used it frequently and alluded to it in A Tale of Two Cities. Mark Twain, Arthur Conan Doyle, G.K. Chesterton, and P.G. Wodehouse all drank in this building. The cellars are labyrinthine and may predate the Fire. You enter through a narrow alley off Fleet Street and the interior is a warren of dark-panelled rooms on multiple levels. This is the one that makes you understand why writers needed pubs.',
     website: 'https://ye-olde-cheshire-cheese.co.uk',
   },
   {
@@ -101,7 +101,7 @@ export const literaryLondonPubs: LiteraryLondonPub[] = [
     lng: -0.0897,
     writer: 'Shakespeare & Dickens',
     walkToNext: null,
-    review: 'End at London\'s last surviving galleried coaching inn. Geoffrey Chaucer\'s Canterbury pilgrims departed from the Tabard Inn next door, which stood on this street until it burned down in 1676, the same fire that destroyed the earlier George. Shakespeare\'s Globe was a ten-minute walk; he almost certainly drank on this site. Dickens knew the George well and referenced it in Little Dorrit - his father had been locked up in the Marshalsea debtors\' prison around the corner.',
+    review: 'London\'s last surviving galleried coaching inn, owned by the National Trust since 1937. The earliest record dates to 1542. The current building went up in 1677 after the Southwark fire of 1676 destroyed the earlier George \u2014 the same fire that took the Tabard Inn next door, where Chaucer\'s Canterbury pilgrims gathered. Shakespeare\'s Globe was a ten-minute walk away, and he almost certainly drank on this site. Dickens knew the George well and referenced it in Little Dorrit \u2014 his father had been locked up in the Marshalsea debtors\' prison around the corner, which probably made the pub more useful than most. The Great Northern Railway demolished the north and east wings in 1889 for warehouses, so what survives is the south range only. Greene King runs it now. The galleried courtyard is the thing \u2014 get a drink and sit outside if the weather allows.',
     website: 'https://www.george-southwark.co.uk',
   },
 ];

@@ -58,6 +58,19 @@ export default function Home() {
     .filter((c): c is typeof liveCrawls[number] => !!c);
   const totalPubs = liveCrawls.reduce((sum, c) => sum + (c.pubCount ?? 0), 0);
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "London on Tap",
+    url: "https://londonontap.com",
+    description: "Free, self-guided pub crawls through London. Curated routes, interactive maps, no booking required.",
+    publisher: {
+      "@type": "Organization",
+      name: "London on Tap",
+      url: "https://londonontap.com",
+    },
+  };
+
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -68,13 +81,17 @@ export default function Home() {
       "@type": "ListItem",
       position: i + 1,
       url: `https://londonontap.com/${crawl.slug}`,
-      name: crawl.name,
+      name: `${crawl.name} Pub Crawl`,
     })),
   };
 
   return (
     <>
       <SiteNav hideUntilScroll />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
@@ -136,7 +153,7 @@ export default function Home() {
 
               {/* Main Headline */}
               <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-[var(--ink)] mb-32 md:mb-16 tracking-tight">
-                London on Tap
+                <span className="sr-only">Free Self-Guided Pub Crawls in London — </span>London on Tap
               </h1>
 
               {/* CTA Button */}

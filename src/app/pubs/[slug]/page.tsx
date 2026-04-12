@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PubPageProps): Promise<Metada
 function PlaceJsonLd({ pub }: { pub: AggregatedPub }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Place',
+    '@type': ['Place', 'BarOrPub'],
     name: pub.name,
     address: {
       '@type': 'PostalAddress',

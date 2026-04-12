@@ -27,7 +27,7 @@ export default function PubList<T extends BasePub>({
 }: PubListProps<T>) {
   const { onPubClick: contextPubClick } = useCrawlContext();
   const handlePubClick = onPubClick ?? contextPubClick;
-  const [expandedPubs, setExpandedPubs] = useState<Set<number>>(new Set());
+  const [collapsedPubs, setCollapsedPubs] = useState<Set<number>>(new Set());
   const mc = markerColor;
   const mtc = markerTextColor;
   const spineRef = useRef<HTMLDivElement>(null);
@@ -142,24 +142,21 @@ export default function PubList<T extends BasePub>({
                   })()}
                 </h3>
                 <p className="tl-addr">{pub.address}, {pub.postcode}</p>
-                {expandedPubs.has(pub.id) ? (
-                  <>
-                    <p className="tl-desc">{pub.review}</p>
-                    <button
-                      className="tl-toggle"
-                      onClick={(e) => { e.stopPropagation(); setExpandedPubs(prev => { const next = new Set(prev); next.delete(pub.id); return next; }); }}
-                    >
-                      Show less
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    className="tl-toggle"
-                    onClick={(e) => { e.stopPropagation(); setExpandedPubs(prev => new Set(prev).add(pub.id)); }}
-                  >
-                    Read more
-                  </button>
-                )}
+                <p className={`tl-desc ${collapsedPubs.has(pub.id) ? 'hidden' : ''}`}>{pub.review}</p>
+                <button
+                  className="tl-toggle"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCollapsedPubs(prev => {
+                      const next = new Set(prev);
+                      if (next.has(pub.id)) next.delete(pub.id);
+                      else next.add(pub.id);
+                      return next;
+                    });
+                  }}
+                >
+                  {collapsedPubs.has(pub.id) ? 'Read more' : 'Show less'}
+                </button>
                 <div className="tl-links">
                   <a href={mapsUrl(pub)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
                     Open in Maps

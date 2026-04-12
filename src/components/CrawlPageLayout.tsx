@@ -47,30 +47,28 @@ interface CrawlPageLayoutProps {
 }
 
 function AboutSection({ text }: { text: string }) {
-  const [open, setOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const paragraphs = text.split('\n\n');
 
   return (
     <div className="px-6 py-6">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={() => setCollapsed(!collapsed)}
         className="flex items-center gap-2 group w-full text-left"
       >
         <h2 className="font-display text-xl font-bold text-[var(--ink)]">About This Crawl</h2>
         <svg
-          className={`w-4 h-4 text-[var(--muted)] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-[var(--muted)] transition-transform duration-200 ${collapsed ? '' : 'rotate-180'}`}
           fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {open && (
-        <div className="font-body text-base text-[var(--muted)] leading-relaxed space-y-4 mt-3">
-          {paragraphs.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
-      )}
+      <div className={`font-body text-base text-[var(--muted)] leading-relaxed space-y-4 mt-3 ${collapsed ? 'hidden' : ''}`}>
+        {paragraphs.map((para, i) => (
+          <p key={i}>{para}</p>
+        ))}
+      </div>
     </div>
   );
 }
@@ -116,10 +114,15 @@ export default function CrawlPageLayout({
 
   const schemaData = {
     "@context": "https://schema.org", "@type": "TouristAttraction",
-    name: crawl.name, description: crawl.editorialDescription || crawl.description,
+    name: `${crawl.name} Pub Crawl`, description: crawl.metaDescription || crawl.description,
     url: `${SITE_URL}/${crawl.slug}`, touristType: "Pub crawl enthusiasts",
     isAccessibleForFree: true, publicAccess: true,
     address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
+    amenityFeature: pubs.map(pub => ({
+      "@type": "LocationFeatureSpecification",
+      name: pub.pubName,
+      value: true,
+    })),
   };
 
   return (
@@ -176,7 +179,7 @@ export default function CrawlPageLayout({
               </svg>
               All Crawls
             </a>
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">{crawl.name}</h1>
+            <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">{crawl.name} Pub Crawl</h1>
             <p className="font-display text-lg italic text-white opacity-90 mb-4">{crawl.tagline}</p>
             <div className="flex gap-3 flex-wrap">
               <Chip size="sm" className="bg-[var(--surface)] text-[var(--ink)] font-label text-xs uppercase tracking-wider px-3">{pubCount} {stopsLabel}</Chip>

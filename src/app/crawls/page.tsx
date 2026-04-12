@@ -1,5 +1,19 @@
+import type { Metadata } from 'next';
 import { crawls } from '@/content/crawls';
+import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { SiteNav, SiteFooter, CrawlCard } from '@/components';
+
+export const metadata: Metadata = {
+  title: 'All Pub Crawls in London',
+  description: 'Browse all London on Tap pub crawls — Monopoly, Circle Line, Bermondsey Beer Mile, and more. Free, self-guided routes with maps and pub-by-pub descriptions.',
+  openGraph: {
+    title: `All Pub Crawls in London | ${SITE_NAME}`,
+    description: 'Browse all London on Tap pub crawls — Monopoly, Circle Line, Bermondsey Beer Mile, and more. Free, self-guided routes with maps.',
+    url: `${SITE_URL}/crawls`,
+    type: 'website',
+  },
+  alternates: { canonical: `${SITE_URL}/crawls` },
+};
 
 const CRAWL_ORDER = [
   'monopoly',
